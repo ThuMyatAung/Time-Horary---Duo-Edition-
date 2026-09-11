@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (Tri-Mode Edition)</title>
+  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (Tri-Mode Comparison)</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,7 @@
       --accent-yellow: #f59e0b;
       --accent-gold: #fbbf24;
       --accent-red: #ef4444;
+      --accent-orange: #fb923c;
     }
 
     * {
@@ -45,7 +46,7 @@
 
     .container {
       width: 100%;
-      max-width: 580px;
+      max-width: 600px;
       margin: 0 auto;
       padding-bottom: 60px;
     }
@@ -124,78 +125,116 @@
       gap: 4px;
     }
 
-    /* 3-Mode Tri-Tabs */
-    .tri-tabs {
+    /* 3 Comparative Cards Grid */
+    .tri-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 8px;
       margin-bottom: 12px;
     }
-    .tri-tab {
+    .hora-select-card {
       background-color: var(--bg-input);
-      border: 1.5px solid var(--border-color);
-      border-radius: 8px;
-      padding: 8px 4px;
-      text-align: center;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 8px;
       cursor: pointer;
-      color: var(--text-muted);
-      transition: all 0.2s;
+      position: relative;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .tri-tab-title {
-      font-size: 11px;
-      font-weight: 700;
-      display: block;
+    .hora-select-card:hover {
+      border-color: #475569;
     }
-    .tri-tab-sub {
-      font-size: 9px;
-      color: #64748b;
-      display: block;
-      margin-top: 2px;
-    }
-    .tri-tab.active {
+    .hora-select-card.active {
       border-color: var(--accent-blue);
       background-color: #162038;
-      color: #ffffff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
     }
-    .tri-tab.active .tri-tab-sub {
-      color: #38bdf8;
+    .active-tag {
+      display: none;
+      position: absolute;
+      top: -9px;
+      right: 8px;
+      background-color: var(--accent-blue);
+      color: #090d16;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+    .hora-select-card.active .active-tag {
+      display: block;
+    }
+    .card-mode-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .hora-badge-mini {
+      display: inline-block;
+      padding: 4px 6px;
+      border-radius: 6px;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 4px 0;
+      text-align: center;
+    }
+    .card-kw-box {
+      font-size: 10px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      background-color: rgba(0, 0, 0, 0.25);
+      padding: 5px;
+      border-radius: 5px;
+      margin-top: 4px;
+    }
+    .card-meta-text {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 4px;
     }
 
-    /* Hero Banner */
-    .hora-hero {
+    /* Active Summary Banner */
+    .active-banner {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       border: 1px solid #3730a3;
       border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
     }
-    .hero-top {
+    .banner-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .hero-title {
-      font-size: 18px;
+    .banner-title {
+      font-size: 17px;
       font-weight: 700;
       color: #ffffff;
     }
-    .hero-tag {
+    .banner-tag {
       padding: 3px 10px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 700;
       color: #ffffff;
     }
-    .hero-meta {
+    .banner-meta {
       font-size: 11px;
       color: #94a3b8;
       margin-top: 4px;
-      line-height: 1.5;
     }
     .hero-pillars {
       display: flex;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 8px;
       padding-top: 8px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -217,7 +256,7 @@
       color: #38bdf8;
     }
 
-    /* Collapsible Sections */
+    /* Accordions */
     .accordion-btn {
       width: 100%;
       display: flex;
@@ -226,7 +265,7 @@
       background-color: var(--bg-input);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 10px 12px;
+      padding: 9px 12px;
       margin-top: 8px;
       color: var(--accent-blue);
       font-size: 12px;
@@ -464,17 +503,17 @@
     
     <div class="header">
       <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
-      <p>ကျမ်းရင်း ၈ အခါ • ရိုးရာ ၆:၀၀ နာရီ • နက္ခတ် ဟိုရာ စနစ် ၃ မျိုး နှိုင်းယှဉ်ချက်</p>
+      <p>ကျမ်းရင်း ၈ အခါ • ရိုးရာ ၆ နာရီ • နက္ခတ် ၁ နာရီ နှိုင်းယှဉ်ချက်</p>
     </div>
 
-    <!-- Step 1: Time, Location, Mode & Hora -->
+    <!-- Step 1: Location & 3 Comparative Cards -->
     <div class="card">
       <div class="card-header">
         <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
-        <span>အဆင့် (၁) - အခါတော်စိစစ်ချက်နှင့် ဌာနဇယားများ</span>
+        <span>အဆင့် (၁) - အခါရွေးချယ်မှု (နှိုင်းယှဉ်ချက် ၃ ကွက်)</span>
       </div>
 
-      <!-- Timezone & GPS Bar -->
+      <!-- Location Bar -->
       <div class="loc-bar">
         <div>
           <span class="time-info" id="timeDisplay">--:--:--</span>
@@ -498,33 +537,54 @@
         </div>
       </div>
 
-      <!-- 3-Way Tri-Tabs (Segmented Control) -->
-      <div class="tri-tabs">
-        <div class="tri-tab active" id="tabKhingyi" onclick="setMode('khingyi')">
-          <span class="tri-tab-title"><i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၈ အခါ</span>
-          <span class="tri-tab-sub">နေထွက်/ဝင် ÷ ၈</span>
+      <!-- ၃ ကွက်တွဲ နှိုင်းယှဉ်ချက် (Tri-Grid Cards) -->
+      <div class="tri-grid">
+        <!-- ကတ် ၁: ကျမ်းရင်း ၈ အခါ (ဆရာတော် ခင်ကြီးဖျော် ပေမူ) -->
+        <div class="hora-select-card active" id="cardKhingyi" onclick="selectCardMode('khingyi')">
+          <div class="active-tag">ရွေးထားသည်</div>
+          <div class="card-mode-title">
+            <i class="fa-solid fa-scroll" style="color: var(--accent-gold);"></i>
+            <span>၁။ ကျမ်းရင်း ၈ အခါ</span>
+          </div>
+          <div class="hora-badge-mini" id="badgeKhingyi">...</div>
+          <div class="card-kw-box" id="kwKhingyi">...</div>
+          <div class="card-meta-text" id="metaKhingyi">နေထွက်/ဝင် ÷ ၈</div>
         </div>
-        <div class="tri-tab" id="tabFixed" onclick="setMode('fixed')">
-          <span class="tri-tab-title"><i class="fa-solid fa-book"></i> ရိုးရာ ၆:၀၀ နာရီ</span>
-          <span class="tri-tab-sub">၆:၀၀ AM ပုံသေစံ</span>
+
+        <!-- ကတ် ၂: ရိုးရာ ၆:၀၀ နာရီစနစ် (Fixed 6:00 AM Standard) -->
+        <div class="hora-select-card" id="cardFixed" onclick="selectCardMode('fixed')">
+          <div class="active-tag">ရွေးထားသည်</div>
+          <div class="card-mode-title">
+            <i class="fa-solid fa-book" style="color: var(--accent-blue);"></i>
+            <span>၂။ ရိုးရာ ၆ နာရီစံ</span>
+          </div>
+          <div class="hora-badge-mini" id="badgeFixed">...</div>
+          <div class="card-kw-box" id="kwFixed">...</div>
+          <div class="card-meta-text" id="metaFixed">မနက် ၆:၀၀ ပုံသေ</div>
         </div>
-        <div class="tri-tab" id="tabSolar1h" onclick="setMode('solar1h')">
-          <span class="tri-tab-title"><i class="fa-solid fa-sun"></i> နက္ခတ် ဟိုရာ</span>
-          <span class="tri-tab-sub">နေထွက်မှ ၁ နာရီခြား</span>
+
+        <!-- ကတ် ၃: နက္ခတ် Solar ၁ နာရီစနစ် (Solar 1-Hour Step) -->
+        <div class="hora-select-card" id="cardSolar1h" onclick="selectCardMode('solar1h')">
+          <div class="active-tag">ရွေးထားသည်</div>
+          <div class="card-mode-title">
+            <i class="fa-solid fa-sun" style="color: var(--accent-orange);"></i>
+            <span>၃။ နက္ခတ် ၁ နာရီ</span>
+          </div>
+          <div class="hora-badge-mini" id="badgeSolar1h">...</div>
+          <div class="card-kw-box" id="kwSolar1h">...</div>
+          <div class="card-meta-text" id="metaSolar1h">နေထွက်မှ ၁ နာရီခြား</div>
         </div>
       </div>
 
-      <!-- Active Hora Hero Box -->
-      <div class="hora-hero">
-        <div class="hero-top">
-          <div class="hero-title" id="horaMainName">တနင်္ဂနွေ အခါ</div>
-          <div class="hero-tag" id="horaTag">၁ ယာမ်</div>
+      <!-- Active Selection Summary Banner -->
+      <div class="active-banner">
+        <div class="banner-top">
+          <div class="banner-title" id="activeHoraTitle">တနင်္ဂနွေ အခါ</div>
+          <div class="banner-tag" id="activeHoraTag">၁ ယာမ်</div>
         </div>
-        <div class="hero-meta" id="horaMetaLine">
+        <div class="banner-meta" id="activeMetaLine">
           ဗေဒင်နေ့နံ: ... | နေထွက်: ... | နေဝင်: ...
         </div>
-
-        <!-- 3 Pillars of Khingyi Phyaw -->
         <div class="hero-pillars">
           <div class="pillar-box">
             <span class="pillar-lbl">မူလတိုင် (P1)</span>
@@ -566,7 +626,7 @@
         </div>
       </div>
 
-      <!-- Accordion 2: 7 Status Matrix Table (ဆပွတ်ရိုက် ၇ ဌာန ဇယား) -->
+      <!-- Accordion 2: 7-Status Matrix Table (ဆပွတ်ရိုက် ၇ ဌာန ဇယား) -->
       <button class="accordion-btn" id="matrixToggleBtn" style="margin-top: 8px;">
         <span><i class="fa-solid fa-table-cells"></i> <span id="matrixBtnText">ဆပွတ်ရိုက် ၇ ဌာန ဇယား ကြည့်ရန်</span></span>
         <i class="fa-solid fa-chevron-down" id="matrixChevron"></i>
@@ -611,7 +671,7 @@
     <!-- Calculate Button -->
     <button class="btn-calculate" id="btnCalculate">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
-      <span>အခါတော် အပြီးသတ် ဟောချက်ထုတ်မည်</span>
+      <span>ရွေးထားသော အခါဖြင့် အပြီးသတ် ဟောချက်ထုတ်မည်</span>
     </button>
 
     <!-- Results Section -->
@@ -656,13 +716,13 @@
     // ၁။ ဂန္ထဝင် အချက်အလက်များနှင့် Dossier အဘိဓာန်
     // ==========================================
     const PLANET_INFO = {
-      1: { name: 'တနင်္ဂနွေ', symbol: '၁', color: '#EF4444' },
-      2: { name: 'တနင်္လာ', symbol: '၂', color: '#F59E0B' },
-      3: { name: 'အင်္ဂါ', symbol: '၃', color: '#EC4899' },
-      4: { name: 'ဗုဒ္ဓဟူး', symbol: '၄', color: '#10B981' },
-      5: { name: 'ကြာသပတေး', symbol: '၅', color: '#6366F1' },
-      6: { name: 'သောကြာ', symbol: '၆', color: '#06B6D4' },
-      0: { name: 'စနေ', symbol: '၀', color: '#8B5CF6' },
+      1: { name: 'တနင်္ဂနွေ', symbol: '၁', color: '#EF4444', kw: 'အာဏာ • အကြီးအကဲ • ဂုဏ်' },
+      2: { name: 'တနင်္လာ', symbol: '၂', color: '#F59E0B', kw: 'ငွေကြေး • ခရီး • အရောင်း' },
+      3: { name: 'အင်္ဂါ', symbol: '၃', color: '#EC4899', kw: 'အပြိုင် • စက်/မြေ • အမှု' },
+      4: { name: 'ဗုဒ္ဓဟူး', symbol: '၄', color: '#10B981', kw: 'စာချုပ် • စကား • သတင်း' },
+      5: { name: 'ကြာသပတေး', symbol: '၅', color: '#6366F1', kw: 'ဆရာ • မင်္ဂလာ • ဥပဒေ' },
+      6: { name: 'သောကြာ', symbol: '၆', color: '#06B6D4', kw: 'အချစ် • အလှ • ရတနာ' },
+      0: { name: 'စနေ', symbol: '၀', color: '#8B5CF6', kw: 'အကြွေး • ကြန့်ကြာ • ပျောက်' },
     };
 
     const HORA_DOSSIER = {
@@ -775,9 +835,16 @@
     let currentLat = CITIES.yangon.lat;
     let currentLng = CITIES.yangon.lng;
     let currentTz = CITIES.yangon.tz;
-    let calculationMode = 'khingyi'; // 'khingyi', 'fixed', 'solar1h'
+    let selectedMode = 'khingyi'; // 'khingyi', 'fixed', 'solar1h'
     let selectedBodyPlanet = 1;
     let activeCalculatedHora = 1;
+
+    // Cache for 3 modes
+    let modeResults = {
+      khingyi: { hora: 1, index: 1, label: '', kw: '', dayLord: 1 },
+      fixed: { hora: 1, index: 1, label: '', kw: '', dayLord: 1 },
+      solar1h: { hora: 1, index: 1, label: '', kw: '', dayLord: 1 },
+    };
 
     // ==========================================
     // ၃။ Solar Calculations & Engine
@@ -844,7 +911,8 @@
       }
     }
 
-    function calculateAngaWeikzaHora() {
+    // ၃ မျိုးလုံးကို တစ်ပြိုင်နက် တွက်ချက်ခြင်း
+    function calculateAllThreeModes() {
       const localDate = getCityCurrentDate(currentTz);
       const hours = localDate.getHours();
       const minutes = localDate.getMinutes();
@@ -854,85 +922,106 @@
       const tzOffsetHours = -localDate.getTimezoneOffset() / 60;
       const { sunrise, sunset } = calculateSolarSunTimes(localDate, currentLat, currentLng, tzOffsetHours);
 
-      let dayOfWeek = localDate.getDay();
-      const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
-      let dayLord = dayLordMap[dayOfWeek];
-      let currentHora = 1;
-      let horaIndex = 1;
-      let periodLabel = '';
+      const yesterday = new Date(localDate.getTime() - 86400000);
+      const yTimes = calculateSolarSunTimes(yesterday, currentLat, currentLng, tzOffsetHours);
 
+      const tomorrow = new Date(localDate.getTime() + 86400000);
+      const tTimes = calculateSolarSunTimes(tomorrow, currentLat, currentLng, tzOffsetHours);
+
+      const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
       const horaCycle = [1, 6, 4, 2, 0, 5, 3];
 
-      if (calculationMode === 'khingyi') {
-        // စနစ် ၁ - ခင်ကြီးဖျော် ပေမူ ၈ အခါ (နေထွက်မှ နေဝင် ÷ ၈)
-        if (currentDec < sunrise) {
-          dayOfWeek = (dayOfWeek - 1 + 7) % 7;
-          dayLord = dayLordMap[dayOfWeek];
-          const yesterday = new Date(localDate.getTime() - 86400000);
-          const yTimes = calculateSolarSunTimes(yesterday, currentLat, currentLng, tzOffsetHours);
-          const nightLen = (24 - yTimes.sunset) + sunrise;
-          const nightUnit = nightLen / 8;
-          const elapsed = (24 - yTimes.sunset) + currentDec;
-          const idx = Math.min(7, Math.floor(elapsed / nightUnit));
-          horaIndex = idx + 1;
-          const startIdx = horaCycle.indexOf(dayLord);
-          currentHora = horaCycle[(startIdx + 8 + idx) % 7];
-          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက် (ကျမ်းရင်း ~၁.၅ နာရီ)`;
-        } else if (currentDec >= sunrise && currentDec < sunset) {
-          const dayLen = sunset - sunrise;
-          const dayUnit = dayLen / 8;
-          const elapsed = currentDec - sunrise;
-          const idx = Math.min(7, Math.floor(elapsed / dayUnit));
-          horaIndex = idx + 1;
-          const startIdx = horaCycle.indexOf(dayLord);
-          currentHora = horaCycle[(startIdx + idx) % 7];
-          periodLabel = `နေ့ ${horaIndex} ခါမြောက် (ကျမ်းရင်း ~၁.၅ နာရီ)`;
-        } else {
-          const tomorrow = new Date(localDate.getTime() + 86400000);
-          const tTimes = calculateSolarSunTimes(tomorrow, currentLat, currentLng, tzOffsetHours);
-          const nightLen = (24 - sunset) + tTimes.sunrise;
-          const nightUnit = nightLen / 8;
-          const elapsed = currentDec - sunset;
-          const idx = Math.min(7, Math.floor(elapsed / nightUnit));
-          horaIndex = idx + 1;
-          const startIdx = horaCycle.indexOf(dayLord);
-          currentHora = horaCycle[(startIdx + 8 + idx) % 7];
-          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက် (ကျမ်းရင်း ~၁.၅ နာရီ)`;
-        }
-      } else if (calculationMode === 'fixed') {
-        // စနစ် ၂ - ရိုးရာ မနက် ၆:၀၀ နာရီ ပုံသေစနစ် (Fixed 6:00 AM Standard)
-        if (currentDec < 6.0) {
-          dayOfWeek = (dayOfWeek - 1 + 7) % 7;
-          dayLord = dayLordMap[dayOfWeek];
-        }
-        const hoursSinceSunrise = (currentDec - 6.0 + 24) % 24;
-        const idx = Math.floor(hoursSinceSunrise);
-        horaIndex = idx + 1;
-        const startIdx = horaCycle.indexOf(dayLord);
-        currentHora = horaCycle[(startIdx + idx) % 7];
-        periodLabel = `${horaIndex} နာရီမြောက် (မနက် ၆:၀၀ ပုံသေ)`;
+      // ----------------------------------------------------
+      // ၁။ ကတ် (၁): ကျမ်းရင်း ၈ အခါ (ဆရာတော် ခင်ကြီးဖျော် ပေမူ)
+      // ----------------------------------------------------
+      let kDayOfWeek = localDate.getDay();
+      let kHora = 1, kIdx = 1, kLabel = '';
+
+      if (currentDec < sunrise) {
+        kDayOfWeek = (kDayOfWeek - 1 + 7) % 7;
+        const nightLen = (24 - yTimes.sunset) + sunrise;
+        const nightUnit = nightLen / 8;
+        const elapsed = (24 - yTimes.sunset) + currentDec;
+        const idx = Math.min(7, Math.floor(elapsed / nightUnit));
+        kIdx = idx + 1;
+        const startIdx = horaCycle.indexOf(dayLordMap[kDayOfWeek]);
+        kHora = horaCycle[(startIdx + 8 + idx) % 7];
+        kLabel = `ညဉ့် ${kIdx} ခါမြောက်`;
+      } else if (currentDec >= sunrise && currentDec < sunset) {
+        const dayLen = sunset - sunrise;
+        const dayUnit = dayLen / 8;
+        const elapsed = currentDec - sunrise;
+        const idx = Math.min(7, Math.floor(elapsed / dayUnit));
+        kIdx = idx + 1;
+        const startIdx = horaCycle.indexOf(dayLordMap[kDayOfWeek]);
+        kHora = horaCycle[(startIdx + idx) % 7];
+        kLabel = `နေ့ ${kIdx} ခါမြောက်`;
       } else {
-        // စနစ် ၃ - နက္ခတ် ဟိုရာစနစ် (Solar 1-Hour Step from Actual Sunrise)
-        if (currentDec < sunrise) {
-          dayOfWeek = (dayOfWeek - 1 + 7) % 7;
-          dayLord = dayLordMap[dayOfWeek];
-        }
-        const hoursSinceSunrise = (currentDec - sunrise + 24) % 24;
-        const idx = Math.floor(hoursSinceSunrise);
-        horaIndex = idx + 1;
-        const startIdx = horaCycle.indexOf(dayLord);
-        currentHora = horaCycle[(startIdx + idx) % 7];
-        periodLabel = `${horaIndex} နာရီမြောက် (နေထွက်မှ ၁ နာရီခြား)`;
+        const nightLen = (24 - sunset) + tTimes.sunrise;
+        const nightUnit = nightLen / 8;
+        const elapsed = currentDec - sunset;
+        const idx = Math.min(7, Math.floor(elapsed / nightUnit));
+        kIdx = idx + 1;
+        const startIdx = horaCycle.indexOf(dayLordMap[kDayOfWeek]);
+        kHora = horaCycle[(startIdx + 8 + idx) % 7];
+        kLabel = `ညဉ့် ${kIdx} ခါမြောက်`;
       }
 
+      modeResults.khingyi = {
+        hora: kHora,
+        index: kIdx,
+        label: kLabel,
+        kw: PLANET_INFO[kHora].kw,
+        dayLord: dayLordMap[kDayOfWeek],
+      };
+
+      // ----------------------------------------------------
+      // ၂။ ကတ် (၂): ရိုးရာ ၆:၀၀ နာရီစနစ် (Fixed 6:00 AM Standard)
+      // ----------------------------------------------------
+      let fDayOfWeek = localDate.getDay();
+      if (currentDec < 6.0) {
+        fDayOfWeek = (fDayOfWeek - 1 + 7) % 7;
+      }
+      const fElapsed = (currentDec - 6.0 + 24) % 24;
+      const fIdx = Math.floor(fElapsed);
+      const fStartIdx = horaCycle.indexOf(dayLordMap[fDayOfWeek]);
+      const fHora = horaCycle[(fStartIdx + fIdx) % 7];
+
+      modeResults.fixed = {
+        hora: fHora,
+        index: fIdx + 1,
+        label: `${fIdx + 1} ယာမ်နာရီ`,
+        kw: PLANET_INFO[fHora].kw,
+        dayLord: dayLordMap[fDayOfWeek],
+      };
+
+      // ----------------------------------------------------
+      // ၃။ ကတ် (၃): နက္ခတ် Solar ၁ နာရီစနစ် (Solar 1-Hour Step)
+      // ----------------------------------------------------
+      let sDayOfWeek = localDate.getDay();
+      let sElapsed = 0;
+      if (currentDec < sunrise) {
+        sDayOfWeek = (sDayOfWeek - 1 + 7) % 7;
+        sElapsed = (currentDec + 24 - yTimes.sunrise) % 24;
+      } else {
+        sElapsed = currentDec - sunrise;
+      }
+      const sIdx = Math.floor(sElapsed);
+      const sStartIdx = horaCycle.indexOf(dayLordMap[sDayOfWeek]);
+      const sHora = horaCycle[(sStartIdx + sIdx) % 7];
+
+      modeResults.solar1h = {
+        hora: sHora,
+        index: sIdx + 1,
+        label: `${sIdx + 1} နာရီမြောက်`,
+        kw: PLANET_INFO[sHora].kw,
+        dayLord: dayLordMap[sDayOfWeek],
+      };
+
       return {
-        currentHora,
-        dayLord,
-        horaIndex,
-        periodLabel,
+        localDate,
         sunrise,
         sunset,
-        localDate,
       };
     }
 
@@ -1055,13 +1144,27 @@
     const citySelect = document.getElementById('citySelect');
     const btnGps = document.getElementById('btnGps');
 
-    const horaMainName = document.getElementById('horaMainName');
-    const horaTag = document.getElementById('horaTag');
-    const horaMetaLine = document.getElementById('horaMetaLine');
+    // 3 Cards elements
+    const cardKhingyi = document.getElementById('cardKhingyi');
+    const cardFixed = document.getElementById('cardFixed');
+    const cardSolar1h = document.getElementById('cardSolar1h');
+
+    const badgeKhingyi = document.getElementById('badgeKhingyi');
+    const kwKhingyi = document.getElementById('kwKhingyi');
+    const badgeFixed = document.getElementById('badgeFixed');
+    const kwFixed = document.getElementById('kwFixed');
+    const badgeSolar1h = document.getElementById('badgeSolar1h');
+    const kwSolar1h = document.getElementById('kwSolar1h');
+
+    // Active Banner elements
+    const activeHoraTitle = document.getElementById('activeHoraTitle');
+    const activeHoraTag = document.getElementById('activeHoraTag');
+    const activeMetaLine = document.getElementById('activeMetaLine');
     const pillarMula = document.getElementById('pillarMula');
     const pillarNimitta = document.getElementById('pillarNimitta');
     const pillarLakkhana = document.getElementById('pillarLakkhana');
 
+    // Accordions
     const dossierBtnText = document.getElementById('dossierBtnText');
     const dossierBox = document.getElementById('dossierBox');
     const dossierToggleBtn = document.getElementById('dossierToggleBtn');
@@ -1073,42 +1176,55 @@
     const matrixChevron = document.getElementById('matrixChevron');
     const matrixTableBody = document.getElementById('matrixTableBody');
 
-    function setMode(mode) {
-      calculationMode = mode;
-      document.getElementById('tabKhingyi').classList.toggle('active', mode === 'khingyi');
-      document.getElementById('tabFixed').classList.toggle('active', mode === 'fixed');
-      document.getElementById('tabSolar1h').classList.toggle('active', mode === 'solar1h');
-      updateRealtimeClock();
+    function selectCardMode(mode) {
+      selectedMode = mode;
+      cardKhingyi.classList.toggle('active', mode === 'khingyi');
+      cardFixed.classList.toggle('active', mode === 'fixed');
+      cardSolar1h.classList.toggle('active', mode === 'solar1h');
+      updateRealtimeUI();
     }
 
-    function updateRealtimeClock() {
-      const data = calculateAngaWeikzaHora();
-      activeCalculatedHora = data.currentHora;
+    function updateRealtimeUI() {
+      const times = calculateAllThreeModes();
+      timeDisplay.textContent = times.localDate.toLocaleTimeString('en-US');
 
-      timeDisplay.textContent = data.localDate.toLocaleTimeString('en-US');
+      // Update Card 1: Khingyi
+      const k = modeResults.khingyi;
+      badgeKhingyi.textContent = `${PLANET_INFO[k.hora].name} (${k.label})`;
+      badgeKhingyi.style.backgroundColor = PLANET_INFO[k.hora].color;
+      kwKhingyi.textContent = k.kw;
 
-      const pInfo = PLANET_INFO[data.currentHora];
-      const pillars = THREE_PILLARS[data.currentHora];
+      // Update Card 2: Fixed
+      const f = modeResults.fixed;
+      badgeFixed.textContent = `${PLANET_INFO[f.hora].name} (${f.label})`;
+      badgeFixed.style.backgroundColor = PLANET_INFO[f.hora].color;
+      kwFixed.textContent = f.kw;
 
-      horaMainName.textContent = `${pInfo.name} အခါ`;
-      horaTag.textContent = data.periodLabel;
-      horaTag.style.backgroundColor = pInfo.color;
+      // Update Card 3: Solar 1h
+      const s = modeResults.solar1h;
+      badgeSolar1h.textContent = `${PLANET_INFO[s.hora].name} (${s.label})`;
+      badgeSolar1h.style.backgroundColor = PLANET_INFO[s.hora].color;
+      kwSolar1h.textContent = s.kw;
 
-      const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
-      if (calculationMode === 'khingyi') {
-        horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} | နေဝင်: ${formatTimeDecimal(data.sunset)}`;
-      } else if (calculationMode === 'fixed') {
-        horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | မနက် ၆:၀၀ ပုံသေစံ | (နေထွက်အမှန်: ${formatTimeDecimal(data.sunrise)})`;
-      } else {
-        horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} (၁ နာရီခြား)`;
-      }
+      // Update Active Selected Mode
+      const activeRes = modeResults[selectedMode];
+      activeCalculatedHora = activeRes.hora;
+
+      const pInfo = PLANET_INFO[activeRes.hora];
+      const pillars = THREE_PILLARS[activeRes.hora];
+
+      activeHoraTitle.textContent = `${pInfo.name} အခါ`;
+      activeHoraTag.textContent = activeRes.label;
+      activeHoraTag.style.backgroundColor = pInfo.color;
+
+      activeMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[activeRes.dayLord].name} | နေထွက်: ${formatTimeDecimal(times.sunrise)} | နေဝင်: ${formatTimeDecimal(times.sunset)}`;
 
       pillarMula.textContent = `${pillars.m} (${PLANET_INFO[pillars.m].name.substring(0,3)})`;
       pillarNimitta.textContent = `${pillars.n} (${PLANET_INFO[pillars.n].name.substring(0,3)})`;
       pillarLakkhana.textContent = `${pillars.l} (${PLANET_INFO[pillars.l].name.substring(0,3)})`;
 
-      // Update Dossier Box
-      const dossier = HORA_DOSSIER[data.currentHora];
+      // Update Dossier
+      const dossier = HORA_DOSSIER[activeRes.hora];
       dossierBtnText.textContent = `${pInfo.name}အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ`;
       document.getElementById('dossierTitle').textContent = dossier.title;
       document.getElementById('dossierNature').textContent = dossier.nature;
@@ -1116,8 +1232,8 @@
       document.getElementById('dossierMatters').textContent = dossier.matters;
       document.getElementById('dossierGuidance').textContent = dossier.guidance;
 
-      // Update 7-Status Matrix Table
-      renderMatrixTable(data.currentHora);
+      // Update Matrix Table
+      renderMatrixTable(activeRes.hora);
     }
 
     function renderMatrixTable(currentHora) {
@@ -1157,7 +1273,7 @@
         currentLng = city.lng;
         currentTz = city.tz;
         cityLabel.textContent = city.name;
-        updateRealtimeClock();
+        updateRealtimeUI();
       }
     });
 
@@ -1172,7 +1288,7 @@
             currentTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Yangon';
             cityLabel.textContent = `GPS (${currentLat.toFixed(2)}°)`;
             btnGps.innerHTML = '<i class="fa-solid fa-check"></i> GPS';
-            updateRealtimeClock();
+            updateRealtimeUI();
           },
           (err) => {
             alert('GPS ရယူ၍ မရနိုင်ပါ။ Location ခွင့်ပြုချက် စစ်ဆေးပါ။');
@@ -1259,8 +1375,8 @@
       resultContainer.scrollIntoView({ behavior: 'smooth' });
     });
 
-    setInterval(updateRealtimeClock, 1000);
-    updateRealtimeClock();
+    setInterval(updateRealtimeUI, 1000);
+    updateRealtimeUI();
   </script>
 </body>
 </html>
