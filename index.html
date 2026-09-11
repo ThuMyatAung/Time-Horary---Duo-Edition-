@@ -1,430 +1,1184 @@
-from pathlib import Path
-
-html = r'''<!doctype html>
+<!DOCTYPE html>
 <html lang="my">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>အင်္ဂဝိဇ္ဇာ အခါတော်တွက် Engine — V2</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap');
-:root{--bg:#070b13;--card:#101827;--input:#0b1220;--line:#22304a;--text:#f4f7fb;--muted:#94a3b8;--blue:#38bdf8;--green:#34d399;--red:#fb7185;--gold:#fbbf24;--violet:#a78bfa}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Padauk,system-ui,sans-serif}
-.wrap{max-width:720px;margin:auto;padding:18px 14px 60px}.hero{text-align:center;padding:10px 0 18px}.hero h1{margin:0;font-size:23px}.hero p{margin:4px 0;color:var(--muted);font-size:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 13px}.title{font-weight:700;font-size:14px;margin-bottom:10px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-label{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}input,select,button{font:inherit}input,select{width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px}
-button{border:0;border-radius:9px;cursor:pointer}.btn{padding:10px 12px;background:#26334c;color:#fff}.primary{width:100%;padding:13px;background:#4f46e5;color:#fff;font-weight:700;font-size:15px}.secondary{background:#17233a;color:#cbd5e1}
-.mode{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mode button{padding:12px;text-align:left;background:var(--input);border:1px solid var(--line);color:#cbd5e1}.mode button.active{border-color:var(--blue);background:#12243a;color:#fff}
-.badge{display:inline-block;padding:4px 8px;border-radius:7px;font-size:12px;font-weight:700;margin:4px 0}.muted{color:var(--muted);font-size:11px}.notice{background:#172554;border:1px solid #3347a1;color:#c7d2fe;border-radius:9px;padding:9px;font-size:11px;margin-top:9px}
-.bodygrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.body{background:var(--input);border:1px solid var(--line);padding:10px;border-radius:9px;text-align:center;color:#cbd5e1;font-size:12px}.body.active{border-color:var(--gold);color:#fff;background:#211d10}
-.result{display:none}.verdict{border:1px solid #4338ca;background:#17144a;border-radius:14px;padding:16px;text-align:center;margin-bottom:13px}.score{font-size:29px;font-weight:700}.confidence{font-size:11px;color:#c4b5fd}.heading{font-size:17px;font-weight:700;margin-top:4px}.meter{height:8px;background:#0b1120;border-radius:99px;overflow:hidden;margin-top:10px}.meter i{display:block;height:100%;background:var(--green);width:0}
-.row{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}.dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}.row b{font-size:12px}.row div{font-size:11px;color:#cbd5e1;line-height:1.55}
-.stat{background:var(--input);border:1px solid var(--line);border-radius:10px;padding:10px}.stat b{display:block;font-size:12px}.stat span{font-size:11px;color:var(--muted)}
-.sectionhead{font-size:13px;font-weight:700;margin-bottom:8px}.small{font-size:10px;color:var(--muted);line-height:1.5}.method{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:11px}.method:last-child{border:0}.ok{color:var(--green)}.warn{color:var(--gold)}.bad{color:var(--red)}
-details summary{cursor:pointer;color:var(--blue);font-size:12px;font-weight:700}
-@media(max-width:520px){.grid3{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (ခင်ကြီးဖျော် မူရင်းကျမ်းလာ)</title>
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: Padauk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: #131b2e;
+      --bg-input: #0f172a;
+      --bg-accent: #1e1b4b;
+      --border-color: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #4f46e5;
+      --accent-green: #10b981;
+      --accent-yellow: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-gold: #fbbf24;
+      --accent-purple: #c084fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Padauk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin: 12px 0 16px 0;
+    }
+    .header h1 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 2px;
+      letter-spacing: 0.5px;
+    }
+    .header p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Card Box */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+    .card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Location & Timezone Bar */
+    .loc-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .time-info {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+    .city-select {
+      background-color: #1e293b;
+      color: var(--text-main);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+    .btn-gps {
+      background-color: #334155;
+      border: none;
+      border-radius: 6px;
+      color: #f1f5f9;
+      padding: 5px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-gps:hover {
+      background-color: #475569;
+    }
+
+    /* System Mode Selector Tabs */
+    .mode-tab-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .mode-tab {
+      background-color: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 6px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .mode-tab.active {
+      border-color: var(--accent-blue);
+      background-color: #162038;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Active Hora Hero Banner */
+    .hora-hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1px solid #3730a3;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .hero-tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .hero-meta {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .hero-pillars {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .pillar-box {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.35);
+      padding: 6px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .pillar-lbl {
+      font-size: 10px;
+      color: #94a3b8;
+      display: block;
+    }
+    .pillar-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    /* 7-Status Matrix Grid (ဆပွတ်ရိုက် ၇ ဌာန) */
+    .matrix-toggle-btn {
+      width: 100%;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--accent-blue);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .matrix-panel {
+      display: none;
+      background-color: #0b1120;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+    .matrix-panel.show {
+      display: block;
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 4px 6px;
+      text-align: left;
+      border-bottom: 1px solid #1e293b;
+    }
+    .matrix-table th {
+      color: #94a3b8;
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* Body Touch Buttons Grid */
+    .instruction {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .body-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .body-btn {
+      background-color: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #cbd5e1;
+    }
+    .body-btn i {
+      font-size: 18px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+    .body-btn .btn-text {
+      font-size: 12px;
+      text-align: center;
+    }
+    .body-btn .planet-tag {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .body-btn.active {
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-weight: 700;
+    }
+
+    /* Speech Sound Input */
+    .text-input {
+      width: 100%;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+    }
+    .text-input:focus {
+      border-color: var(--accent-indigo);
+    }
+    .consonant-badge {
+      display: none;
+      margin-top: 8px;
+      padding: 6px 10px;
+      background-color: var(--bg-input);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .consonant-badge strong {
+      color: var(--accent-green);
+    }
+
+    /* Action Calculate Button */
+    .btn-calculate {
+      width: 100%;
+      background-color: var(--accent-indigo);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0;
+      transition: background-color 0.2s;
+    }
+    .btn-calculate:hover {
+      background-color: #4338ca;
+    }
+
+    /* Results */
+    #resultContainer {
+      display: none;
+    }
+    .verdict-banner {
+      background-color: var(--bg-accent);
+      border: 1px solid #4338ca;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .verdict-score {
+      font-size: 13px;
+      font-weight: 600;
+      color: #a5b4fc;
+    }
+    .verdict-heading {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    .status-match-box {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .status-pill {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .result-card {
+      background-color: var(--bg-card);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--accent-blue);
+    }
+    .result-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+    .result-body {
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .result-body-highlight {
+      font-size: 14px;
+      font-weight: 700;
+      color: #34d399;
+    }
+    .number-subtext {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+    .remedy-box {
+      background-color: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .remedy-title {
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-<header class="hero">
-<h1>အင်္ဂဝိဇ္ဇာ အခါတော်တွက် Engine</h1>
-<p>V2 • Solar + Standard • 24-layer cross-check • Evidence-first interpretation</p>
-</header>
 
-<section class="card">
-<div class="title">၁။ မေးချိန် + နေရာ</div>
-<div class="grid2">
-<div><label>ရက်စွဲ</label><input id="date" type="date"></div>
-<div><label>အချိန်</label><input id="time" type="time" step="1"></div>
-<div><label>နေရာ</label><select id="city"></select></div>
-<div><label>စနစ်</label>
-<select id="mode"><option value="solar">ဒေသ Solar / Dynamic</option><option value="standard">ရိုးရာ ၆:၀၀ စမှတ်</option><option value="compare">နှစ်မျိုးလုံး နှိုင်းယှဉ်</option></select>
-</div>
-</div>
-<div class="notice" id="astro">Astronomical calculation loading…</div>
-</section>
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="header">
+      <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
+      <p>တောင်တွင်းဆရာတော် ခင်ကြီးဖျော် မူရင်းကျမ်းလာ ဆပွတ်ရိုက် ၇ ဌာန ဥပဒေသ</p>
+    </div>
 
-<section class="card">
-<div class="title">၂။ အခါ / အမူအရာ / အသံ</div>
-<div id="horaCards" class="grid2"></div>
-<div style="margin-top:10px">
-<label>ထိတွေ့သည့် အစိတ်အပိုင်း</label>
-<div id="bodyGrid" class="bodygrid"></div>
-</div>
-<div style="margin-top:10px">
-<label>မေးခွန်း စတင်ပြောသော စကားလုံး</label>
-<input id="sound" placeholder="ဥပမာ — အလုပ်၊ ငွေ၊ သူငယ်ချင်း၊ သူ...">
-<div id="soundInfo" class="muted" style="margin-top:5px"></div>
-</div>
-</section>
+    <!-- Step 1: Location, Time & Hora Selection -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
+          <span>အဆင့် (၁) - အခါတော် စိစစ်ရွေးချယ်မှု</span>
+        </div>
+      </div>
 
-<button id="calc" class="primary">✦ အဆင့် ၂၄ ဆင့် ဖြတ်ပြီး အပြီးသတ်ဟောချက်ထုတ်မည်</button>
+      <!-- Timezone & GPS Bar -->
+      <div class="loc-bar">
+        <div>
+          <span class="time-info" id="timeDisplay">--:--:--</span>
+          <span style="color: #64748b; margin: 0 4px;">|</span>
+          <span style="font-size: 12px; font-weight: 600; color: var(--accent-blue);" id="cityLabel">ရန်ကုန်</span>
+        </div>
+        <div style="display: flex; gap: 6px; align-items: center;">
+          <select id="citySelect" class="city-select">
+            <option value="yangon">ရန်ကုန် (UTC+6:30)</option>
+            <option value="mandalay">မန္တလေး (UTC+6:30)</option>
+            <option value="bangkok">ဘန်ကောက် (UTC+7)</option>
+            <option value="singapore">စင်ကာပူ (UTC+8)</option>
+            <option value="tokyo">တိုကျို (UTC+9)</option>
+            <option value="dubai">ဒူဘိုင်း (UTC+4)</option>
+            <option value="london">လန်ဒန် (UTC+0/+1)</option>
+            <option value="newyork">နယူးယောက် (UTC-5/-4)</option>
+          </select>
+          <button id="btnGps" class="btn-gps" title="ဖုန်း GPS တည်နေရာယူရန်">
+            <i class="fa-solid fa-crosshairs"></i> GPS
+          </button>
+        </div>
+      </div>
 
-<section id="result" class="result" style="margin-top:13px">
-<div class="verdict">
-<div class="score" id="score">--</div>
-<div class="confidence" id="confidence">--</div>
-<div class="heading" id="heading">--</div>
-<div class="meter"><i id="meter"></i></div>
-</div>
+      <!-- Calculation Mode Tabs -->
+      <div class="mode-tab-group">
+        <div class="mode-tab active" id="tabKhingyi" onclick="switchCalculationMode('khingyi')">
+          <i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၈ အခါခွဲစနစ် (ခင်ကြီးဖျော် ပေမူ)
+        </div>
+        <div class="mode-tab" id="tabStandard" onclick="switchCalculationMode('standard')">
+          <i class="fa-solid fa-stopwatch"></i> ၁ နာရီ ၁ အခါစနစ် (Standard Chaldean)
+        </div>
+      </div>
 
-<div class="card">
-<div class="sectionhead">Astronomical / Hora အခြေခံဒေတာ</div>
-<div id="stats" class="grid3"></div>
-</div>
+      <!-- Active Hora Hero Box -->
+      <div class="hora-hero">
+        <div class="hero-top">
+          <div class="hero-title" id="horaMainName">တနင်္ဂနွေ အခါ</div>
+          <div class="hero-tag" id="horaTag">၁ ယာမ်</div>
+        </div>
+        <div class="hero-meta" id="horaMetaLine">
+          ဗေဒင်နေ့နံ: ... | နေထွက်: ... | နေဝင်: ...
+        </div>
 
-<div class="card">
-<div class="sectionhead">၂၄ အလွှာ Cross-check</div>
-<div id="methods"></div>
-<div class="small" style="margin-top:8px">မှတ်ချက် — အောက်ပါ ၂၄ အလွှာသည် engine validation / corroboration layers ဖြစ်သည်။ ရိုးရာစာပေတွင် သီးခြားသတ်မှတ်ထားသော “၂၄ နည်း” ဟူသော အမည်နှင့် စည်းမျဉ်းများကို မရရှိသေးသဖြင့် အမည်မဖန်တီးထားပါ။</div>
-</div>
+        <!-- 3 Pillars of Khingyi Phyaw -->
+        <div class="hero-pillars">
+          <div class="pillar-box">
+            <span class="pillar-lbl">မူလတိုင် (P1)</span>
+            <span class="pillar-val" id="pillarMula">၁ (နွေ)</span>
+          </div>
+          <div class="pillar-box">
+            <span class="pillar-lbl">နိမိတ်တိုင် (P2)</span>
+            <span class="pillar-val" id="pillarNimitta">၅ (တေး)</span>
+          </div>
+          <div class="pillar-box">
+            <span class="pillar-lbl">လက္ခဏာတိုင် (P3)</span>
+            <span class="pillar-val" id="pillarLakkhana">၂ (လာ)</span>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
-<div class="sectionhead">ဓာတ်မိတ် / ဓာတ်ရန်</div><div id="pairs"></div><div id="elements"></div>
-</div>
+      <!-- 7 Status Matrix Accordion -->
+      <button class="matrix-toggle-btn" id="matrixToggleBtn">
+        <span><i class="fa-solid fa-table-cells"></i> <span id="matrixBtnText">အခါ၏ ဆပွတ်ရိုက် ၇ ဌာန ဇယား ကြည့်ရန်</span></span>
+        <i class="fa-solid fa-chevron-down" id="matrixChevron"></i>
+      </button>
 
-<div class="card"><div class="sectionhead">(၁) ဘာကိစ္စနှင့် ပတ်သက်သနည်း</div><div id="root"></div></div>
-<div class="card"><div class="sectionhead">(၂) အောင်မြင် / ကြန့်ကြာ / မသင့်</div><div id="detail"></div></div>
-<div class="card"><div class="sectionhead">(၃) ရှေ့ဖြစ်နှင့် နောက်ဆက်တွဲ</div><div id="progress"></div></div>
-<div class="card"><div class="sectionhead">(၄) အချိန်ကာလ</div><div id="duration"></div></div>
-<div class="card"><div class="sectionhead">⚠️ အဓိက သတိပြုရန်</div><div id="caution"></div></div>
-</section>
+      <div class="matrix-panel" id="matrixPanel">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>ဌာန</th>
+              <th>ဂြိုဟ်</th>
+              <th>ကျမ်းလာ သဘောတရားနှင့် အကျိုးပေး</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody"></tbody>
+        </table>
+      </div>
+    </div>
 
-<details class="card" style="margin-top:13px"><summary>Engine design note</summary>
-<p class="small">ဒီ version မှာ “အမှန်တကယ်ဖြစ်နိုင်ခြေ 83%” လို့ မဆိုထားပါ။ Score သည် traditional/heuristic indicators များကို ပေါင်းစပ်ထားသော strength index ဖြစ်ပြီး empirical probability မဟုတ်ပါ။ တကယ့် “သွေးထွက်အောင်မှန်” ဖြစ်မဖြစ်ကို historical back-test ဖြင့်သာ စစ်ဆေးနိုင်ပါသည်။</p>
-</details>
-</div>
+    <!-- Step 2: Body Touch Picker -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <i class="fa-solid fa-child" style="color: var(--accent-yellow);"></i>
+          <span>အဆင့် (၂) - မေးသူ ထိတွေ့သည့် အင်္ဂါအစိတ်အပိုင်း</span>
+        </div>
+      </div>
+      <div class="instruction">မေးသူ စတင်မေးမြန်းချိန် ထိတွေ့လိုက်သော ခန္ဓာကိုယ်နေရာကို ရွေးပါ-</div>
+      <div class="body-grid" id="bodyGrid"></div>
+    </div>
 
-<script>
-'use strict';
+    <!-- Step 3: Sound Input -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <i class="fa-solid fa-microphone" style="color: var(--accent-green);"></i>
+          <span>အဆင့် (၃) - စကားစတင်ပြောဆိုသော စကားလုံး/အသံ</span>
+        </div>
+      </div>
+      <input type="text" id="soundInput" class="text-input" placeholder="ဥပမာ - ကား၊ အလုပ်၊ ပိုက်ဆံ၊ သူငယ်ချင်း..." autocomplete="off" />
+      <div class="consonant-badge" id="consonantBadge">
+        အစဗျည်း: <strong id="parsedChar">[-]</strong> → <span id="parsedPlanetText">...</span>
+      </div>
+    </div>
 
-/* =========================
-   DATA
-========================= */
-const P={
-  1:{name:'တနင်္ဂနွေ',element:'FIRE',kw:'အာဏာ • အကြီးအကဲ • ဂုဏ်သိက္ခာ'},
-  2:{name:'တနင်္လာ',element:'WATER',kw:'ငွေကြေး • ခရီး • စိတ်လှုပ်ရှား'},
-  3:{name:'အင်္ဂါ',element:'FIRE',kw:'အပြိုင်အဆိုင် • အမှုအခင်း • စက်/မြေ'},
-  4:{name:'ဗုဒ္ဓဟူး',element:'WATER',kw:'စာချုပ် • စကား • ဆက်သွယ်ရေး'},
-  5:{name:'ကြာသပတေး',element:'EARTH',kw:'ဆရာ • မင်္ဂလာ • ပညာ/ဥပဒေ'},
-  6:{name:'သောကြာ',element:'AIR',kw:'အချစ် • အလှအပ • ရတနာ'},
-  0:{name:'စနေ',element:'AIR',kw:'အကြွေး • ကြန့်ကြာ • ပျောက်ဆုံးမှု'}
-};
-const CITIES={
-  yangon:{name:'ရန်ကုန်',lat:16.8661,lng:96.1951,tz:6.5},
-  mandalay:{name:'မန္တလေး',lat:21.9588,lng:96.0891,tz:6.5},
-  bangkok:{name:'ဘန်ကောက်',lat:13.7563,lng:100.5018,tz:7},
-  singapore:{name:'စင်ကာပူ',lat:1.3521,lng:103.8198,tz:8},
-  tokyo:{name:'တိုကျို',lat:35.6762,lng:139.6503,tz:9},
-  london:{name:'လန်ဒန်',lat:51.5074,lng:-0.1278,tz:0},
-  newyork:{name:'နယူးယောက်',lat:40.7128,lng:-74.0060,tz:-4}
-};
-const FRIEND={
-'1-5':20,'5-1':20,'2-4':20,'4-2':20,'3-6':20,'6-3':20,'4-0':20,'0-4':20
-};
-const ENEMY={
-'1-6':-25,'6-1':-25,'2-5':-25,'5-2':-25,'3-0':-30,'0-3':-30
-};
-const BODY=[
-['HEAD','ဦးခေါင်း / ဆံပင်',1],['FACE','မျက်နှာ / မျက်စိ / နဖူး',2],
-['NECK','လည်ပင်း / ပခုံး',3],['CHEST','ရင်ဘတ် / နှလုံး / လက်ဖျံ',4],
-['BELLY','ဝမ်းဗိုက် / ခါး',5],['FEET','ခြေဖျား / လျှို့ဝှက်အင်္ဂါ',6],
-['JOINTS','ဒူး / ခြေဆစ် / အရိုး',0]
-];
-const DOSSIER={
-1:['တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာ','ဂုဏ်သိက္ခာ၊ အကြီးအကဲ၊ အာဏာပိုင်၊ ရာထူး၊ အမိန့်'],
-2:['ပထဝီ/အာပေါ • ငွေကြေးနှင့် အပြောင်းအလဲ','ငွေ၊ အရောင်းအဝယ်၊ ခရီး၊ အိမ်/နေရာပြောင်း'],
-3:['တေဇောကြမ်း • အပြိုင်အဆိုင်','အမှုအခင်း၊ စက်၊ မြေ၊ ပြိုင်ဘက်၊ အရေးယူမှု'],
-4:['အာပေါ/ဝါယော • ဆက်သွယ်ရေး','စာချုပ်၊ စကား၊ သတင်း၊ ပညာ၊ ကုန်သွယ်မှု'],
-5:['ပထဝီကြီး • မင်္ဂလာနှင့် တရားဓမ္မ','ဆရာ၊ ဥပဒေ၊ ပညာ၊ မင်္ဂလာ၊ ဘဏ်'],
-6:['ဝါယောနု • အလှအပနှင့် သုခ','အချစ်၊ အနုပညာ၊ အလှအပ၊ ရတနာ'],
-0:['ဝါယောကြမ်း • အကြွေးနှင့် ကြန့်ကြာမှု','အကြွေးဟောင်း၊ ပျောက်ဆုံးမှု၊ ဝန်ထုပ်ဝန်ပိုး၊ ကြန့်ကြာမှု']
-};
+    <!-- Calculate Button -->
+    <button class="btn-calculate" id="btnCalculate">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span>ဆပွတ်ရိုက် ၇ ဌာနအရ အပြီးသတ် ဟောချက်ထုတ်မည်</span>
+    </button>
 
-/* =========================
-   ASTRONOMY
-   NOAA-style solar event calculation.
-   All calculations use explicit location timezone.
-========================= */
-const RAD=Math.PI/180, DEG=180/Math.PI;
-const norm=x=>((x%360)+360)%360;
-function julianDay(y,m,d){
-  if(m<=2){y--;m+=12}
-  const A=Math.floor(y/100),B=2-A+Math.floor(A/4);
-  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;
-}
-function solarPosition(date,lat,lng){
-  const y=date.getUTCFullYear(),m=date.getUTCMonth()+1,d=date.getUTCDate();
-  const jd=julianDay(y,m,d)+(date.getUTCHours()+date.getUTCMinutes()/60+date.getUTCSeconds()/3600)/24;
-  const T=(jd-2451545)/36525;
-  const L0=norm(280.46646+36000.76983*T+0.0003032*T*T);
-  const M=norm(357.52911+35999.05029*T-0.0001537*T*T);
-  const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M*RAD)+(0.019993-0.000101*T)*Math.sin(2*M*RAD)+0.000289*Math.sin(3*M*RAD);
-  const sunLon=L0+C;
-  const e=23.439291-0.0130042*T;
-  const ra=Math.atan2(Math.cos(e*RAD)*Math.sin(sunLon*RAD),Math.cos(sunLon*RAD))*DEG;
-  const dec=Math.asin(Math.sin(e*RAD)*Math.sin(sunLon*RAD))*DEG;
-  const gmst=norm(280.46061837+360.98564736629*(jd-2451545)+0.000387933*T*T-T*T*T/38710000);
-  const lst=norm(gmst+lng);
-  let H=norm(lst-ra); if(H>180)H-=360;
-  const alt=Math.asin(Math.sin(lat*RAD)*Math.sin(dec*RAD)+Math.cos(lat*RAD)*Math.cos(dec*RAD)*Math.cos(H*RAD))*DEG;
-  return {dec,ra,alt};
-}
-function eventUTC(y,m,d,lat,lng,zenith=90.8333,rise=true){
-  // Iterative local solar transit approximation; sufficient for user-facing minute-level hora work.
-  let date=new Date(Date.UTC(y,m-1,d,12,0,0));
-  let base=solarPosition(date,lat,lng);
-  let dec=base.dec;
-  let cosH=(Math.cos(zenith*RAD)-Math.sin(lat*RAD)*Math.sin(dec*RAD))/(Math.cos(lat*RAD)*Math.cos(dec*RAD));
-  if(cosH>1)return null;if(cosH<-1)return null;
-  let H= Math.acos(cosH)*DEG;
-  if(!rise)H=-H;
-  const noonMinutes=720-4*lng;
-  // Equation of time from solar position model
-  const T=(julianDay(y,m,d)-2451545)/36525;
-  const L0=norm(280.46646+36000.76983*T+0.0003032*T*T);
-  const M=norm(357.52911+35999.05029*T-0.0001537*T*T);
-  const eps=23.439291-0.0130042*T;
-  const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M*RAD)+(0.019993-0.000101*T)*Math.sin(2*M*RAD)+0.000289*Math.sin(3*M*RAD);
-  const sunLon=L0+C;
-  let ra=Math.atan2(Math.cos(eps*RAD)*Math.sin(sunLon*RAD),Math.cos(sunLon*RAD))*DEG;
-  ra=norm(ra);
-  const eq=4*(norm(L0)-ra);
-  let mins=noonMinutes-eq+4*H;
-  mins=((mins%1440)+1440)%1440;
-  return mins/60;
-}
-function solarEvents(date,city){
-  const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();
-  const sr=eventUTC(y,m,d,city.lat,city.lng,90.8333,true);
-  const ss=eventUTC(y,m,d,city.lat,city.lng,90.8333,false);
-  const prev=new Date(date);prev.setDate(prev.getDate()-1);
-  const next=new Date(date);next.setDate(next.getDate()+1);
-  const ps=eventUTC(prev.getFullYear(),prev.getMonth()+1,prev.getDate(),city.lat,city.lng,90.8333,true);
-  const ns=eventUTC(next.getFullYear(),next.getMonth()+1,next.getDate(),city.lat,city.lng,90.8333,true);
-  return {sunrise:sr,sunset:ss,prevSunrise:ps,nextSunrise:ns,dayLen:sr!=null&&ss!=null?ss-sr:null};
-}
-const toMin=h=>h*60;
-const fromMin=m=>((m%1440)+1440)%1440;
-function hms(h){if(h==null)return'—';let m=fromMin(Math.round(h*60));return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
-function dateFromInputs(){return new Date(document.getElementById('date').value+'T'+document.getElementById('time').value)}
-function localMinutes(date){return date.getHours()*60+date.getMinutes()+date.getSeconds()/60}
+    <!-- Results Section -->
+    <div id="resultContainer">
+      <div class="verdict-banner">
+        <div class="verdict-score" id="resScore">--% ဓာတ်စီး အလားအလာ</div>
+        <div class="verdict-heading" id="resHeading">...</div>
+        <div class="status-match-box" id="resStatusPills"></div>
+      </div>
 
-/* Planetary hours */
-const HORA=[1,6,4,2,0,5,3];
-const dayLord=d=>({0:1,1:2,2:3,3:4,4:5,5:6,6:0})[d];
-function standardHora(date){
-  let dow=date.getDay(), mins=localMinutes(date), before=mins<360;
-  if(before)dow=(dow+6)%7;
-  const lord=dayLord(dow), elapsed=(mins<360?mins+1440:mins)-360;
-  const idx=Math.floor(elapsed/60);
-  const start=HORA.indexOf(lord);
-  return {planet:HORA[(start+idx)%7],dayLord:lord,index:(idx%24)+1,before};
-}
-function solarHora(date,city){
-  const e=solarEvents(date,city), mins=localMinutes(date);
-  if(e.sunrise==null||e.sunset==null)return standardHora(date);
-  let lord=date.getDay(),start=e.sunrise,segments;
-  let phase='day', idx;
-  if(mins>=e.sunrise&&mins<e.sunset){
-    segments=(e.sunset-e.sunrise)/12;idx=Math.floor((mins-e.sunrise)/segments);
-  }else{
-    phase='night';
-    const ns=(mins>=e.sunset)?e.nextSunrise+1440:e.sunrise+1440;
-    const s=(mins>=e.sunset)?e.sunset:e.prevSunrise;
-    segments=(ns-s)/12;idx=Math.floor((mins-s)/segments);
-    if(mins<e.sunrise)lord=(lord+6)%7;
-  }
-  const dl=dayLord(lord), startIdx=HORA.indexOf(dl);
-  return {planet:HORA[(startIdx+idx)%7],dayLord:dl,index:idx+1,phase,segmentMinutes:segments,sunrise:e.sunrise,sunset:e.sunset};
-}
-function trueSolarTime(date,city){
-  const mins=localMinutes(date), standardMeridian=city.tz*15;
-  const longitudeCorrection=4*(city.lng-standardMeridian);
-  const day=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(date.getFullYear(),0,0))/86400000);
-  const B=2*Math.PI*(day-81)/364;
-  const eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
-  return fromMin(mins+longitudeCorrection+eot);
-}
+      <!-- Result 1 -->
+      <div class="result-card">
+        <div class="result-label">(၁) ဘာကိစ္စနှင့် ပတ်သက်၍ ရောက်လာခြင်း (အခါအရင်းခံ)</div>
+        <div class="result-body" id="resRootCause">...</div>
+      </div>
 
-/* =========================
-   Burmese consonant parser
-========================= */
-function parseSound(s){
-  const c=(s||'').trim()[0];if(!c)return null;
-  const sets=[
-    [/[အဣဤဥဦဧဩဪ]/,1],[/[ကခဂဃင]/,2],[/[စဆဇဈည]/,3],
-    [/[ယရလဝ]/,4],[/[ပဖဗဘမ]/,5],[/[သဟဠ]/,6],[/[တထဒဓန]/,0]
-  ];
-  for(const [re,p] of sets)if(re.test(c))return{char:c,planet:p};
-  return{char:c,planet:1};
-}
+      <!-- Result 2 -->
+      <div class="result-card">
+        <div class="result-label">(၂) အောင်မြင်မည် (သို့) ကျရှုံးမည် သုံးသပ်ချက် (ဆပွတ်ရိုက် ၇ ဌာန)</div>
+        <div class="result-body" id="resVerdictDetail">...</div>
+      </div>
 
-/* =========================
-   Relation + element layer
-========================= */
-function relation(a,b){
-  if(a===b)return{type:'SAME',delta:25,title:'ထပ်တူဓာတ်',desc:'အင်အားတစ်မျိုးတည်း ထပ်တူကျ၍ အချက်အလက်က တစ်ဖက်တည်းကို ပြင်းပြင်းထန်ထန် ညွှန်သည်.'};
-  const k=a+'-'+b;
-  if(FRIEND[k])return{type:'FRIEND',delta:FRIEND[k],title:'ဓာတ်မိတ်',desc:'မိတ်ဖက်အနေအထားက ကိစ္စကို တွန်းပို့သည်.'};
-  if(ENEMY[k])return{type:'ENEMY',delta:ENEMY[k],title:'ဓာတ်ရန်',desc:'ပဋိပက္ခ/အတားအဆီး indicator တိုးသည်.'};
-  return{type:'NEUTRAL',delta:0,title:'အလယ်အလတ်',desc:'မိတ်/ရန် အထူးသတ်မှတ်ချက် မရှိ.'};
-}
-function elementLayer(ps){
-  const es=ps.map(x=>P[x].element),n=[];
-  let d=0;
-  if(es.includes('FIRE')&&es.includes('WATER')){d-=10;n.push('မီး + ရေ တွဲမှုကြောင့် အမြန်တက်ပြီး ပြန်တုံ့ပြန်မှု ဖြစ်နိုင်သည်.')}
-  if(es.includes('EARTH')&&es.includes('AIR')){d-=8;n.push('မြေ + လေ တွဲမှုကြောင့် အစီအစဉ်နှင့် လက်တွေ့ကြား ကွာဟမှု ရှိနိုင်သည်.')}
-  if(es.filter(x=>x==='FIRE').length>=2){d+=5;n.push('မီးဓာတ် အားကောင်း — အဆုံးအဖြတ်မြန်.')}
-  if(es.filter(x=>x==='WATER').length>=2){d+=8;n.push('ရေဓာတ် အားကောင်း — ညှိနှိုင်း/စီးဆင်းမှုကောင်း.')}
-  return{delta:d,notes:n};
-}
+      <!-- Result 3 -->
+      <div class="result-card">
+        <div class="result-label">(၃) ရှေ့ဖြစ်နှင့် နောက်ဆက်တွဲ ဖြစ်ပေါ်လာမည့်အခြေအနေ</div>
+        <div class="result-body" id="resProgression">...</div>
+      </div>
 
-/* =========================
-   24 corroboration layers
-   These are engineering layers, not claimed as canonical
-   traditional 24 methods.
-========================= */
-function run24(ctx){
-  const {date,city,std,sol,solar,ts,p1,p2,p3}=ctx;
-  const sameMode=std.planet===sol.planet;
-  const rel12=relation(p1,p2),rel23=relation(p2,p3),rel13=relation(p1,p3);
-  const el=elementLayer([p1,p2,p3]);
-  const arr=[];
-  const add=(name,pass,why)=>arr.push({name,pass,why});
-  add('01 • Standard 6AM Hora',true,`${P[p1].name} အခါကို ရိုးရာ ၆:၀၀ စမှတ်ဖြင့် တွက်ထားသည်.`);
-  add('02 • Solar Sunrise Hora',true,`${P[p2].name} — ဒေသနေထွက်ကို စမှတ်အဖြစ် အသုံးပြု.`);
-  add('03 • Dynamic Day/Night Hora',true,`${sol.phase==='day'?'နေ့':'ည'} ယာမ်အရှည် ${sol.segmentMinutes?sol.segmentMinutes.toFixed(2):'—'} မိနစ်.`);
-  add('04 • Day Lord',true,`နေ့နံ = ${P[sol.dayLord].name}.`);
-  add('05 • Hora Lord',true,`လက်ရှိအခါ = ${P[sol.planet].name}.`);
-  add('06 • True Solar Time',true,`ဒေသနေအချိန်ညှိချက် = ${hms(ts)}.`);
-  add('07 • Sunrise Anchor',solar.sunrise!=null,true?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');
-  add('08 • Sunset Anchor',solar.sunset!=null,solar.sunset!=null?`နေဝင် ${hms(solar.sunset)}.`:'နေဝင်မရရှိ.');
-  add('09 • Solar Noon Geometry',true,`နေ့လယ်အလယ်ချက် ≈ ${hms((solar.sunrise+solar.sunset)/2)}.`);
-  add('10 • Phase Position',true,`${sol.phase==='day'?'နေ့ပိုင်း':'ညပိုင်း'} ${sol.index} ယာမ်မြောက်.`);
-  add('11 • Day/Hora Agreement',sameMode,`Standard=${P[std.planet].name}, Solar=${P[sol.planet].name}.`);
-  add('12 • Hora→Body Relation',true,`${P[sol.planet].name} ↔ ${P[p2].name}: ${rel12.type}.`);
-  add('13 • Body→Sound Relation',true,`${P[p2].name} ↔ ${P[p3].name}: ${rel23.type}.`);
-  add('14 • Hora→Sound Relation',true,`${P[p1].name} ↔ ${P[p3].name}: ${rel13.type}.`);
-  add('15 • Triple Concordance',rel12.delta+rel23.delta+rel13.delta>=0,`အတွဲသုံးခုစုစုပေါင်း ${rel12.delta+rel23.delta+rel13.delta}.`);
-  add('16 • Element Balance',el.delta>=0,`ဓာတ်ညှိချက် ${el.delta >=0?'+':''}${el.delta}.`);
-  add('17 • Dominant Planet',true,`အဓိက = ${P[p1].name}.`);
-  add('18 • Conflict Index',rel12.type!=='ENEMY'&&rel23.type!=='ENEMY',`ရန်အတွဲအရေအတွက်ကို စစ်ထားသည်.`);
-  add('19 • Sound Signal',!!parseSound(document.getElementById('sound').value),`အစဗျည်းမှ ${P[p3].name} ကို ထုတ်ထားသည်.`);
-  add('20 • Time Resonance',true,`ယာမ်နံပါတ် ${sol.index} နှင့် အခါနံ ဆက်စပ်မှု.`);
-  add('21 • Midnight Rule',std.before||sol.phase==='night',`ည/နေမထွက်မီ rule ကို စစ်ထားသည်.`);
-  add('22 • Solar/Standard Cross-check',sameMode,`စနစ်နှစ်ခု ${sameMode?'တူညီ':'ကွဲပြား'} သည်.`);
-  add('23 • Consensus Strength',true,`အောက်ပါ weighted score ဖြင့် consensus ထုတ်မည်.`);
-  add('24 • Data Quality Gate',solar.sunrise!=null&&solar.sunset!=null,`နက္ခတ်အချက်အလက် completeness ကို စစ်ထားသည်.`);
-  return {arr,rel12,rel23,rel13,el,sameMode};
-}
+      <!-- Result 4 -->
+      <div class="result-card">
+        <div class="result-label">(၄) ပြီးမြောက်မည့် ကာလအပိုင်းအခြားနှင့် ဓာတ်ဂဏန်း</div>
+        <div class="result-body-highlight" id="resDuration">...</div>
+        <div class="number-subtext" id="resDominantNums">အကျိုးပေးဂြိုဟ်အစီအစဉ်: [...]</div>
+      </div>
 
-/* =========================
-   Interpretation
-========================= */
-const ROOT={
-1:'အကြီးအကဲ၊ ရာထူး၊ ဂုဏ်သိက္ခာ၊ အာဏာပိုင် သို့မဟုတ် ဖခင်/အထက်လူကြီးဆိုင်ရာ ကိစ္စ.',
-2:'ငွေကြေး၊ အရောင်းအဝယ်၊ ခရီး၊ နေရာပြောင်းခြင်း သို့မဟုတ် စိတ်အပြောင်းအလဲဆိုင်ရာ ကိစ္စ.',
-3:'အငြင်းပွားမှု၊ ပြိုင်ဘက်၊ စက်/မြေ၊ အရေးယူမှု သို့မဟုတ် အမှုအခင်းဆိုင်ရာ ကိစ္စ.',
-4:'စာချုပ်၊ သတင်း၊ စကားပြော၊ ပညာရေး၊ ကုန်သွယ်ရေး သို့မဟုတ် မိတ်ဆွေဆက်သွယ်မှု.',
-5:'ဆရာ၊ ဥပဒေ၊ ပညာ၊ အဖွဲ့အစည်း၊ မင်္ဂလာ သို့မဟုတ် အကြံပေးသူဆိုင်ရာ ကိစ္စ.',
-6:'အချစ်ရေး၊ အနုပညာ၊ အလှအပ၊ ရတနာ၊ ယာဉ် သို့မဟုတ် ဆွဲဆောင်မှုဆိုင်ရာ ကိစ္စ.',
-0:'အကြွေးဟောင်း၊ ပျောက်ဆုံးမှု၊ ကြန့်ကြာနေသောအလုပ်၊ ဝန်ထုပ်ဝန်ပိုး သို့မဟုတ် ပြန်လည်ဖြေရှင်းရမည့် အဟောင်းကိစ္စ.'
-};
-const NEXT={
-1:'အစပိုင်းတွင် အခွင့်အရေးကောင်းပေါ်လာပြီး အထက်လူကြီး/အာဏာပိုင်၏ စိစစ်မှုနောက်မှ အဆုံးအဖြတ်ကျမည်.',
-2:'ငွေ/အခွင့်အရေး လှုပ်ရှားလာနိုင်သော်လည်း အဝင်အထွက်မြန်၍ ပြန်လည်ညှိနှိုင်းရနိုင်သည်.',
-3:'ပြိုင်ဘက် သို့မဟုတ် အငြင်းပွားစရာတစ်ခု ပေါ်လာနိုင်ပြီး တိုက်ရိုက်တုံ့ပြန်ခြင်းထက် စနစ်တကျ ဖြေရှင်းရန်လို.',
-4:'စကား၊ စာရွက်စာတမ်း သို့မဟုတ် မိတ်ဆွေတစ်ဦး၏ ဆက်သွယ်မှုက နောက်တစ်ဆင့်ကို ဖွင့်ပေးနိုင်သည်.',
-5:'အတွေ့အကြုံရှိသူ/အထက်လူကြီး၏ အကြံက အဆုံးအဖြတ်ကို ပိုကောင်းစေမည်.',
-6:'လူ/အရာဝတ္ထုတစ်ခုက ဆွဲဆောင်မှုတိုးစေမည်; သို့သော် အပျော်အပါးကြောင့် မူလရည်ရွယ်ချက် မလွဲစေရန်လို.',
-0:'ကြန့်ကြာမှု သို့မဟုတ် ပြန်လည်ပြင်ဆင်ရမှု ဖြစ်နိုင်ပြီး အချိန်ပိုနှင့် ကုန်ကျစရိတ်ပိုကို ကြိုတင်တွက်ထားသင့်.'
-};
-function duration(p,score){
-  const fast=score>=70?'မြန်':'အလယ်အလတ်';
-  const unit={1:'၁ ရက်–၁ ပတ်',2:'၂ ရက်–၂ ပတ်',3:'၃ ရက်–၃ ပတ်',4:'၄ ရက်–၄ ပတ်',5:'၅ ရက်–၅ ပတ်',6:'၆ ရက်–၆ ပတ်',0:'၇ ရက်နှင့်အထက်'}[p];
-  return `${fast} ဘက် — အဓိက time signal ${unit}. ရိုးရာ timing ကို empirical guarantee မဟုတ်ဘဲ indicator အဖြစ်သာ ယူပါ.`;
-}
-function finalScore(ctx,x){
-  const base=50;
-  const agreement=x.sameMode?8:0;
-  const relationScore=x.rel12.delta+x.rel23.delta*.7+x.rel13.delta*.5;
-  const solarQuality=(ctx.solar.sunrise!=null&&ctx.solar.sunset!=null)?4:0;
-  let raw=base+relationScore+x.el.delta+agreement+solarQuality;
-  return Math.max(5,Math.min(95,Math.round(raw)));
-}
-function confidence(ctx,x){
-  let c=62;
-  if(ctx.solar.sunrise!=null&&ctx.solar.sunset!=null)c+=8;
-  if(x.sameMode)c+=12;
-  if(x.rel12.type==='ENEMY'||x.rel23.type==='ENEMY'||x.rel13.type==='ENEMY')c+=3;
-  if(!document.getElementById('sound').value.trim())c-=8;
-  return Math.max(35,Math.min(92,c));
-}
+      <!-- Result 5: Khingyi Phyaw Remedy -->
+      <div class="result-card" style="border-left-color: var(--accent-gold);">
+        <div class="result-label" style="color: var(--accent-gold);">(၅) ကျမ်းလာ ယတြာနှင့် အစာဓာတ်ဆင် လမ်းညွှန်</div>
+        <div class="remedy-box" id="resRemedyBox">...</div>
+      </div>
+    </div>
 
-/* =========================
-   UI
-========================= */
-const cityEl=document.getElementById('city');
-Object.entries(CITIES).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.name;cityEl.appendChild(o)});
-const now=new Date();
-document.getElementById('date').value=now.toISOString().slice(0,10);
-document.getElementById('time').value=[now.getHours(),now.getMinutes(),now.getSeconds()].map((x,i)=>String(x).padStart(2,'0')).join(':');
-let selectedBody=1;
-BODY.forEach((b,i)=>{const el=document.createElement('button');el.className='body'+(i===0?' active':'');el.textContent=b[1];el.onclick=()=>{document.querySelectorAll('.body').forEach(x=>x.classList.remove('active'));el.classList.add('active');selectedBody=b[2]};document.getElementById('bodyGrid').appendChild(el)});
-document.getElementById('sound').addEventListener('input',()=>{const p=parseSound(document.getElementById('sound').value);document.getElementById('soundInfo').textContent=p?`အစဗျည်း [${p.char}] → ${P[p.planet].name} နံ (${p.planet})`:'စကားလုံးထည့်ပါ'});
-function update(){
-  const date=dateFromInputs(),city=CITIES[cityEl.value],e=solarEvents(date,city),std=standardHora(date),sol=solarHora(date,city),ts=trueSolarTime(date,city);
-  document.getElementById('astro').textContent=`${city.name} • နေထွက် ${hms(e.sunrise)} • နေဝင် ${hms(e.sunset)} • True Solar ${hms(ts)} • ${sol.phase==='day'?'နေ့':'ည'} ${sol.index} ယာမ်`;
-  document.getElementById('horaCards').innerHTML='';
-  [['Standard',std],['Solar Dynamic',sol]].forEach(([n,h])=>{
-    const d=document.createElement('div');d.className='stat';
-    d.innerHTML=`<b>${n}: ${P[h.planet].name} အခါ</b><span>${h.index} ယာမ် • နေ့နံ ${P[h.dayLord].name}<br>${P[h.planet].kw}</span>`;
-    document.getElementById('horaCards').appendChild(d);
-  });
-}
-['date','time','city','mode'].forEach(id=>document.getElementById(id).addEventListener('change',update));update();
+  </div>
 
-document.getElementById('calc').onclick=()=>{
-  const date=dateFromInputs(),city=CITIES[cityEl.value],solar=solarEvents(date,city),std=standardHora(date),sol=solarHora(date,city),ts=trueSolarTime(date,city);
-  const p1=std.planet,p2=selectedBody,p3=(parseSound(document.getElementById('sound').value)||{planet:1}).planet;
-  const ctx={date,city,std,sol,solar,ts,p1,p2,p3};
-  const x=run24(ctx),score=finalScore(ctx,x),conf=confidence(ctx,x);
-  let heading=score>=75?'အခါစီး အားကောင်း — အောင်မြင်ဘက် အလေးသာ':score>=55?'အလယ်အလတ် — အခြေအနေကို ထိန်းချုပ်ပြီး ဆက်လုပ်ရန်လို':'ကြန့်ကြာ/ပဋိပက္ခဘက် အလေးသာ';
-  document.getElementById('score').textContent=`${score}/100`;
-  document.getElementById('confidence').textContent=`အင်အားညွှန်းကိန်း • data confidence ${conf}% (probability မဟုတ်)`;
-  document.getElementById('heading').textContent=heading;
-  document.getElementById('meter').style.width=score+'%';
+  <script>
+    // ==========================================
+    // ၁။ ကျမ်းရင်းအချက်အလက်များနှင့် ဂြိုဟ်နံများ
+    // ==========================================
+    const PLANET_INFO = {
+      1: { name: 'တနင်္ဂနွေ', symbol: '၁', element: 'တေဇော (မီး)', color: '#EF4444' },
+      2: { name: 'တနင်္လာ', symbol: '၂', element: 'အာပေါ (ရေ)', color: '#F59E0B' },
+      3: { name: 'အင်္ဂါ', symbol: '၃', element: 'တေဇောကြမ်း (မီး)', color: '#EC4899' },
+      4: { name: 'ဗုဒ္ဓဟူး', symbol: '၄', element: 'ဝါယော (လေ)', color: '#10B981' },
+      5: { name: 'ကြာသပတေး', symbol: '၅', element: 'ပထဝီ (မြေ)', color: '#6366F1' },
+      6: { name: 'သောကြာ', symbol: '၆', element: 'အာပေါနု (ရေ)', color: '#06B6D4' },
+      0: { name: 'စနေ', symbol: '၀', element: 'ဝါယောကြမ်း (လေ)', color: '#8B5CF6' },
+    };
 
-  document.getElementById('stats').innerHTML=[
-    ['နေထွက်',hms(solar.sunrise)],['နေဝင်',hms(solar.sunset)],['True Solar',hms(ts)],
-    ['Standard',P[std.planet].name],['Solar Dynamic',P[sol.planet].name],['Phase',`${sol.phase} • ${sol.index}`]
-  ].map(a=>`<div class="stat"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('');
+    // ကျမ်းလာ တိုင် ၃ ပါး (မူလ၊ နိမိတ်၊ လက္ခဏာ)
+    const THREE_PILLARS = {
+      1: { m: 1, n: 5, l: 2, mantra: 'လွန်ကြာမြင့်' },
+      2: { m: 2, n: 4, l: 6, mantra: 'မင်း၏နောင်' },
+      3: { m: 3, n: 6, l: 1, mantra: 'အမျှကြံ' },
+      4: { m: 4, n: 2, l: 5, mantra: 'ခင်လှသွေ' },
+      5: { m: 5, n: 1, l: 3, mantra: 'စေသဝန်' },
+      6: { m: 6, n: 3, l: 0, mantra: 'သောင်စလမ်း' },
+      0: { m: 0, n: 4, l: 1, mantra: 'နန်းလုံးဆွေ' },
+    };
 
-  document.getElementById('methods').innerHTML=x.arr.map(m=>`<div class="method"><span>${m.name}</span><b class="${m.pass?'ok':'warn'}">${m.pass?'✓':'△'}</b><div style="display:none">${m.why}</div></div>`).join('');
-  document.getElementById('pairs').innerHTML=[['အခါ ↔ အမူအရာ',x.rel12],['အမူအရာ ↔ အသံ',x.rel23],['အခါ ↔ အသံ',x.rel13]].map(([n,r])=>`<div class="row"><span class="dot" style="background:${r.type==='ENEMY'?'var(--red)':r.type==='FRIEND'||r.type==='SAME'?'var(--green)':'var(--muted)'}"></span><div><b>${n} — ${r.title}</b><br>${r.desc} (${r.delta>=0?'+':''}${r.delta})</div></div>`).join('');
-  document.getElementById('elements').innerHTML=x.el.notes.length?`<div class="notice">${x.el.notes.join('<br>')}</div>`:'';
+    // ကျမ်းလာ ဆပွတ်ရိုက် ၇ ဌာန
+    const SEVEN_STATUSES = {
+      1: { adhipati: 2, achya: 1, anyunt: 6, ahtun: 5, banga: 0, amyit: 4, puti: 3 },
+      2: { adhipati: 6, achya: 2, anyunt: 3, ahtun: 0, banga: 5, amyit: 1, puti: 4 },
+      3: { adhipati: 0, achya: 3, anyunt: 4, ahtun: 1, banga: 6, amyit: 2, puti: 5 },
+      4: { adhipati: 1, achya: 4, anyunt: 5, ahtun: 2, banga: 0, amyit: 3, puti: 6 },
+      5: { adhipati: 2, achya: 5, anyunt: 6, ahtun: 3, banga: 1, amyit: 4, puti: 0 },
+      6: { adhipati: 3, achya: 6, anyunt: 0, ahtun: 4, banga: 2, amyit: 5, puti: 1 },
+      0: { adhipati: 4, achya: 0, anyunt: 1, ahtun: 5, banga: 3, amyit: 6, puti: 2 },
+    };
 
-  document.getElementById('root').textContent=ROOT[p1];
-  document.getElementById('detail').textContent=score>=75?'အခြေခံအချက်များက တစ်ဖက်တည်းကို ပိုမိုထောက်ခံနေသည်။ သို့သော် အပြင်ဘက်အခြေအနေများကို မကြည့်ဘဲ “သေချာပေါက်” ဟု မယူပါနှင့်.':score>=55?'အခွင့်အရေးရှိသော်လည်း အတားအဆီး/ညှိနှိုင်းရမှု ပါဝင်နိုင်သည်။ အချိန်နှင့် လုပ်ဆောင်ပုံက ရလဒ်ကို ပြောင်းနိုင်သည်.':'ယခုအချိန်တွင် စတင်ရန်ထက် ပြန်စစ်၊ ပြန်ညှိပြီးမှ လုပ်ဆောင်ခြင်းက ပိုသင့်တော်သည်.';
-  document.getElementById('progress').textContent=NEXT[p2];
-  document.getElementById('duration').textContent=duration(p3,score);
-  document.getElementById('caution').textContent=x.el.notes.length?x.el.notes.join(' '):'အဓိက indicator များအကြား ကြီးမားသောဓာတ်ပဋိပက္ခ မတွေ့ရပါ.';
-  document.getElementById('result').style.display='block';
-  document.getElementById('result').scrollIntoView({behavior:'smooth'});
-};
-</script>
+    const STATUS_INFO = {
+      adhipati: { name: 'အဓိပတိ', score: 35, color: '#10B981', desc: 'အောင်မြင်မှု အထွတ်အထိပ်ရောက်ခြင်း၊ ခေါင်းဆောင်/အကြီးအကဲ မစခြင်း' },
+      ahtun: { name: 'အထွန်း', score: 25, color: '#34D399', desc: 'ထင်ပေါ်ကျော်ကြားခြင်း၊ ကိစ္စပြီးမြောက် အောင်မြင်လွယ်ခြင်း' },
+      anyunt: { name: 'အညွန့်', score: 20, color: '#38BDF8', desc: 'အကျိုးစီးပွား တိုးတက်စည်ပင်ခြင်း၊ အကူအညီရလွယ်ခြင်း' },
+      achya: { name: 'အချာ', score: 10, color: '#94A3B8', desc: 'နံတူပင်ကိုစွမ်းရည်၊ တည်ငြိမ်သော်လည်း ကိုယ်တိုင်အားထုတ်ရမည်' },
+      amyit: { name: 'အမြစ်', score: 5, color: '#F59E0B', desc: 'အခြေခံခိုင်မာခြင်း၊ မူလအကြောင်းအရင်းဟောင်းများ ပြန်လည်ပါဝင်ခြင်း' },
+      banga: { name: 'ဘင်္ဂ', score: -25, color: '#F87171', desc: 'ပျက်စီးဆုံးရှုံးခြင်း၊ အသုံးစရိတ်ပိုထွက်ပြီး အစီအစဉ် ပျက်ပြားတတ်ခြင်း' },
+      puti: { name: 'ပူတိ (အပုပ်)', score: -35, color: '#EF4444', desc: 'အပုပ်နိမိတ်၊ ရောဂါဝေဒနာ၊ ရန်သူအတိုက်အခိုက် အလွန်ပြင်းထန်ခြင်း' },
+    };
+
+    const CITIES = {
+      yangon: { name: 'ရန်ကုန်', lat: 16.8661, lng: 96.1951, tz: 'Asia/Yangon' },
+      mandalay: { name: 'မန္တလေး', lat: 21.9588, lng: 96.0891, tz: 'Asia/Yangon' },
+      bangkok: { name: 'ဘန်ကောက်', lat: 13.7563, lng: 100.5018, tz: 'Asia/Bangkok' },
+      singapore: { name: 'စင်ကာပူ', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore' },
+      tokyo: { name: 'တိုကျို', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo' },
+      dubai: { name: 'ဒူဘိုင်း', lat: 25.2048, lng: 55.2708, tz: 'Asia/Dubai' },
+      london: { name: 'လန်ဒန်', lat: 51.5074, lng: -0.1278, tz: 'Europe/London' },
+      newyork: { name: 'နယူးယောက်', lat: 40.7128, lng: -74.0060, tz: 'America/New_York' },
+    };
+
+    const BODY_PARTS = [
+      { id: 'HEAD', name: 'ဦးခေါင်း / ဆံပင်', planet: 1, icon: 'fa-user' },
+      { id: 'FACE', name: 'မျက်နှာ / မျက်စိ / နဖူး', planet: 2, icon: 'fa-face-smile' },
+      { id: 'NECK', name: 'လည်ပင်း / ပခုံး', planet: 3, icon: 'fa-person' },
+      { id: 'CHEST', name: 'ရင်ဘတ် / နှလုံး / လက်ဖျံ', planet: 4, icon: 'fa-heart-pulse' },
+      { id: 'BELLY', name: 'ဝမ်းဗိုက် / ခါး', planet: 5, icon: 'fa-circle-dot' },
+      { id: 'FEET', name: 'ခြေဖျား / လျှို့ဝှက်အင်္ဂါ', planet: 6, icon: 'fa-shoe-prints' },
+      { id: 'JOINTS', name: 'ဒူး / ခြေဆစ်လက်ဆစ် / အရိုး', planet: 0, icon: 'fa-bone' },
+    ];
+
+    // ==========================================
+    // ၂။ State Management
+    // ==========================================
+    let currentCityKey = 'yangon';
+    let currentLat = CITIES.yangon.lat;
+    let currentLng = CITIES.yangon.lng;
+    let currentTz = CITIES.yangon.tz;
+    let calculationMode = 'khingyi'; // 'khingyi' (8-division) သို့မဟုတ် 'standard' (1-hour)
+    let selectedBodyPlanet = 1;
+    let activeCalculatedHora = 1;
+
+    // ==========================================
+    // ၃။ Solar Astronomical Calculations
+    // ==========================================
+    function calculateSolarSunTimes(date, lat, lng, tzOffsetHours) {
+      const zen = 90.8333;
+      const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      const dayOfYear = Math.floor((date - startOfYear) / 86400000) + 1;
+      const lngHour = lng / 15;
+      const rad = Math.PI / 180;
+      const deg = 180 / Math.PI;
+
+      function calcTime(isSunrise) {
+        const t = dayOfYear + ((isSunrise ? 6 : 18) - lngHour) / 24;
+        const M = (0.9856 * t) - 3.289;
+        let L = M + (1.916 * Math.sin(M * rad)) + (0.020 * Math.sin(2 * M * rad)) + 282.634;
+        L = (L % 360 + 360) % 360;
+
+        let RA = deg * Math.atan(0.91764 * Math.tan(L * rad));
+        RA = (RA % 360 + 360) % 360;
+        const Lquad = Math.floor(L / 90) * 90;
+        const RAquad = Math.floor(RA / 90) * 90;
+        RA = (RA + (Lquad - RAquad)) / 15;
+
+        const sinDec = 0.39782 * Math.sin(L * rad);
+        const cosDec = Math.cos(Math.asin(sinDec));
+        const cosH = (Math.cos(zen * rad) - (sinDec * Math.sin(lat * rad))) / (cosDec * Math.cos(lat * rad));
+
+        if (cosH > 1) return 6.0;
+        if (cosH < -1) return 18.0;
+
+        const H = isSunrise ? (360 - deg * Math.acos(cosH)) / 15 : (deg * Math.acos(cosH)) / 15;
+        const T = H + RA - (0.06571 * t) - 6.622;
+        let UT = (T - lngHour) % 24;
+        if (UT < 0) UT += 24;
+
+        let localTime = (UT + tzOffsetHours) % 24;
+        if (localTime < 0) localTime += 24;
+        return localTime;
+      }
+
+      return {
+        sunrise: calcTime(true),
+        sunset: calcTime(false),
+      };
+    }
+
+    function formatTimeDecimal(decHours) {
+      const h = Math.floor(decHours);
+      const m = Math.floor((decHours - h) * 60);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const dh = h % 12 === 0 ? 12 : h % 12;
+      return `${dh.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')} ${ampm}`;
+    }
+
+    // ==========================================
+    // ၄။ အင်္ဂဝိဇ္ဇာ အခါတွက်ချက်မှု Core Engine
+    // ==========================================
+    function getCityCurrentDate(tzString) {
+      const now = new Date();
+      try {
+        const invDate = new Date(now.toLocaleString('en-US', { timeZone: tzString }));
+        const diff = now.getTime() - invDate.getTime();
+        return new Date(now.getTime() - diff);
+      } catch (e) {
+        return now;
+      }
+    }
+
+    function getBurmeseDayLord(dayOfWeek) {
+      const map = [1, 2, 3, 4, 5, 6, 0];
+      return map[dayOfWeek];
+    }
+
+    function calculateAngaWeikzaHora() {
+      const localDate = getCityCurrentDate(currentTz);
+      const hours = localDate.getHours();
+      const minutes = localDate.getMinutes();
+      const seconds = localDate.getSeconds();
+      const currentDec = hours + minutes / 60 + seconds / 3600;
+
+      const tzOffsetHours = -localDate.getTimezoneOffset() / 60;
+      const { sunrise, sunset } = calculateSolarSunTimes(localDate, currentLat, currentLng, tzOffsetHours);
+
+      let dayOfWeek = localDate.getDay();
+      let dayLord = getBurmeseDayLord(dayOfWeek);
+      let isNight = false;
+      let currentHora = 1;
+      let horaIndex = 1;
+      let periodLabel = '';
+
+      const horaCycle = [1, 6, 4, 2, 0, 5, 3];
+
+      if (calculationMode === 'khingyi') {
+        // ပုဒ်ရေ (၇) ကျမ်းရင်း ၈ အခါစနစ်
+        if (currentDec < sunrise) {
+          // မနက်နေမထွက်မီ: မနေ့က ညအခါ
+          dayOfWeek = (dayOfWeek - 1 + 7) % 7;
+          dayLord = getBurmeseDayLord(dayOfWeek);
+          isNight = true;
+
+          const yesterday = new Date(localDate.getTime() - 86400000);
+          const yTimes = calculateSolarSunTimes(yesterday, currentLat, currentLng, tzOffsetHours);
+          const nightLen = (24 - yTimes.sunset) + sunrise;
+          const nightUnit = nightLen / 8;
+          const elapsed = (24 - yTimes.sunset) + currentDec;
+          const idx = Math.min(7, Math.floor(elapsed / nightUnit));
+          horaIndex = idx + 1;
+
+          const startIdx = horaCycle.indexOf(dayLord);
+          currentHora = horaCycle[(startIdx + 8 + idx) % 7];
+          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက်`;
+        } else if (currentDec >= sunrise && currentDec < sunset) {
+          // နေ့ ၈ အခါ
+          isNight = false;
+          const dayLen = sunset - sunrise;
+          const dayUnit = dayLen / 8;
+          const elapsed = currentDec - sunrise;
+          const idx = Math.min(7, Math.floor(elapsed / dayUnit));
+          horaIndex = idx + 1;
+
+          const startIdx = horaCycle.indexOf(dayLord);
+          currentHora = horaCycle[(startIdx + idx) % 7];
+          periodLabel = `နေ့ ${horaIndex} ခါမြောက်`;
+        } else {
+          // နေဝင်ပြီး ည ၈ အခါ
+          isNight = true;
+          const tomorrow = new Date(localDate.getTime() + 86400000);
+          const tTimes = calculateSolarSunTimes(tomorrow, currentLat, currentLng, tzOffsetHours);
+          const nightLen = (24 - sunset) + tTimes.sunrise;
+          const nightUnit = nightLen / 8;
+          const elapsed = currentDec - sunset;
+          const idx = Math.min(7, Math.floor(elapsed / nightUnit));
+          horaIndex = idx + 1;
+
+          const startIdx = horaCycle.indexOf(dayLord);
+          currentHora = horaCycle[(startIdx + 8 + idx) % 7];
+          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက်`;
+        }
+      } else {
+        // Standard 1-Hour Chaldean System
+        if (currentDec < sunrise) {
+          dayOfWeek = (dayOfWeek - 1 + 7) % 7;
+          dayLord = getBurmeseDayLord(dayOfWeek);
+        }
+        const hoursSinceSunrise = (currentDec - sunrise + 24) % 24;
+        const idx = Math.floor(hoursSinceSunrise);
+        horaIndex = idx + 1;
+
+        const startIdx = horaCycle.indexOf(dayLord);
+        currentHora = horaCycle[(startIdx + idx) % 7];
+        periodLabel = `${horaIndex} နာရီမြောက်`;
+      }
+
+      return {
+        currentHora,
+        dayLord,
+        horaIndex,
+        periodLabel,
+        sunrise,
+        sunset,
+        localDate,
+        isNight,
+      };
+    }
+
+    // Consonant Parser
+    function parseInitialConsonant(text) {
+      if (!text || text.trim().length === 0) return null;
+      let clean = text.trim();
+      const stopwords = ['ဆရာ', 'ဆရာရေ', 'ကဲ', 'ဒီမှာ', 'ဟိုဟာ', 'ကျွန်တော်', 'ကျွန်မ'];
+      for (const sw of stopwords) {
+        if (clean.startsWith(sw)) {
+          clean = clean.substring(sw.length).trim();
+        }
+      }
+      if (clean.length === 0) clean = text.trim();
+      const firstChar = clean.charAt(0);
+
+      if (/[အဣဤဥဦဧဩဪ]/.test(firstChar)) return { planet: 1, char: firstChar, name: 'တနင်္ဂနွေ' };
+      if (/[ကခဂဃင]/.test(firstChar)) return { planet: 2, char: firstChar, name: 'တနင်္လာ' };
+      if (/[စဆဇဈည]/.test(firstChar)) return { planet: 3, char: firstChar, name: 'အင်္ဂါ' };
+      if (/[ယရလဝ]/.test(firstChar)) return { planet: 4, char: firstChar, name: 'ဗုဒ္ဓဟူး' };
+      if (/[ပဖဗဘမ]/.test(firstChar)) return { planet: 5, char: firstChar, name: 'ကြာသပတေး' };
+      if (/[သဟဠ]/.test(firstChar)) return { planet: 6, char: firstChar, name: 'သောကြာ' };
+      if (/[တထဒဓန]/.test(firstChar)) return { planet: 0, char: firstChar, name: 'စနေ' };
+
+      return { planet: 1, char: firstChar, name: 'အခြား (တနင်္ဂနွေ)' };
+    }
+
+    // ဆပွတ်ရိုက် ၇ ဌာနအရ အပြီးသတ် ဆန်းစစ်ချက်
+    function evaluateKhingyiPhyawMatrix(p1, p2, p3) {
+      const stMap = SEVEN_STATUSES[p1];
+      const pillars = THREE_PILLARS[p1];
+
+      function getPlanetStatus(planet) {
+        for (const [stKey, pNum] of Object.entries(stMap)) {
+          if (pNum === planet) return stKey;
+        }
+        return 'achya';
+      }
+
+      const stP2 = getPlanetStatus(p2);
+      const stP3 = getPlanetStatus(p3);
+
+      const infoP2 = STATUS_INFO[stP2];
+      const infoP3 = STATUS_INFO[stP3];
+
+      let score = 50 + infoP2.score + (infoP3.score * 0.7);
+
+      // တိုင် ၃ ပါး ညီညွတ်မှု အပိုဆောင်းရမှတ်
+      if (p2 === pillars.n) score += 15;
+      if (p3 === pillars.l) score += 15;
+
+      score = Math.max(10, Math.min(98, Math.round(score)));
+
+      let verdictTitle = '';
+      let verdictDetail = '';
+      if (score >= 75) {
+        verdictTitle = 'ဧကန်မုချ အောင်မြင်ပြီးမြောက်မည် (အဓိပတိ/အထွန်း ဓာတ်စီး)';
+        verdictDetail = `မေးသူ၏ အင်္ဂါလက္ခဏာသည် [${infoP2.name}] ဌာနသို့ ကျရောက်ပြီး စကားအသံသည် [${infoP3.name}] ဌာနနှင့် ညီညွတ်နေသဖြင့် အတားအဆီးမရှိ လျင်မြန်ချောမွေ့စွာ အောင်မြင်ပါမည်။`;
+      } else if (score >= 48) {
+        verdictTitle = 'အခက်အခဲကြားမှ တစ်ဝက်တစ်ပျက် အောင်မြင်မည်';
+        verdictDetail = `အကျိုးပေးဌာနနှင့် အညံ့ဌာနတို့ အားပြိုင်နေသဖြင့် အလွယ်တကူမပြီးဘဲ မိမိဘက်မှ အားထုတ်မှု နှစ်ဆစိုက်ထုတ်ပြီး ဇွဲဖြင့် ညှိနှိုင်းမှသာ ပြီးမြောက်ပါမည်။`;
+      } else {
+        verdictTitle = 'ပျက်စီး/ကြန့်ကြာမည် (ဘင်္ဂ/ပူတိ ဓာတ်ခိုက်)';
+        verdictDetail = `အမူအရာနှင့် စကားသံတို့သည် [${infoP2.name}] နှင့် [${infoP3.name}] အပုပ်နိမိတ်သို့ ကျရောက်နေသဖြင့် လောလောဆယ် ကိစ္စမမြောက်ဘဲ အရှုပ်အထွေး ကြုံရတတ်ပါသည်။`;
+      }
+
+      const rootCauses = {
+        1: 'ဂုဏ်သိက္ခာ၊ ရာထူး၊ အကြီးအကဲ၊ အစိုးရ သို့မဟုတ် ဖခင်/အထက်လူကြီးနှင့် ပတ်သက်သောအရေး ဖြစ်သည်။',
+        2: 'ငွေကြေးအရင်းအနှီး၊ ခရီးသွားလာရေး၊ ကူးသန်းရောင်းဝယ်ရေး သို့မဟုတ် စိတ်လှုပ်ရှားဖွယ် ကိစ္စများကြောင့် ဖြစ်သည်။',
+        3: 'အငြင်းပွားမှု၊ အမှုအခင်း၊ ဒေါသဖြစ်စရာ၊ စက်ပစ္စည်း သို့မဟုတ် မြေယာ/အိုးအိမ် အရှုပ်အထွေးကြောင့် ဖြစ်သည်။',
+        4: 'စာချုပ်စာတမ်း၊ မိတ်ဆွေအပေါင်းအသင်း၊ ပညာရေး၊ သတင်းစကား ဖလှယ်ရေး သို့မဟုတ် စကားပြောဆို ဆွေးနွေးမှုများကြောင့် ဖြစ်သည်။',
+        5: 'ဆရာသမား၊ ဘာသာရေး၊ တရားရုံး၊ ပညာရှင်များထံမှ အကူအညီရယူလိုမှု သို့မဟုတ် မင်္ဂလာကိစ္စ အကြံအစည်များကြောင့် ဖြစ်သည်။',
+        6: 'အချစ်ရေး၊ အိမ်ထောင်ရေး၊ ငွေကြေးအဖိုးတန်ပစ္စည်း၊ အလှအပ သို့မဟုတ် အနုပညာ စီးပွားရေးကိစ္စများကြောင့် ဖြစ်သည်။',
+        0: 'အကြွေးဟောင်း၊ ကြန့်ကြာနေသော အလုပ်၊ ကျန်းမာရေး၊ လူပျောက်/ပစ္စည်းပျောက် သို့မဟုတ် ဝန်ထုပ်ဝန်ပိုး သောကများကြောင့် ဖြစ်သည်။',
+      };
+
+      const subsequentProgression = {
+        1: 'အစပိုင်းတွင် အခွင့်အရေးရသယောင် ထင်ရသော်လည်း အကြီးအကဲများ၏ စိစစ်မှုပြင်းထန်မည်။ နောက်ဆက်တွဲအနေဖြင့် နာမည်ဂုဏ်သတင်း ပေါ်ထွက်လာမည်။',
+        2: 'ငွေကြေးကိစ္စများ မကြာမီ လက်ထဲရောက်လာနိုင်သော်လည်း လက်လွတ်စပယ် ပြန်ထွက်သွားတတ်သည်။ စိတ်အပြောင်းအလဲ အလွန်မြန်နေမည်ကို သတိပြုပါ။',
+        3: 'စကားအချေအတင် ဖြစ်ပွားတတ်သည်။ နောက်ဆက်တွဲတွင် ပြိုင်ဘက် သို့မဟုတ် ရန်သူတစ်ဦး ပေါ်ပေါက်လာပြီး အနှောင့်အယှက်ပေးတတ်သဖြင့် စိတ်အေးအေးထားပါ။',
+        4: 'မိတ်ဆွေကောင်းတစ်ဦးက ကူညီရန် စကားကမ်းလှမ်းလာမည်။ ထို့နောက် စာရွက်စာတမ်း သို့မဟုတ် သတင်းကောင်းတစ်ခု ထပ်မံရောက်ရှိလာမည်။',
+        5: 'သက်ကြီးဝါကြီးသူများက လမ်းညွှန်မှုပေးမည်။ နောက်ဆက်တွဲအနေဖြင့် မျှော်လင့်မထားသော နေရာမှ အကျိုးအမြတ် သို့မဟုတ် အခွင့်အလမ်းသစ် ထပ်တိုးရရှိမည်။',
+        6: 'ဆွဲဆောင်မှုရှိသော လူ သို့မဟုတ် ပစ္စည်းတစ်ခု ရောက်လာမည်။ သို့သော် ကာမဂုဏ်နှင့် အပျော်အပါးဘက်သို့ လမ်းလွဲပြီး မူလရည်ရွယ်ချက် ဝေးသွားတတ်သည်။',
+        0: 'အလုပ်များ အချိန်ဆွဲခံရမည်။ နောက်ဆက်တွဲအနေဖြင့် မမျှော်လင့်ဘဲ အသုံးစရိတ်ပိုထွက်ခြင်း၊ ကျန်းမာရေးညံ့ခြင်းများ ဆက်လက်ဖြစ်ပေါ်လာတတ်သည်။',
+      };
+
+      const timeUnits = {
+        1: '၁ ရက် သို့မဟုတ် ၁ ပတ် (တနင်္ဂနွေနေ့တွင် အဆုံးအဖြတ်ကျမည်)',
+        2: '၂ ရက် သို့မဟုတ် ၂ ပတ်အတွင်း ထူးခြားမည်',
+        3: '၃ ရက် သို့မဟုတ် အင်္ဂါနေ့တွင် အဆုံးအဖြတ်ပေါ်မည်',
+        4: '၄ ရက် သို့မဟုတ် ၄ ပတ်အတွင်း အဖြေပေါ်မည်',
+        5: '၅ ရက် သို့မဟုတ် ၅ လအတွင်း အထွတ်အထိပ်ရောက်မည်',
+        6: '၆ ရက် သို့မဟုတ် သောကြာနေ့တွင် အကျိုးပေးမည်',
+        0: '၇ ရက်၊ ၇ လ သို့မဟုတ် ကြန့်ကြာချိန် အနည်းငယ်ကြာနိုင်သည်',
+      };
+
+      // ကျမ်းလာ ဓာတ်စာနှင့် ယတြာလမ်းညွှန်
+      const remedies = {
+        1: 'ပဉ္စပွတ် (ကြာသပတေးနံ-တမာ၊ ဂန့်ဂလာ) နှင့် ဆပွတ် (သောကြာနံ) ကို ရှောင်၍ တြိရန်း (အင်္ဂါနံ-ဇီး၊ ဆီးသီး) ဖြင့် ဓာတ်ဆင် ယတြာပြုပါ။',
+        2: 'ပဉ္စပွတ် (သောကြာနံ) နှင့် ဆပွတ် (စနေနံ) ကို ရှောင်၍ စတုရန်း (ကြာသပတေးနံ-ပဲ၊ နွားနို့) ဖြင့် အစာဓာတ်ပေးပါ။',
+        3: 'စနေနှင့် တနင်္ဂနွေ အခါတို့တွင် ခရီးယတြာရှောင်ပါ။ ကြာသပတေးနံ (ပေါက်ပန်း၊ ဖီးကြမ်း) ဖြင့် ဓာတ်ကို ထောက်ပံ့ပါ။',
+        4: 'တနင်္ဂနွေနှင့် တနင်္လာနံ အစာရှောင်ပါ။ သောကြာနံ (မေတ္တာစကား၊ သီးသီး) နှင့် စနေနံ (သည်းခံခြင်း) ဖြင့် အောင်မြင်အောင် ပြုလုပ်ပါ။',
+        5: 'စနေနံနှင့် တနင်္ဂနွေနံ အစာရှောင်ပါ။ ကြာသပတေးနံ ဆရာသမားနှင့် သံဃာတော်များအား ဆွမ်း၊ သစ်သီး လှူဒါန်း ယတြာပြုပါ။',
+        6: 'အင်္ဂါနံနှင့် ဗုဒ္ဓဟူးနံတို့ကို ရှောင်ပါ။ သောကြာနံ အဝတ်အစားသစ် သို့မဟုတ် အမွှေးနံ့သာဖြင့် မိမိဓာတ်ကို မြှင့်တင်ပါ။',
+        0: 'ဗုဒ္ဓဟူးနံနှင့် ကြာသပတေးနံတို့ကို ရှောင်ပါ။ အကြွေးဟောင်းပြေစေရန် စနေနံ ဘုရားတွင် မီးသက်စေ့ ထွန်းညှိပူဇော်ပါ။',
+      };
+
+      return {
+        score,
+        verdictTitle,
+        verdictDetail,
+        rootCause: rootCauses[p1],
+        progression: subsequentProgression[p2],
+        duration: timeUnits[p3] || 'မကြာမီ ကာလအတွင်း',
+        remedy: remedies[p1],
+        stP2: { key: stP2, ...infoP2 },
+        stP3: { key: stP3, ...infoP3 },
+        dominantNumbers: `${PLANET_INFO[p1].symbol}, ${PLANET_INFO[p2].symbol}, ${PLANET_INFO[p3].symbol}`,
+      };
+    }
+
+    // ==========================================
+    // ၅။ UI Binding & Realtime Controller
+    // ==========================================
+    const timeDisplay = document.getElementById('timeDisplay');
+    const cityLabel = document.getElementById('cityLabel');
+    const citySelect = document.getElementById('citySelect');
+    const btnGps = document.getElementById('btnGps');
+
+    const horaMainName = document.getElementById('horaMainName');
+    const horaTag = document.getElementById('horaTag');
+    const horaMetaLine = document.getElementById('horaMetaLine');
+    const pillarMula = document.getElementById('pillarMula');
+    const pillarNimitta = document.getElementById('pillarNimitta');
+    const pillarLakkhana = document.getElementById('pillarLakkhana');
+
+    const matrixToggleBtn = document.getElementById('matrixToggleBtn');
+    const matrixPanel = document.getElementById('matrixPanel');
+    const matrixChevron = document.getElementById('matrixChevron');
+    const matrixTableBody = document.getElementById('matrixTableBody');
+
+    function switchCalculationMode(mode) {
+      calculationMode = mode;
+      document.getElementById('tabKhingyi').classList.toggle('active', mode === 'khingyi');
+      document.getElementById('tabStandard').classList.toggle('active', mode === 'standard');
+      updateRealtimeClock();
+    }
+
+    function updateRealtimeClock() {
+      const data = calculateAngaWeikzaHora();
+      activeCalculatedHora = data.currentHora;
+
+      timeDisplay.textContent = data.localDate.toLocaleTimeString('en-US');
+
+      const pInfo = PLANET_INFO[data.currentHora];
+      const pillars = THREE_PILLARS[data.currentHora];
+
+      horaMainName.textContent = `${pInfo.name} အခါ`;
+      horaTag.textContent = data.periodLabel;
+      horaTag.style.backgroundColor = pInfo.color;
+
+      horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} | နေဝင်: ${formatTimeDecimal(data.sunset)}`;
+
+      pillarMula.textContent = `${pillars.m} (${PLANET_INFO[pillars.m].name.substring(0,3)})`;
+      pillarNimitta.textContent = `${pillars.n} (${PLANET_INFO[pillars.n].name.substring(0,3)})`;
+      pillarLakkhana.textContent = `${pillars.l} (${PLANET_INFO[pillars.l].name.substring(0,3)})`;
+
+      renderMatrixTable(data.currentHora);
+    }
+
+    function renderMatrixTable(currentHora) {
+      const stMap = SEVEN_STATUSES[currentHora];
+      matrixTableBody.innerHTML = '';
+
+      for (const [stKey, pNum] of Object.entries(stMap)) {
+        const info = STATUS_INFO[stKey];
+        const planet = PLANET_INFO[pNum];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="badge-status" style="background-color: ${info.color}; color: #000;">${info.name}</span></td>
+          <td style="color: ${planet.color}; font-weight: bold;">${planet.name} (${planet.symbol})</td>
+          <td style="color: #94a3b8;">${info.desc}</td>
+        `;
+        matrixTableBody.appendChild(tr);
+      }
+    }
+
+    // Toggle 7 Status Panel
+    matrixToggleBtn.addEventListener('click', () => {
+      const isShowing = matrixPanel.classList.toggle('show');
+      matrixChevron.className = isShowing ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+    });
+
+    // City Selection
+    citySelect.addEventListener('change', (e) => {
+      const city = CITIES[e.target.value];
+      if (city) {
+        currentCityKey = e.target.value;
+        currentLat = city.lat;
+        currentLng = city.lng;
+        currentTz = city.tz;
+        cityLabel.textContent = city.name;
+        updateRealtimeClock();
+      }
+    });
+
+    // GPS Auto Detection
+    btnGps.addEventListener('click', () => {
+      if (navigator.geolocation) {
+        btnGps.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ရယူနေ...';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            currentLat = pos.coords.latitude;
+            currentLng = pos.coords.longitude;
+            // Use local browser timezone
+            currentTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Yangon';
+            cityLabel.textContent = `GPS (${currentLat.toFixed(2)}°, ${currentLng.toFixed(2)}°)`;
+            btnGps.innerHTML = '<i class="fa-solid fa-check"></i> မိမိနေရာ';
+            updateRealtimeClock();
+          },
+          (err) => {
+            alert('GPS ရယူ၍ မရနိုင်ပါ။ Browser တည်နေရာခွင့်ပြုချက် (Location Permission) ကို စစ်ဆေးပါ။');
+            btnGps.innerHTML = '<i class="fa-solid fa-crosshairs"></i> GPS';
+          }
+        );
+      } else {
+        alert('ဤ Browser သည် Geolocation ကို မထောက်ပံ့ပါ။');
+      }
+    });
+
+    // Body Grid
+    const bodyGrid = document.getElementById('bodyGrid');
+    BODY_PARTS.forEach((part, index) => {
+      const btn = document.createElement('div');
+      btn.className = `body-btn ${index === 0 ? 'active' : ''}`;
+      if (index === 0) {
+        btn.style.borderColor = PLANET_INFO[part.planet].color;
+      }
+
+      btn.innerHTML = `
+        <i class="fa-solid ${part.icon}" style="${index === 0 ? `color: ${PLANET_INFO[part.planet].color}` : ''}"></i>
+        <div class="btn-text">${part.name}</div>
+        <div class="planet-tag">${PLANET_INFO[part.planet].name} (${part.planet})</div>
+      `;
+
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.body-btn').forEach((b) => {
+          b.classList.remove('active');
+          b.style.borderColor = 'var(--border-color)';
+          b.querySelector('i').style.color = 'var(--text-muted)';
+        });
+        btn.classList.add('active');
+        btn.style.borderColor = PLANET_INFO[part.planet].color;
+        btn.querySelector('i').style.color = PLANET_INFO[part.planet].color;
+        selectedBodyPlanet = part.planet;
+      });
+
+      bodyGrid.appendChild(btn);
+    });
+
+    // Sound Input
+    const soundInput = document.getElementById('soundInput');
+    const consonantBadge = document.getElementById('consonantBadge');
+    const parsedChar = document.getElementById('parsedChar');
+    const parsedPlanetText = document.getElementById('parsedPlanetText');
+
+    soundInput.addEventListener('input', (e) => {
+      const parsed = parseInitialConsonant(e.target.value);
+      if (parsed) {
+        consonantBadge.style.display = 'block';
+        parsedChar.textContent = `[${parsed.char}]`;
+        parsedPlanetText.textContent = `${parsed.name}နံ (${parsed.planet})`;
+      } else {
+        consonantBadge.style.display = 'none';
+      }
+    });
+
+    // Calculate Final Output
+    const btnCalculate = document.getElementById('btnCalculate');
+    const resultContainer = document.getElementById('resultContainer');
+
+    btnCalculate.addEventListener('click', () => {
+      const parsed = parseInitialConsonant(soundInput.value);
+      const p3 = parsed ? parsed.planet : 1;
+      const res = evaluateKhingyiPhyawMatrix(activeCalculatedHora, selectedBodyPlanet, p3);
+
+      // Score Banner & Status Pills
+      document.getElementById('resScore').textContent = `${res.score}% ဓာတ်စီး အလားအလာ`;
+      document.getElementById('resHeading').textContent = res.verdictTitle;
+
+      const pillsBox = document.getElementById('resStatusPills');
+      pillsBox.innerHTML = `
+        <span class="status-pill" style="background-color: ${res.stP2.color}; color: #000;">
+          အမူအရာ: ${res.stP2.name} ဌာန
+        </span>
+        <span class="status-pill" style="background-color: ${res.stP3.color}; color: #000;">
+          စကားသံ: ${res.stP3.name} ဌာန
+        </span>
+      `;
+
+      // 4 Deliverables
+      document.getElementById('resRootCause').textContent = res.rootCause;
+      document.getElementById('resVerdictDetail').textContent = res.verdictDetail;
+      document.getElementById('resProgression').textContent = res.progression;
+      document.getElementById('resDuration').textContent = res.duration;
+      document.getElementById('resDominantNums').textContent = `အကျိုးပေးဂြိုဟ်အစီအစဉ်: [${res.dominantNumbers}]`;
+
+      // 5th Deliverable: Khingyi Phyaw Remedy
+      document.getElementById('resRemedyBox').innerHTML = `
+        <div class="remedy-title">★ ပဌမကဏ္ဍလာ အစာဓာတ်ဆင်နှင့် ယတြာနည်း-</div>
+        <div>${res.remedy}</div>
+      `;
+
+      resultContainer.style.display = 'block';
+      resultContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Start Real-time Clock
+    setInterval(updateRealtimeClock, 1000);
+    updateRealtimeClock();
+  </script>
 </body>
-</html>'''
-
-# Fix one small accidental boolean expression in the generated JS for readability.
-html = html.replace(
-    "add('07 • Sunrise Anchor',solar.sunrise!=null,true?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');",
-    "add('07 • Sunrise Anchor',solar.sunrise!=null,solar.sunrise!=null?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');"
-)
-
-path = Path("/mnt/data/Anga_Weikza_Horary_Engine_V2.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created: {path}")
-print(f"Size: {path.stat().st_size:,} bytes")
+</html>
