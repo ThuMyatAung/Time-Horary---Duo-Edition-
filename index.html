@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (ခင်ကြီးဖျော် မူရင်းကျမ်းလာ)</title>
+  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</title>
   
-  <!-- FontAwesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts: Padauk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
@@ -25,9 +23,9 @@
       --accent-indigo: #4f46e5;
       --accent-green: #10b981;
       --accent-yellow: #f59e0b;
-      --accent-red: #ef4444;
       --accent-gold: #fbbf24;
-      --accent-purple: #c084fc;
+      --accent-red: #ef4444;
+      --accent-orange: #fb923c;
     }
 
     * {
@@ -53,7 +51,6 @@
       padding-bottom: 60px;
     }
 
-    /* Header */
     .header {
       text-align: center;
       margin: 12px 0 16px 0;
@@ -63,14 +60,12 @@
       font-weight: 700;
       color: var(--accent-gold);
       margin-bottom: 2px;
-      letter-spacing: 0.5px;
     }
     .header p {
       font-size: 12px;
       color: var(--text-muted);
     }
 
-    /* Card Box */
     .card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -82,19 +77,14 @@
     .card-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       margin-bottom: 10px;
       font-size: 13px;
       font-weight: 700;
       color: #e2e8f0;
-    }
-    .card-header-left {
-      display: flex;
-      align-items: center;
       gap: 8px;
     }
 
-    /* Location & Timezone Bar */
+    /* Location Bar */
     .loc-bar {
       display: flex;
       flex-wrap: wrap;
@@ -134,11 +124,8 @@
       align-items: center;
       gap: 4px;
     }
-    .btn-gps:hover {
-      background-color: #475569;
-    }
 
-    /* System Mode Selector Tabs */
+    /* Calculation Mode Tabs */
     .mode-tab-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -164,14 +151,13 @@
       font-weight: 700;
     }
 
-    /* Active Hora Hero Banner */
+    /* Hero Banner */
     .hora-hero {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       border: 1px solid #3730a3;
       border-radius: 10px;
       padding: 14px;
       margin-bottom: 12px;
-      position: relative;
     }
     .hero-top {
       display: flex;
@@ -221,55 +207,67 @@
       color: #38bdf8;
     }
 
-    /* 7-Status Matrix Grid (ဆပွတ်ရိုက် ၇ ဌာန) */
-    .matrix-toggle-btn {
+    /* Dossier Box (သဘောသဘာဝ အကွက်) */
+    .dossier-toggle {
       width: 100%;
-      background-color: var(--bg-input);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 8px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-top: 8px;
       color: var(--accent-blue);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 4px;
     }
-    .matrix-panel {
-      display: none;
+    .dossier-box {
+      display: block;
       background-color: #0b1120;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 10px;
+      padding: 12px;
       margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.6;
     }
-    .matrix-panel.show {
+    .dossier-box.collapsed {
+      display: none;
+    }
+    .dossier-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f1f5f9;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+    .dossier-item {
+      margin-bottom: 6px;
+      color: #cbd5e1;
+    }
+    .dossier-item strong {
+      color: var(--text-muted);
+      font-size: 11px;
       display: block;
     }
-    .matrix-table {
-      width: 100%;
-      border-collapse: collapse;
+    .guidance-box {
+      background-color: #172554;
+      border-radius: 6px;
+      padding: 8px;
+      margin-top: 6px;
+      color: #bfdbfe;
+    }
+    .guidance-box strong {
+      color: #93c5fd;
       font-size: 11px;
-    }
-    .matrix-table th, .matrix-table td {
-      padding: 4px 6px;
-      text-align: left;
-      border-bottom: 1px solid #1e293b;
-    }
-    .matrix-table th {
-      color: #94a3b8;
-    }
-    .badge-status {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
     }
 
-    /* Body Touch Buttons Grid */
+    /* Step 2: Body Grid */
     .instruction {
       font-size: 12px;
       color: var(--text-muted);
@@ -313,7 +311,7 @@
       font-weight: 700;
     }
 
-    /* Speech Sound Input */
+    /* Step 3: Sound Input */
     .text-input {
       width: 100%;
       background-color: var(--bg-input);
@@ -340,7 +338,6 @@
       color: var(--accent-green);
     }
 
-    /* Action Calculate Button */
     .btn-calculate {
       width: 100%;
       background-color: var(--accent-indigo);
@@ -385,8 +382,7 @@
       color: var(--text-main);
       margin-top: 4px;
     }
-
-    .status-match-box {
+    .status-pills {
       display: flex;
       gap: 6px;
       justify-content: center;
@@ -394,7 +390,7 @@
       flex-wrap: wrap;
     }
     .status-pill {
-      font-size: 10px;
+      font-size: 11px;
       padding: 2px 8px;
       border-radius: 12px;
       font-weight: 700;
@@ -428,40 +424,22 @@
       color: #64748b;
       margin-top: 4px;
     }
-    .remedy-box {
-      background-color: #0b1120;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 10px;
-      margin-top: 8px;
-      font-size: 11px;
-      color: #cbd5e1;
-      line-height: 1.5;
-    }
-    .remedy-title {
-      font-weight: 700;
-      color: var(--accent-gold);
-      margin-bottom: 4px;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
     
-    <!-- Header -->
     <div class="header">
       <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
-      <p>တောင်တွင်းဆရာတော် ခင်ကြီးဖျော် မူရင်းကျမ်းလာ ဆပွတ်ရိုက် ၇ ဌာန ဥပဒေသ</p>
+      <p>ကျမ်းရင်း ၁ နာရီခွဲ (၈ အခါ) စနစ် • ဟိုရာ ၁ နာရီစနစ် • အခါသဘောသဘာဝ Dossier</p>
     </div>
 
-    <!-- Step 1: Location, Time & Hora Selection -->
+    <!-- Step 1: Time, Location, Mode & Hora -->
     <div class="card">
       <div class="card-header">
-        <div class="card-header-left">
-          <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
-          <span>အဆင့် (၁) - အခါတော် စိစစ်ရွေးချယ်မှု</span>
-        </div>
+        <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
+        <span>အဆင့် (၁) - အခါတော်စိစစ်ချက်နှင့် သဘောသဘာဝများ</span>
       </div>
 
       <!-- Timezone & GPS Bar -->
@@ -479,22 +457,22 @@
             <option value="singapore">စင်ကာပူ (UTC+8)</option>
             <option value="tokyo">တိုကျို (UTC+9)</option>
             <option value="dubai">ဒူဘိုင်း (UTC+4)</option>
-            <option value="london">လန်ဒန် (UTC+0/+1)</option>
-            <option value="newyork">နယူးယောက် (UTC-5/-4)</option>
+            <option value="london">လန်ဒန် (UTC+0)</option>
+            <option value="newyork">နယူးယောက် (UTC-5)</option>
           </select>
-          <button id="btnGps" class="btn-gps" title="ဖုန်း GPS တည်နေရာယူရန်">
+          <button id="btnGps" class="btn-gps" title="ဖုန်း GPS ရယူရန်">
             <i class="fa-solid fa-crosshairs"></i> GPS
           </button>
         </div>
       </div>
 
-      <!-- Calculation Mode Tabs -->
+      <!-- Mode Tabs -->
       <div class="mode-tab-group">
-        <div class="mode-tab active" id="tabKhingyi" onclick="switchCalculationMode('khingyi')">
-          <i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၈ အခါခွဲစနစ် (ခင်ကြီးဖျော် ပေမူ)
+        <div class="mode-tab active" id="tabKhingyi" onclick="setCalculationMode('khingyi')">
+          <i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၁ နာရီခွဲစနစ် (နေ့ ၈ ခါ / ည ၈ ခါ)
         </div>
-        <div class="mode-tab" id="tabStandard" onclick="switchCalculationMode('standard')">
-          <i class="fa-solid fa-stopwatch"></i> ၁ နာရီ ၁ အခါစနစ် (Standard Chaldean)
+        <div class="mode-tab" id="tabStandard" onclick="setCalculationMode('standard')">
+          <i class="fa-solid fa-stopwatch"></i> ၁ နာရီ ၁ အခါစနစ် (ဟိုရာစနစ်)
         </div>
       </div>
 
@@ -525,33 +503,38 @@
         </div>
       </div>
 
-      <!-- 7 Status Matrix Accordion -->
-      <button class="matrix-toggle-btn" id="matrixToggleBtn">
-        <span><i class="fa-solid fa-table-cells"></i> <span id="matrixBtnText">အခါ၏ ဆပွတ်ရိုက် ၇ ဌာန ဇယား ကြည့်ရန်</span></span>
-        <i class="fa-solid fa-chevron-down" id="matrixChevron"></i>
+      <!-- Dossier Box (သဘောသဘာဝ အသေးစိတ် အကွက်) -->
+      <button class="dossier-toggle" id="dossierToggleBtn">
+        <span><i class="fa-solid fa-book-open"></i> <span id="dossierBtnText">အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ</span></span>
+        <i class="fa-solid fa-chevron-up" id="dossierChevron"></i>
       </button>
 
-      <div class="matrix-panel" id="matrixPanel">
-        <table class="matrix-table">
-          <thead>
-            <tr>
-              <th>ဌာန</th>
-              <th>ဂြိုဟ်</th>
-              <th>ကျမ်းလာ သဘောတရားနှင့် အကျိုးပေး</th>
-            </tr>
-          </thead>
-          <tbody id="matrixTableBody"></tbody>
-        </table>
+      <div class="dossier-box" id="dossierBox">
+        <div class="dossier-heading" id="dossierTitle">တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာအခါ</div>
+        <div class="dossier-item">
+          <strong>• သဘောသဘာဝ:</strong>
+          <span id="dossierNature">...</span>
+        </div>
+        <div class="dossier-item">
+          <strong>• ကိုယ်စားပြု ပုဂ္ဂိုလ်များ:</strong>
+          <span id="dossierPeople">...</span>
+        </div>
+        <div class="dossier-item">
+          <strong>• သက်ဆိုင်သည့် ကိစ္စရပ်များ:</strong>
+          <span id="dossierMatters">...</span>
+        </div>
+        <div class="guidance-box">
+          <strong>💡 လမ်းညွှန်ချက် (သင့်/မသင့်):</strong>
+          <span id="dossierGuidance">...</span>
+        </div>
       </div>
     </div>
 
     <!-- Step 2: Body Touch Picker -->
     <div class="card">
       <div class="card-header">
-        <div class="card-header-left">
-          <i class="fa-solid fa-child" style="color: var(--accent-yellow);"></i>
-          <span>အဆင့် (၂) - မေးသူ ထိတွေ့သည့် အင်္ဂါအစိတ်အပိုင်း</span>
-        </div>
+        <i class="fa-solid fa-child" style="color: var(--accent-yellow);"></i>
+        <span>အဆင့် (၂) - မေးသူ ထိတွေ့သည့် အင်္ဂါအစိတ်အပိုင်း</span>
       </div>
       <div class="instruction">မေးသူ စတင်မေးမြန်းချိန် ထိတွေ့လိုက်သော ခန္ဓာကိုယ်နေရာကို ရွေးပါ-</div>
       <div class="body-grid" id="bodyGrid"></div>
@@ -560,10 +543,8 @@
     <!-- Step 3: Sound Input -->
     <div class="card">
       <div class="card-header">
-        <div class="card-header-left">
-          <i class="fa-solid fa-microphone" style="color: var(--accent-green);"></i>
-          <span>အဆင့် (၃) - စကားစတင်ပြောဆိုသော စကားလုံး/အသံ</span>
-        </div>
+        <i class="fa-solid fa-microphone" style="color: var(--accent-green);"></i>
+        <span>အဆင့် (၃) - စကားစတင်ပြောဆိုသော စကားလုံး/အသံ</span>
       </div>
       <input type="text" id="soundInput" class="text-input" placeholder="ဥပမာ - ကား၊ အလုပ်၊ ပိုက်ဆံ၊ သူငယ်ချင်း..." autocomplete="off" />
       <div class="consonant-badge" id="consonantBadge">
@@ -574,7 +555,7 @@
     <!-- Calculate Button -->
     <button class="btn-calculate" id="btnCalculate">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
-      <span>ဆပွတ်ရိုက် ၇ ဌာနအရ အပြီးသတ် ဟောချက်ထုတ်မည်</span>
+      <span>အခါတော် အပြီးသတ် ဟောချက်ထုတ်မည်</span>
     </button>
 
     <!-- Results Section -->
@@ -582,38 +563,33 @@
       <div class="verdict-banner">
         <div class="verdict-score" id="resScore">--% ဓာတ်စီး အလားအလာ</div>
         <div class="verdict-heading" id="resHeading">...</div>
-        <div class="status-match-box" id="resStatusPills"></div>
+        <div class="status-pills" id="resStatusPills"></div>
       </div>
 
-      <!-- Result 1 -->
       <div class="result-card">
         <div class="result-label">(၁) ဘာကိစ္စနှင့် ပတ်သက်၍ ရောက်လာခြင်း (အခါအရင်းခံ)</div>
         <div class="result-body" id="resRootCause">...</div>
       </div>
 
-      <!-- Result 2 -->
       <div class="result-card">
-        <div class="result-label">(၂) အောင်မြင်မည် (သို့) ကျရှုံးမည် သုံးသပ်ချက် (ဆပွတ်ရိုက် ၇ ဌာန)</div>
+        <div class="result-label">(၂) အောင်မြင်မည် (သို့) ကျရှုံးမည် သုံးသပ်ချက်</div>
         <div class="result-body" id="resVerdictDetail">...</div>
       </div>
 
-      <!-- Result 3 -->
       <div class="result-card">
         <div class="result-label">(၃) ရှေ့ဖြစ်နှင့် နောက်ဆက်တွဲ ဖြစ်ပေါ်လာမည့်အခြေအနေ</div>
         <div class="result-body" id="resProgression">...</div>
       </div>
 
-      <!-- Result 4 -->
       <div class="result-card">
         <div class="result-label">(၄) ပြီးမြောက်မည့် ကာလအပိုင်းအခြားနှင့် ဓာတ်ဂဏန်း</div>
         <div class="result-body-highlight" id="resDuration">...</div>
         <div class="number-subtext" id="resDominantNums">အကျိုးပေးဂြိုဟ်အစီအစဉ်: [...]</div>
       </div>
 
-      <!-- Result 5: Khingyi Phyaw Remedy -->
       <div class="result-card" style="border-left-color: var(--accent-gold);">
         <div class="result-label" style="color: var(--accent-gold);">(၅) ကျမ်းလာ ယတြာနှင့် အစာဓာတ်ဆင် လမ်းညွှန်</div>
-        <div class="remedy-box" id="resRemedyBox">...</div>
+        <div class="result-body" id="resRemedyText">...</div>
       </div>
     </div>
 
@@ -621,27 +597,80 @@
 
   <script>
     // ==========================================
-    // ၁။ ကျမ်းရင်းအချက်အလက်များနှင့် ဂြိုဟ်နံများ
+    // ၁။ ဂန္ထဝင် အချက်အလက်များနှင့် Dossier အဘိဓာန်
     // ==========================================
     const PLANET_INFO = {
-      1: { name: 'တနင်္ဂနွေ', symbol: '၁', element: 'တေဇော (မီး)', color: '#EF4444' },
-      2: { name: 'တနင်္လာ', symbol: '၂', element: 'အာပေါ (ရေ)', color: '#F59E0B' },
-      3: { name: 'အင်္ဂါ', symbol: '၃', element: 'တေဇောကြမ်း (မီး)', color: '#EC4899' },
-      4: { name: 'ဗုဒ္ဓဟူး', symbol: '၄', element: 'ဝါယော (လေ)', color: '#10B981' },
-      5: { name: 'ကြာသပတေး', symbol: '၅', element: 'ပထဝီ (မြေ)', color: '#6366F1' },
-      6: { name: 'သောကြာ', symbol: '၆', element: 'အာပေါနု (ရေ)', color: '#06B6D4' },
-      0: { name: 'စနေ', symbol: '၀', element: 'ဝါယောကြမ်း (လေ)', color: '#8B5CF6' },
+      1: { name: 'တနင်္ဂနွေ', symbol: '၁', color: '#EF4444' },
+      2: { name: 'တနင်္လာ', symbol: '၂', color: '#F59E0B' },
+      3: { name: 'အင်္ဂါ', symbol: '၃', color: '#EC4899' },
+      4: { name: 'ဗုဒ္ဓဟူး', symbol: '၄', color: '#10B981' },
+      5: { name: 'ကြာသပတေး', symbol: '၅', color: '#6366F1' },
+      6: { name: 'သောကြာ', symbol: '၆', color: '#06B6D4' },
+      0: { name: 'စနေ', symbol: '၀', color: '#8B5CF6' },
     };
 
-    // ကျမ်းလာ တိုင် ၃ ပါး (မူလ၊ နိမိတ်၊ လက္ခဏာ)
+    // အခါအလိုက် အသေးစိတ် Dossier
+    const HORA_DOSSIER = {
+      1: {
+        title: 'တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာအခါ',
+        nature: 'ရဲရင့်ခြင်း၊ တောက်ပခြင်း၊ မာနကြီးခြင်း၊ ထင်ပေါ်လိုခြင်း၊ ပူလောင်လောဆယ်ခြင်း။',
+        people: 'ဖခင်၊ နိုင်ငံတော်အကြီးအကဲ၊ အစိုးရအရာရှိ၊ ခေါင်းဆောင်၊ အထက်လူကြီး။',
+        matters: 'ရာထူးတိုးရေး၊ အာဏာပြိုင်ဆိုင်မှု၊ ဂုဏ်သိက္ခာ၊ ဦးခေါင်း/မျက်စိရောဂါ၊ ရွှေထည်၊ အထက်အမိန့်။',
+        guidance: 'အထက်လူကြီးထံ အကူအညီတောင်းခြင်း၊ ဦးဆောင်ကြေညာခြင်း ကောင်း၏။ လျှို့ဝှက်စေ့စပ်ရေးများ မသင့်။',
+      },
+      2: {
+        title: 'ပထဝီ/အာပေါ • ငွေကြေးနှင့် အပြောင်းအလဲအခါ',
+        nature: 'နူးညံ့ခြင်း၊ စိတ်လှုပ်ရှားလွယ်ခြင်း၊ မတည်ငြိမ်ခြင်း၊ ကရုဏာသက်ခြင်း၊ စိတ်ပြောင်းမြန်ခြင်း။',
+        people: 'မိခင်၊ အမျိုးသမီး၊ စီးပွားဖက်၊ ခရီးသွား၊ ပြည်သူလူထု၊ ဧည့်သည်။',
+        matters: 'ငွေကြေးအရင်းအနှီး၊ ရေထွက်ကုန်၊ ကူးသန်းရောင်းဝယ်ရေး၊ အိမ်ပြောင်းခြင်း၊ ခရီးတိုသွားလာရေး။',
+        guidance: 'အရောင်းအဝယ်၊ ပြည်သူနှင့် ဆက်ဆံရေး ကောင်း၏။ ရေရှည်ကတိသစ္စာပြုရန် မသင့်။',
+      },
+      3: {
+        title: 'တေဇောကြမ်း • အပြိုင်အဆိုင်နှင့် အရေးယူမှုအခါ',
+        nature: 'ဒေါသထွက်လွယ်ခြင်း၊ ဇွဲလုံ့လ၊ တိုက်ခိုက်လိုစိတ်၊ စိတ်ဆတ်ခြင်း၊ စွန့်စားခြင်း။',
+        people: 'စစ်သား၊ ရဲ၊ ခွဲစိတ်ဆရာဝန်၊ စက်ပြင်သမား၊ ပြိုင်ဘက်၊ ညီအစ်ကို မောင်နှမ။',
+        matters: 'စက်ယန္တရား၊ သံထည်၊ မီး၊ မတော်တဆမှု၊ ခွဲစိတ်ကုသခြင်း၊ မြေယာအငြင်းပွားမှု၊ အမှုအခင်း။',
+        guidance: 'ပြိုင်ဆိုင်မှု၊ တရားရင်ဆိုင်မှု သင့်၏။ မင်္ဂလာကိစ္စ၊ မိတ်ဆွေဖွဲ့ခြင်း၊ စေ့စပ်ဖျန်ဖြေခြင်း မသင့်။',
+      },
+      4: {
+        title: 'ဝါယော/အာပေါ • ဆက်သွယ်ရေးနှင့် ဉာဏ်ပညာအခါ',
+        nature: 'ပါးနပ်ခြင်း၊ အပြောချိုသာခြင်း၊ ဉာဏ်များခြင်း၊ လှည့်ပတ်နိုင်ခြင်း၊ စူးစမ်းလိုစိတ်။',
+        people: 'စာရေးဆရာ၊ ကုန်သည်၊ သံတမန်၊ ကျောင်းသား၊ မိတ်ဆွေ၊ စကားပြောကောင်းသူ၊ တူ/တူမ။',
+        matters: 'စာချုပ်စာတမ်း၊ ပညာရေး၊ သတင်းစကား၊ အင်တာနက်/ဖုန်း ဆက်သွယ်ရေး၊ ကုန်သွယ်မှု။',
+        guidance: 'စာချုပ်ချုပ်ဆိုခြင်း၊ စကားစတင်ဆွေးနွေးခြင်း ကောင်း၏။ စာရွက်စာတမ်း အလိမ်အကောက် သတိထားပါ။',
+      },
+      5: {
+        title: 'ပထဝီကြီး • မင်္ဂလာနှင့် တရားဓမ္မအခါ',
+        nature: 'အေးချမ်းတည်ငြိမ်ခြင်း၊ ကြီးကျယ်မြင့်မြတ်ခြင်း၊ သစ္စာရှိခြင်း၊ အကြံကောင်း ထွက်ပေါ်ခြင်း။',
+        people: 'ဆရာသမား၊ သံဃာတော်၊ တရားသူကြီး၊ ပညာရှိ၊ အကြံပေးပုဂ္ဂိုလ်၊ သက်ကြီးဝါကြီးများ။',
+        matters: 'တရားဥပဒေ၊ ဘာသာရေးကုသိုလ်၊ ပညာသင်ကြားရေး၊ မင်္ဂလာပွဲ၊ ဘဏ်လုပ်ငန်း၊ ရတနာ။',
+        guidance: 'အလွန်မင်္ဂလာရှိသဖြင့် အရေးကြီးကိစ္စ စတင်ရန်နှင့် ဆရာထံမှ အကြံဉာဏ်ယူရန် အထူးသင့်၏။',
+      },
+      6: {
+        title: 'အာပေါနု • အလှအပနှင့် သုခချမ်းသာအခါ',
+        nature: 'ဆွဲဆောင်မှုရှိခြင်း၊ ပေါ့ပါးပျော်ရွှင်ခြင်း၊ ကာမဂုဏ်ခံစားလိုခြင်း၊ သံယောဇဉ်ကြီးခြင်း။',
+        people: 'ဇနီး/ချစ်သူ၊ အနုပညာရှင်၊ မော်ဒယ်၊ ဒီဇိုင်နာ၊ ဖျော်ဖြေရေးသမား၊ မိတ်ဆွေမိန်းကလေး။',
+        matters: 'အချစ်ရေး၊ အိမ်ထောင်ရေး၊ အဝတ်အထည်သစ်၊ ကား/ယာဉ်၊ ရတနာ၊ အလှကုန်၊ အပျော်အပါး။',
+        guidance: 'မေတ္တာစကားပြောဆိုခြင်း၊ အနုပညာဖန်တီးခြင်း၊ ဈေးဝယ်ခြင်း ကောင်း၏။ အပျော်မလွန်စေနှင့်။',
+      },
+      0: {
+        title: 'ဝါယောကြမ်း • အကြွေးဟောင်းနှင့် ကြန့်ကြာမှုအခါ',
+        nature: 'လေးလံထိုင်းမှိုင်းခြင်း၊ ပင်ပန်းဆင်းရဲခြင်း၊ စိတ်ဓာတ်ကျဆင်းခြင်း၊ သည်းခံရခြင်း။',
+        people: 'အလုပ်သမား၊ ဆင်းရဲနွမ်းပါးသူ၊ သက်ကြီးရွယ်အို၊ လူမသမာ၊ ရန်ငြိုးဖွဲ့ထားသူ။',
+        matters: 'အကြွေးဟောင်း၊ ပစ္စည်းပျောက်/လူပျောက်၊ ရောဂါဟောင်း၊ မြေအောက်သယံဇာတ၊ အဆောက်အအုံဟောင်း။',
+        guidance: 'အုတ်မြစ်ချခြင်း၊ ရေရှည်အလုပ်၊ လျှို့ဝှက်စုံစမ်းခြင်း သင့်၏။ အလျင်လိုသောကိစ္စ လုံးဝမသင့်။',
+      },
+    };
+
+    // ကျမ်းလာ တိုင် ၃ ပါး
     const THREE_PILLARS = {
-      1: { m: 1, n: 5, l: 2, mantra: 'လွန်ကြာမြင့်' },
-      2: { m: 2, n: 4, l: 6, mantra: 'မင်း၏နောင်' },
-      3: { m: 3, n: 6, l: 1, mantra: 'အမျှကြံ' },
-      4: { m: 4, n: 2, l: 5, mantra: 'ခင်လှသွေ' },
-      5: { m: 5, n: 1, l: 3, mantra: 'စေသဝန်' },
-      6: { m: 6, n: 3, l: 0, mantra: 'သောင်စလမ်း' },
-      0: { m: 0, n: 4, l: 1, mantra: 'နန်းလုံးဆွေ' },
+      1: { m: 1, n: 5, l: 2 },
+      2: { m: 2, n: 4, l: 6 },
+      3: { m: 3, n: 6, l: 1 },
+      4: { m: 4, n: 2, l: 5 },
+      5: { m: 5, n: 1, l: 3 },
+      6: { m: 6, n: 3, l: 0 },
+      0: { m: 0, n: 4, l: 1 },
     };
 
     // ကျမ်းလာ ဆပွတ်ရိုက် ၇ ဌာန
@@ -656,13 +685,13 @@
     };
 
     const STATUS_INFO = {
-      adhipati: { name: 'အဓိပတိ', score: 35, color: '#10B981', desc: 'အောင်မြင်မှု အထွတ်အထိပ်ရောက်ခြင်း၊ ခေါင်းဆောင်/အကြီးအကဲ မစခြင်း' },
-      ahtun: { name: 'အထွန်း', score: 25, color: '#34D399', desc: 'ထင်ပေါ်ကျော်ကြားခြင်း၊ ကိစ္စပြီးမြောက် အောင်မြင်လွယ်ခြင်း' },
-      anyunt: { name: 'အညွန့်', score: 20, color: '#38BDF8', desc: 'အကျိုးစီးပွား တိုးတက်စည်ပင်ခြင်း၊ အကူအညီရလွယ်ခြင်း' },
-      achya: { name: 'အချာ', score: 10, color: '#94A3B8', desc: 'နံတူပင်ကိုစွမ်းရည်၊ တည်ငြိမ်သော်လည်း ကိုယ်တိုင်အားထုတ်ရမည်' },
-      amyit: { name: 'အမြစ်', score: 5, color: '#F59E0B', desc: 'အခြေခံခိုင်မာခြင်း၊ မူလအကြောင်းအရင်းဟောင်းများ ပြန်လည်ပါဝင်ခြင်း' },
-      banga: { name: 'ဘင်္ဂ', score: -25, color: '#F87171', desc: 'ပျက်စီးဆုံးရှုံးခြင်း၊ အသုံးစရိတ်ပိုထွက်ပြီး အစီအစဉ် ပျက်ပြားတတ်ခြင်း' },
-      puti: { name: 'ပူတိ (အပုပ်)', score: -35, color: '#EF4444', desc: 'အပုပ်နိမိတ်၊ ရောဂါဝေဒနာ၊ ရန်သူအတိုက်အခိုက် အလွန်ပြင်းထန်ခြင်း' },
+      adhipati: { name: 'အဓိပတိ', score: 35, color: '#10B981' },
+      ahtun: { name: 'အထွန်း', score: 25, color: '#34D399' },
+      anyunt: { name: 'အညွန့်', score: 20, color: '#38BDF8' },
+      achya: { name: 'အချာ', score: 10, color: '#94A3B8' },
+      amyit: { name: 'အမြစ်', score: 5, color: '#F59E0B' },
+      banga: { name: 'ဘင်္ဂ', score: -25, color: '#F87171' },
+      puti: { name: 'ပူတိ', score: -35, color: '#EF4444' },
     };
 
     const CITIES = {
@@ -687,18 +716,18 @@
     ];
 
     // ==========================================
-    // ၂။ State Management
+    // ၂။ State Variables
     // ==========================================
     let currentCityKey = 'yangon';
     let currentLat = CITIES.yangon.lat;
     let currentLng = CITIES.yangon.lng;
     let currentTz = CITIES.yangon.tz;
-    let calculationMode = 'khingyi'; // 'khingyi' (8-division) သို့မဟုတ် 'standard' (1-hour)
+    let calculationMode = 'khingyi'; // 'khingyi' (1.5 hr) သို့မဟုတ် 'standard' (1 hr)
     let selectedBodyPlanet = 1;
     let activeCalculatedHora = 1;
 
     // ==========================================
-    // ၃။ Solar Astronomical Calculations
+    // ၃။ Solar Calculations & Engine
     // ==========================================
     function calculateSolarSunTimes(date, lat, lng, tzOffsetHours) {
       const zen = 90.8333;
@@ -751,9 +780,6 @@
       return `${dh.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')} ${ampm}`;
     }
 
-    // ==========================================
-    // ၄။ အင်္ဂဝိဇ္ဇာ အခါတွက်ချက်မှု Core Engine
-    // ==========================================
     function getCityCurrentDate(tzString) {
       const now = new Date();
       try {
@@ -763,11 +789,6 @@
       } catch (e) {
         return now;
       }
-    }
-
-    function getBurmeseDayLord(dayOfWeek) {
-      const map = [1, 2, 3, 4, 5, 6, 0];
-      return map[dayOfWeek];
     }
 
     function calculateAngaWeikzaHora() {
@@ -781,8 +802,8 @@
       const { sunrise, sunset } = calculateSolarSunTimes(localDate, currentLat, currentLng, tzOffsetHours);
 
       let dayOfWeek = localDate.getDay();
-      let dayLord = getBurmeseDayLord(dayOfWeek);
-      let isNight = false;
+      const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
+      let dayLord = dayLordMap[dayOfWeek];
       let currentHora = 1;
       let horaIndex = 1;
       let periodLabel = '';
@@ -790,13 +811,10 @@
       const horaCycle = [1, 6, 4, 2, 0, 5, 3];
 
       if (calculationMode === 'khingyi') {
-        // ပုဒ်ရေ (၇) ကျမ်းရင်း ၈ အခါစနစ်
+        // ကျမ်းရင်း ၈ အခါ (ပျမ်းမျှ ၁ နာရီခွဲခန့်) စနစ်
         if (currentDec < sunrise) {
-          // မနက်နေမထွက်မီ: မနေ့က ညအခါ
           dayOfWeek = (dayOfWeek - 1 + 7) % 7;
-          dayLord = getBurmeseDayLord(dayOfWeek);
-          isNight = true;
-
+          dayLord = dayLordMap[dayOfWeek];
           const yesterday = new Date(localDate.getTime() - 86400000);
           const yTimes = calculateSolarSunTimes(yesterday, currentLat, currentLng, tzOffsetHours);
           const nightLen = (24 - yTimes.sunset) + sunrise;
@@ -804,25 +822,19 @@
           const elapsed = (24 - yTimes.sunset) + currentDec;
           const idx = Math.min(7, Math.floor(elapsed / nightUnit));
           horaIndex = idx + 1;
-
           const startIdx = horaCycle.indexOf(dayLord);
           currentHora = horaCycle[(startIdx + 8 + idx) % 7];
-          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက်`;
+          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက် (~၁.၅ နာရီ)`;
         } else if (currentDec >= sunrise && currentDec < sunset) {
-          // နေ့ ၈ အခါ
-          isNight = false;
           const dayLen = sunset - sunrise;
           const dayUnit = dayLen / 8;
           const elapsed = currentDec - sunrise;
           const idx = Math.min(7, Math.floor(elapsed / dayUnit));
           horaIndex = idx + 1;
-
           const startIdx = horaCycle.indexOf(dayLord);
           currentHora = horaCycle[(startIdx + idx) % 7];
-          periodLabel = `နေ့ ${horaIndex} ခါမြောက်`;
+          periodLabel = `နေ့ ${horaIndex} ခါမြောက် (~၁.၅ နာရီ)`;
         } else {
-          // နေဝင်ပြီး ည ၈ အခါ
-          isNight = true;
           const tomorrow = new Date(localDate.getTime() + 86400000);
           const tTimes = calculateSolarSunTimes(tomorrow, currentLat, currentLng, tzOffsetHours);
           const nightLen = (24 - sunset) + tTimes.sunrise;
@@ -830,24 +842,22 @@
           const elapsed = currentDec - sunset;
           const idx = Math.min(7, Math.floor(elapsed / nightUnit));
           horaIndex = idx + 1;
-
           const startIdx = horaCycle.indexOf(dayLord);
           currentHora = horaCycle[(startIdx + 8 + idx) % 7];
-          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက်`;
+          periodLabel = `ညဉ့် ${horaIndex} ခါမြောက် (~၁.၅ နာရီ)`;
         }
       } else {
-        // Standard 1-Hour Chaldean System
+        // Standard 1-Hour System
         if (currentDec < sunrise) {
           dayOfWeek = (dayOfWeek - 1 + 7) % 7;
-          dayLord = getBurmeseDayLord(dayOfWeek);
+          dayLord = dayLordMap[dayOfWeek];
         }
         const hoursSinceSunrise = (currentDec - sunrise + 24) % 24;
         const idx = Math.floor(hoursSinceSunrise);
         horaIndex = idx + 1;
-
         const startIdx = horaCycle.indexOf(dayLord);
         currentHora = horaCycle[(startIdx + idx) % 7];
-        periodLabel = `${horaIndex} နာရီမြောက်`;
+        periodLabel = `${horaIndex} နာရီမြောက် (၁ နာရီတခါ)`;
       }
 
       return {
@@ -858,11 +868,10 @@
         sunrise,
         sunset,
         localDate,
-        isNight,
       };
     }
 
-    // Consonant Parser
+    // Consonant Parser with Stopwords
     function parseInitialConsonant(text) {
       if (!text || text.trim().length === 0) return null;
       let clean = text.trim();
@@ -886,8 +895,8 @@
       return { planet: 1, char: firstChar, name: 'အခြား (တနင်္ဂနွေ)' };
     }
 
-    // ဆပွတ်ရိုက် ၇ ဌာနအရ အပြီးသတ် ဆန်းစစ်ချက်
-    function evaluateKhingyiPhyawMatrix(p1, p2, p3) {
+    // Evaluation Logic
+    function evaluateAngaWeikza(p1, p2, p3) {
       const stMap = SEVEN_STATUSES[p1];
       const pillars = THREE_PILLARS[p1];
 
@@ -900,26 +909,22 @@
 
       const stP2 = getPlanetStatus(p2);
       const stP3 = getPlanetStatus(p3);
-
       const infoP2 = STATUS_INFO[stP2];
       const infoP3 = STATUS_INFO[stP3];
 
       let score = 50 + infoP2.score + (infoP3.score * 0.7);
-
-      // တိုင် ၃ ပါး ညီညွတ်မှု အပိုဆောင်းရမှတ်
       if (p2 === pillars.n) score += 15;
       if (p3 === pillars.l) score += 15;
-
       score = Math.max(10, Math.min(98, Math.round(score)));
 
       let verdictTitle = '';
       let verdictDetail = '';
       if (score >= 75) {
         verdictTitle = 'ဧကန်မုချ အောင်မြင်ပြီးမြောက်မည် (အဓိပတိ/အထွန်း ဓာတ်စီး)';
-        verdictDetail = `မေးသူ၏ အင်္ဂါလက္ခဏာသည် [${infoP2.name}] ဌာနသို့ ကျရောက်ပြီး စကားအသံသည် [${infoP3.name}] ဌာနနှင့် ညီညွတ်နေသဖြင့် အတားအဆီးမရှိ လျင်မြန်ချောမွေ့စွာ အောင်မြင်ပါမည်။`;
+        verdictDetail = `မေးသူ၏ အင်္ဂါလက္ခဏာသည် [${infoP2.name}] ဌာနသို့ ကျရောက်ပြီး စကားအသံသည် [${infoP3.name}] ဌာနနှင့် ညီညွတ်နေသဖြင့် အတားအဆီးမရှိ လျင်မြန်စွာ အောင်မြင်ပါမည်။`;
       } else if (score >= 48) {
         verdictTitle = 'အခက်အခဲကြားမှ တစ်ဝက်တစ်ပျက် အောင်မြင်မည်';
-        verdictDetail = `အကျိုးပေးဌာနနှင့် အညံ့ဌာနတို့ အားပြိုင်နေသဖြင့် အလွယ်တကူမပြီးဘဲ မိမိဘက်မှ အားထုတ်မှု နှစ်ဆစိုက်ထုတ်ပြီး ဇွဲဖြင့် ညှိနှိုင်းမှသာ ပြီးမြောက်ပါမည်။`;
+        verdictDetail = `အကျိုးပေးဌာနနှင့် အညံ့ဌာနတို့ အားပြိုင်နေသဖြင့် အလွယ်တကူမပြီးဘဲ မိမိဘက်မှ အားထုတ်မှု နှစ်ဆစိုက်ထုတ်ပြီး သည်းခံညှိနှိုင်းမှသာ ပြီးမြောက်ပါမည်။`;
       } else {
         verdictTitle = 'ပျက်စီး/ကြန့်ကြာမည် (ဘင်္ဂ/ပူတိ ဓာတ်ခိုက်)';
         verdictDetail = `အမူအရာနှင့် စကားသံတို့သည် [${infoP2.name}] နှင့် [${infoP3.name}] အပုပ်နိမိတ်သို့ ကျရောက်နေသဖြင့် လောလောဆယ် ကိစ္စမမြောက်ဘဲ အရှုပ်အထွေး ကြုံရတတ်ပါသည်။`;
@@ -955,9 +960,8 @@
         0: '၇ ရက်၊ ၇ လ သို့မဟုတ် ကြန့်ကြာချိန် အနည်းငယ်ကြာနိုင်သည်',
       };
 
-      // ကျမ်းလာ ဓာတ်စာနှင့် ယတြာလမ်းညွှန်
       const remedies = {
-        1: 'ပဉ္စပွတ် (ကြာသပတေးနံ-တမာ၊ ဂန့်ဂလာ) နှင့် ဆပွတ် (သောကြာနံ) ကို ရှောင်၍ တြိရန်း (အင်္ဂါနံ-ဇီး၊ ဆီးသီး) ဖြင့် ဓာတ်ဆင် ယတြာပြုပါ။',
+        1: 'ပဉ္စပွတ် (ကြာသပတေးနံ-တမာ) နှင့် ဆပွတ် (သောကြာနံ) ကို ရှောင်၍ တြိရန်း (အင်္ဂါနံ-ဇီး၊ ဆီးသီး) ဖြင့် ဓာတ်ဆင် ယတြာပြုပါ။',
         2: 'ပဉ္စပွတ် (သောကြာနံ) နှင့် ဆပွတ် (စနေနံ) ကို ရှောင်၍ စတုရန်း (ကြာသပတေးနံ-ပဲ၊ နွားနို့) ဖြင့် အစာဓာတ်ပေးပါ။',
         3: 'စနေနှင့် တနင်္ဂနွေ အခါတို့တွင် ခရီးယတြာရှောင်ပါ။ ကြာသပတေးနံ (ပေါက်ပန်း၊ ဖီးကြမ်း) ဖြင့် ဓာတ်ကို ထောက်ပံ့ပါ။',
         4: 'တနင်္ဂနွေနှင့် တနင်္လာနံ အစာရှောင်ပါ။ သောကြာနံ (မေတ္တာစကား၊ သီးသီး) နှင့် စနေနံ (သည်းခံခြင်း) ဖြင့် အောင်မြင်အောင် ပြုလုပ်ပါ။',
@@ -981,7 +985,7 @@
     }
 
     // ==========================================
-    // ၅။ UI Binding & Realtime Controller
+    // ၄။ UI Controller & Event Binding
     // ==========================================
     const timeDisplay = document.getElementById('timeDisplay');
     const cityLabel = document.getElementById('cityLabel');
@@ -995,12 +999,12 @@
     const pillarNimitta = document.getElementById('pillarNimitta');
     const pillarLakkhana = document.getElementById('pillarLakkhana');
 
-    const matrixToggleBtn = document.getElementById('matrixToggleBtn');
-    const matrixPanel = document.getElementById('matrixPanel');
-    const matrixChevron = document.getElementById('matrixChevron');
-    const matrixTableBody = document.getElementById('matrixTableBody');
+    const dossierBtnText = document.getElementById('dossierBtnText');
+    const dossierBox = document.getElementById('dossierBox');
+    const dossierToggleBtn = document.getElementById('dossierToggleBtn');
+    const dossierChevron = document.getElementById('dossierChevron');
 
-    function switchCalculationMode(mode) {
+    function setCalculationMode(mode) {
       calculationMode = mode;
       document.getElementById('tabKhingyi').classList.toggle('active', mode === 'khingyi');
       document.getElementById('tabStandard').classList.toggle('active', mode === 'standard');
@@ -1020,36 +1024,27 @@
       horaTag.textContent = data.periodLabel;
       horaTag.style.backgroundColor = pInfo.color;
 
+      const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
       horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} | နေဝင်: ${formatTimeDecimal(data.sunset)}`;
 
       pillarMula.textContent = `${pillars.m} (${PLANET_INFO[pillars.m].name.substring(0,3)})`;
       pillarNimitta.textContent = `${pillars.n} (${PLANET_INFO[pillars.n].name.substring(0,3)})`;
       pillarLakkhana.textContent = `${pillars.l} (${PLANET_INFO[pillars.l].name.substring(0,3)})`;
 
-      renderMatrixTable(data.currentHora);
+      // Update Dossier Box
+      const dossier = HORA_DOSSIER[data.currentHora];
+      dossierBtnText.textContent = `${pInfo.name}အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ`;
+      document.getElementById('dossierTitle').textContent = dossier.title;
+      document.getElementById('dossierNature').textContent = dossier.nature;
+      document.getElementById('dossierPeople').textContent = dossier.people;
+      document.getElementById('dossierMatters').textContent = dossier.matters;
+      document.getElementById('dossierGuidance').textContent = dossier.guidance;
     }
 
-    function renderMatrixTable(currentHora) {
-      const stMap = SEVEN_STATUSES[currentHora];
-      matrixTableBody.innerHTML = '';
-
-      for (const [stKey, pNum] of Object.entries(stMap)) {
-        const info = STATUS_INFO[stKey];
-        const planet = PLANET_INFO[pNum];
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><span class="badge-status" style="background-color: ${info.color}; color: #000;">${info.name}</span></td>
-          <td style="color: ${planet.color}; font-weight: bold;">${planet.name} (${planet.symbol})</td>
-          <td style="color: #94a3b8;">${info.desc}</td>
-        `;
-        matrixTableBody.appendChild(tr);
-      }
-    }
-
-    // Toggle 7 Status Panel
-    matrixToggleBtn.addEventListener('click', () => {
-      const isShowing = matrixPanel.classList.toggle('show');
-      matrixChevron.className = isShowing ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+    // Dossier Toggle
+    dossierToggleBtn.addEventListener('click', () => {
+      const isCollapsed = dossierBox.classList.toggle('collapsed');
+      dossierChevron.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
     });
 
     // City Selection
@@ -1065,27 +1060,24 @@
       }
     });
 
-    // GPS Auto Detection
+    // GPS
     btnGps.addEventListener('click', () => {
       if (navigator.geolocation) {
-        btnGps.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ရယူနေ...';
+        btnGps.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>...';
         navigator.geolocation.getCurrentPosition(
           (pos) => {
             currentLat = pos.coords.latitude;
             currentLng = pos.coords.longitude;
-            // Use local browser timezone
             currentTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Yangon';
-            cityLabel.textContent = `GPS (${currentLat.toFixed(2)}°, ${currentLng.toFixed(2)}°)`;
-            btnGps.innerHTML = '<i class="fa-solid fa-check"></i> မိမိနေရာ';
+            cityLabel.textContent = `GPS (${currentLat.toFixed(2)}°)`;
+            btnGps.innerHTML = '<i class="fa-solid fa-check"></i> GPS';
             updateRealtimeClock();
           },
           (err) => {
-            alert('GPS ရယူ၍ မရနိုင်ပါ။ Browser တည်နေရာခွင့်ပြုချက် (Location Permission) ကို စစ်ဆေးပါ။');
+            alert('GPS ရယူ၍ မရနိုင်ပါ။ Location ခွင့်ပြုချက် စစ်ဆေးပါ။');
             btnGps.innerHTML = '<i class="fa-solid fa-crosshairs"></i> GPS';
           }
         );
-      } else {
-        alert('ဤ Browser သည် Geolocation ကို မထောက်ပံ့ပါ။');
       }
     });
 
@@ -1097,13 +1089,11 @@
       if (index === 0) {
         btn.style.borderColor = PLANET_INFO[part.planet].color;
       }
-
       btn.innerHTML = `
         <i class="fa-solid ${part.icon}" style="${index === 0 ? `color: ${PLANET_INFO[part.planet].color}` : ''}"></i>
         <div class="btn-text">${part.name}</div>
         <div class="planet-tag">${PLANET_INFO[part.planet].name} (${part.planet})</div>
       `;
-
       btn.addEventListener('click', () => {
         document.querySelectorAll('.body-btn').forEach((b) => {
           b.classList.remove('active');
@@ -1115,7 +1105,6 @@
         btn.querySelector('i').style.color = PLANET_INFO[part.planet].color;
         selectedBodyPlanet = part.planet;
       });
-
       bodyGrid.appendChild(btn);
     });
 
@@ -1136,47 +1125,39 @@
       }
     });
 
-    // Calculate Final Output
+    // Calculate Final Verdict
     const btnCalculate = document.getElementById('btnCalculate');
     const resultContainer = document.getElementById('resultContainer');
 
     btnCalculate.addEventListener('click', () => {
       const parsed = parseInitialConsonant(soundInput.value);
       const p3 = parsed ? parsed.planet : 1;
-      const res = evaluateKhingyiPhyawMatrix(activeCalculatedHora, selectedBodyPlanet, p3);
+      const res = evaluateAngaWeikza(activeCalculatedHora, selectedBodyPlanet, p3);
 
-      // Score Banner & Status Pills
       document.getElementById('resScore').textContent = `${res.score}% ဓာတ်စီး အလားအလာ`;
       document.getElementById('resHeading').textContent = res.verdictTitle;
 
       const pillsBox = document.getElementById('resStatusPills');
       pillsBox.innerHTML = `
         <span class="status-pill" style="background-color: ${res.stP2.color}; color: #000;">
-          အမူအရာ: ${res.stP2.name} ဌာန
+          အမူအရာ: ${res.stP2.name}
         </span>
         <span class="status-pill" style="background-color: ${res.stP3.color}; color: #000;">
-          စကားသံ: ${res.stP3.name} ဌာန
+          စကားသံ: ${res.stP3.name}
         </span>
       `;
 
-      // 4 Deliverables
       document.getElementById('resRootCause').textContent = res.rootCause;
       document.getElementById('resVerdictDetail').textContent = res.verdictDetail;
       document.getElementById('resProgression').textContent = res.progression;
       document.getElementById('resDuration').textContent = res.duration;
       document.getElementById('resDominantNums').textContent = `အကျိုးပေးဂြိုဟ်အစီအစဉ်: [${res.dominantNumbers}]`;
-
-      // 5th Deliverable: Khingyi Phyaw Remedy
-      document.getElementById('resRemedyBox').innerHTML = `
-        <div class="remedy-title">★ ပဌမကဏ္ဍလာ အစာဓာတ်ဆင်နှင့် ယတြာနည်း-</div>
-        <div>${res.remedy}</div>
-      `;
+      document.getElementById('resRemedyText').textContent = res.remedy;
 
       resultContainer.style.display = 'block';
       resultContainer.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Start Real-time Clock
     setInterval(updateRealtimeClock, 1000);
     updateRealtimeClock();
   </script>
