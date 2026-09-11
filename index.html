@@ -1,11 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="my">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</title>
+  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (Master Edition)</title>
   
+  <!-- FontAwesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: Padauk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
@@ -84,7 +87,7 @@
       gap: 8px;
     }
 
-    /* Location Bar */
+    /* Location & Timezone Bar */
     .loc-bar {
       display: flex;
       flex-wrap: wrap;
@@ -125,7 +128,7 @@
       gap: 4px;
     }
 
-    /* Calculation Mode Tabs */
+    /* Mode Tabs */
     .mode-tab-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -207,8 +210,8 @@
       color: #38bdf8;
     }
 
-    /* Dossier Box (သဘောသဘာဝ အကွက်) */
-    .dossier-toggle {
+    /* Collapsible Boxes */
+    .accordion-btn {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -223,19 +226,19 @@
       font-weight: 600;
       cursor: pointer;
     }
-    .dossier-box {
-      display: block;
+    .accordion-content {
       background-color: #0b1120;
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 12px;
-      margin-top: 8px;
+      margin-top: 6px;
       font-size: 12px;
       line-height: 1.6;
     }
-    .dossier-box.collapsed {
+    .accordion-content.collapsed {
       display: none;
     }
+
     .dossier-heading {
       font-size: 13px;
       font-weight: 700;
@@ -265,6 +268,28 @@
       font-size: 11px;
       display: block;
       margin-bottom: 2px;
+    }
+
+    /* 7-Status Table */
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 5px 6px;
+      text-align: left;
+      border-bottom: 1px solid #1e293b;
+    }
+    .matrix-table th {
+      color: #94a3b8;
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
     }
 
     /* Step 2: Body Grid */
@@ -432,14 +457,14 @@
     
     <div class="header">
       <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
-      <p>ကျမ်းရင်း ၁ နာရီခွဲ (၈ အခါ) စနစ် • ဟိုရာ ၁ နာရီစနစ် • အခါသဘောသဘာဝ Dossier</p>
+      <p>ကျမ်းရင်း နေထွက်စနစ် (၈ အခါ) • ရိုးရာ ၆:၀၀ နာရီစနစ် (၁ နာရီခွဲ/၁ နာရီ) စုံလင်စွာပါဝင်သည်</p>
     </div>
 
     <!-- Step 1: Time, Location, Mode & Hora -->
     <div class="card">
       <div class="card-header">
         <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
-        <span>အဆင့် (၁) - အခါတော်စိစစ်ချက်နှင့် သဘောသဘာဝများ</span>
+        <span>အဆင့် (၁) - အခါတော်စိစစ်ချက်နှင့် ဌာနဇယားများ</span>
       </div>
 
       <!-- Timezone & GPS Bar -->
@@ -466,13 +491,13 @@
         </div>
       </div>
 
-      <!-- Mode Tabs -->
+      <!-- Mode Switcher Tabs -->
       <div class="mode-tab-group">
         <div class="mode-tab active" id="tabKhingyi" onclick="setCalculationMode('khingyi')">
-          <i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၁ နာရီခွဲစနစ် (နေ့ ၈ ခါ / ည ၈ ခါ)
+          <i class="fa-solid fa-scroll"></i> ကျမ်းရင်း ၈ အခါစနစ် (နေထွက်/နေဝင်အမှန်)
         </div>
         <div class="mode-tab" id="tabStandard" onclick="setCalculationMode('standard')">
-          <i class="fa-solid fa-stopwatch"></i> ၁ နာရီ ၁ အခါစနစ် (ဟိုရာစနစ်)
+          <i class="fa-solid fa-stopwatch"></i> ရိုးရာ ၆:၀၀ နာရီစနစ် (Fixed Standard)
         </div>
       </div>
 
@@ -503,13 +528,12 @@
         </div>
       </div>
 
-      <!-- Dossier Box (သဘောသဘာဝ အသေးစိတ် အကွက်) -->
-      <button class="dossier-toggle" id="dossierToggleBtn">
+      <!-- Accordion 1: Dossier Box (သဘောသဘာဝ အကွက်) -->
+      <button class="accordion-btn" id="dossierToggleBtn">
         <span><i class="fa-solid fa-book-open"></i> <span id="dossierBtnText">အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ</span></span>
         <i class="fa-solid fa-chevron-up" id="dossierChevron"></i>
       </button>
-
-      <div class="dossier-box" id="dossierBox">
+      <div class="accordion-content" id="dossierBox">
         <div class="dossier-heading" id="dossierTitle">တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာအခါ</div>
         <div class="dossier-item">
           <strong>• သဘောသဘာဝ:</strong>
@@ -528,6 +552,25 @@
           <span id="dossierGuidance">...</span>
         </div>
       </div>
+
+      <!-- Accordion 2: 7 Status Matrix Table (ဆပွတ်ရိုက် ၇ ဌာန ဇယား) -->
+      <button class="accordion-btn" id="matrixToggleBtn" style="margin-top: 8px;">
+        <span><i class="fa-solid fa-table-cells"></i> <span id="matrixBtnText">ဆပွတ်ရိုက် ၇ ဌာန ဇယား ကြည့်ရန်</span></span>
+        <i class="fa-solid fa-chevron-down" id="matrixChevron"></i>
+      </button>
+      <div class="accordion-content collapsed" id="matrixPanel">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>ဌာန</th>
+              <th>ဂြိုဟ်</th>
+              <th>ကျမ်းလာ သဘောတရားနှင့် အကျိုးပေး</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody"></tbody>
+        </table>
+      </div>
+
     </div>
 
     <!-- Step 2: Body Touch Picker -->
@@ -572,7 +615,7 @@
       </div>
 
       <div class="result-card">
-        <div class="result-label">(၂) အောင်မြင်မည် (သို့) ကျရှုံးမည် သုံးသပ်ချက်</div>
+        <div class="result-label">(၂) အောင်မြင်မည် (သို့) ကျရှုံးမည် သုံးသပ်ချက် (ဆပွတ်ရိုက် ၇ ဌာန)</div>
         <div class="result-body" id="resVerdictDetail">...</div>
       </div>
 
@@ -609,7 +652,6 @@
       0: { name: 'စနေ', symbol: '၀', color: '#8B5CF6' },
     };
 
-    // အခါအလိုက် အသေးစိတ် Dossier
     const HORA_DOSSIER = {
       1: {
         title: 'တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာအခါ',
@@ -662,7 +704,6 @@
       },
     };
 
-    // ကျမ်းလာ တိုင် ၃ ပါး
     const THREE_PILLARS = {
       1: { m: 1, n: 5, l: 2 },
       2: { m: 2, n: 4, l: 6 },
@@ -673,7 +714,6 @@
       0: { m: 0, n: 4, l: 1 },
     };
 
-    // ကျမ်းလာ ဆပွတ်ရိုက် ၇ ဌာန
     const SEVEN_STATUSES = {
       1: { adhipati: 2, achya: 1, anyunt: 6, ahtun: 5, banga: 0, amyit: 4, puti: 3 },
       2: { adhipati: 6, achya: 2, anyunt: 3, ahtun: 0, banga: 5, amyit: 1, puti: 4 },
@@ -685,13 +725,13 @@
     };
 
     const STATUS_INFO = {
-      adhipati: { name: 'အဓိပတိ', score: 35, color: '#10B981' },
-      ahtun: { name: 'အထွန်း', score: 25, color: '#34D399' },
-      anyunt: { name: 'အညွန့်', score: 20, color: '#38BDF8' },
-      achya: { name: 'အချာ', score: 10, color: '#94A3B8' },
-      amyit: { name: 'အမြစ်', score: 5, color: '#F59E0B' },
-      banga: { name: 'ဘင်္ဂ', score: -25, color: '#F87171' },
-      puti: { name: 'ပူတိ', score: -35, color: '#EF4444' },
+      adhipati: { name: 'အဓိပတိ', score: 35, color: '#10B981', desc: 'အောင်မြင်မှု အထွတ်အထိပ်ရောက်ခြင်း၊ ခေါင်းဆောင်/အကြီးအကဲ မစခြင်း' },
+      ahtun: { name: 'အထွန်း', score: 25, color: '#34D399', desc: 'ထင်ပေါ်ကျော်ကြားခြင်း၊ ကိစ္စပြီးမြောက် အောင်မြင်လွယ်ခြင်း' },
+      anyunt: { name: 'အညွန့်', score: 20, color: '#38BDF8', desc: 'အကျိုးစီးပွား တိုးတက်စည်ပင်ခြင်း၊ အကူအညီရလွယ်ခြင်း' },
+      achya: { name: 'အချာ', score: 10, color: '#94A3B8', desc: 'နံတူပင်ကိုစွမ်းရည်၊ တည်ငြိမ်သော်လည်း ကိုယ်တိုင်အားထုတ်ရမည်' },
+      amyit: { name: 'အမြစ်', score: 5, color: '#F59E0B', desc: 'အခြေခံခိုင်မာခြင်း၊ မူလအကြောင်းအရင်းဟောင်းများ ပြန်လည်ပါဝင်ခြင်း' },
+      banga: { name: 'ဘင်္ဂ', score: -25, color: '#F87171', desc: 'ပျက်စီးဆုံးရှုံးခြင်း၊ အသုံးစရိတ်ပိုထွက်ပြီး အစီအစဉ် ပျက်ပြားတတ်ခြင်း' },
+      puti: { name: 'ပူတိ (အပုပ်)', score: -35, color: '#EF4444', desc: 'အပုပ်နိမိတ်၊ ရောဂါဝေဒနာ၊ ရန်သူအတိုက်အခိုက် အလွန်ပြင်းထန်ခြင်း' },
     };
 
     const CITIES = {
@@ -722,7 +762,7 @@
     let currentLat = CITIES.yangon.lat;
     let currentLng = CITIES.yangon.lng;
     let currentTz = CITIES.yangon.tz;
-    let calculationMode = 'khingyi'; // 'khingyi' (1.5 hr) သို့မဟုတ် 'standard' (1 hr)
+    let calculationMode = 'khingyi'; // 'khingyi' = ပေမူ ၈ အခါ, 'standard' = ၆ နာရီပုံသေ
     let selectedBodyPlanet = 1;
     let activeCalculatedHora = 1;
 
@@ -811,7 +851,7 @@
       const horaCycle = [1, 6, 4, 2, 0, 5, 3];
 
       if (calculationMode === 'khingyi') {
-        // ကျမ်းရင်း ၈ အခါ (ပျမ်းမျှ ၁ နာရီခွဲခန့်) စနစ်
+        // ၁။ ခင်ကြီးဖျော် မူရင်းကျမ်းလာ ၈ အခါစနစ် (တကယ့် ဒေသနေထွက်ချိန်အမှန်)
         if (currentDec < sunrise) {
           dayOfWeek = (dayOfWeek - 1 + 7) % 7;
           dayLord = dayLordMap[dayOfWeek];
@@ -847,17 +887,17 @@
           periodLabel = `ညဉ့် ${horaIndex} ခါမြောက် (~၁.၅ နာရီ)`;
         }
       } else {
-        // Standard 1-Hour System
-        if (currentDec < sunrise) {
+        // ၂။ ရိုးရာ စာအုပ်များအတိုင်း မနက် ၆:၀၀ နာရီ ပုံသေစနစ် (Fixed 6:00 AM Standard)
+        if (currentDec < 6.0) {
           dayOfWeek = (dayOfWeek - 1 + 7) % 7;
           dayLord = dayLordMap[dayOfWeek];
         }
-        const hoursSinceSunrise = (currentDec - sunrise + 24) % 24;
+        const hoursSinceSunrise = (currentDec - 6.0 + 24) % 24;
         const idx = Math.floor(hoursSinceSunrise);
         horaIndex = idx + 1;
         const startIdx = horaCycle.indexOf(dayLord);
         currentHora = horaCycle[(startIdx + idx) % 7];
-        periodLabel = `${horaIndex} နာရီမြောက် (၁ နာရီတခါ)`;
+        periodLabel = `${horaIndex} နာရီမြောက် (မနက် ၆:၀၀ ပုံသေ)`;
       }
 
       return {
@@ -871,7 +911,6 @@
       };
     }
 
-    // Consonant Parser with Stopwords
     function parseInitialConsonant(text) {
       if (!text || text.trim().length === 0) return null;
       let clean = text.trim();
@@ -895,7 +934,6 @@
       return { planet: 1, char: firstChar, name: 'အခြား (တနင်္ဂနွေ)' };
     }
 
-    // Evaluation Logic
     function evaluateAngaWeikza(p1, p2, p3) {
       const stMap = SEVEN_STATUSES[p1];
       const pillars = THREE_PILLARS[p1];
@@ -985,7 +1023,7 @@
     }
 
     // ==========================================
-    // ၄။ UI Controller & Event Binding
+    // ၄။ UI Controller & Realtime Controller
     // ==========================================
     const timeDisplay = document.getElementById('timeDisplay');
     const cityLabel = document.getElementById('cityLabel');
@@ -1003,6 +1041,12 @@
     const dossierBox = document.getElementById('dossierBox');
     const dossierToggleBtn = document.getElementById('dossierToggleBtn');
     const dossierChevron = document.getElementById('dossierChevron');
+
+    const matrixBtnText = document.getElementById('matrixBtnText');
+    const matrixPanel = document.getElementById('matrixPanel');
+    const matrixToggleBtn = document.getElementById('matrixToggleBtn');
+    const matrixChevron = document.getElementById('matrixChevron');
+    const matrixTableBody = document.getElementById('matrixTableBody');
 
     function setCalculationMode(mode) {
       calculationMode = mode;
@@ -1025,7 +1069,11 @@
       horaTag.style.backgroundColor = pInfo.color;
 
       const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
-      horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} | နေဝင်: ${formatTimeDecimal(data.sunset)}`;
+      if (calculationMode === 'khingyi') {
+        horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | နေထွက်: ${formatTimeDecimal(data.sunrise)} | နေဝင်: ${formatTimeDecimal(data.sunset)}`;
+      } else {
+        horaMetaLine.textContent = `ဗေဒင်နေ့နံ: ${PLANET_INFO[data.dayLord].name} | မနက် ၆:၀၀ စတင် | (နေထွက်အမှန်: ${formatTimeDecimal(data.sunrise)})`;
+      }
 
       pillarMula.textContent = `${pillars.m} (${PLANET_INFO[pillars.m].name.substring(0,3)})`;
       pillarNimitta.textContent = `${pillars.n} (${PLANET_INFO[pillars.n].name.substring(0,3)})`;
@@ -1039,12 +1087,37 @@
       document.getElementById('dossierPeople').textContent = dossier.people;
       document.getElementById('dossierMatters').textContent = dossier.matters;
       document.getElementById('dossierGuidance').textContent = dossier.guidance;
+
+      // Update 7-Status Matrix Table
+      renderMatrixTable(data.currentHora);
     }
 
-    // Dossier Toggle
+    function renderMatrixTable(currentHora) {
+      const stMap = SEVEN_STATUSES[currentHora];
+      matrixTableBody.innerHTML = '';
+      for (const [stKey, pNum] of Object.entries(stMap)) {
+        const info = STATUS_INFO[stKey];
+        const planet = PLANET_INFO[pNum];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="badge-status" style="background-color: ${info.color}; color: #000;">${info.name}</span></td>
+          <td style="color: ${planet.color}; font-weight: bold;">${planet.name} (${planet.symbol})</td>
+          <td style="color: #94a3b8;">${info.desc}</td>
+        `;
+        matrixTableBody.appendChild(tr);
+      }
+    }
+
+    // Toggle Dossier Box
     dossierToggleBtn.addEventListener('click', () => {
       const isCollapsed = dossierBox.classList.toggle('collapsed');
       dossierChevron.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
+    });
+
+    // Toggle Matrix Table Panel
+    matrixToggleBtn.addEventListener('click', () => {
+      const isCollapsed = matrixPanel.classList.toggle('collapsed');
+      matrixChevron.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
     });
 
     // City Selection
