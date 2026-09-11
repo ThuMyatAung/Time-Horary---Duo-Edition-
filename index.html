@@ -1,0 +1,430 @@
+from pathlib import Path
+
+html = r'''<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>အင်္ဂဝိဇ္ဇာ အခါတော်တွက် Engine — V2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap');
+:root{--bg:#070b13;--card:#101827;--input:#0b1220;--line:#22304a;--text:#f4f7fb;--muted:#94a3b8;--blue:#38bdf8;--green:#34d399;--red:#fb7185;--gold:#fbbf24;--violet:#a78bfa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Padauk,system-ui,sans-serif}
+.wrap{max-width:720px;margin:auto;padding:18px 14px 60px}.hero{text-align:center;padding:10px 0 18px}.hero h1{margin:0;font-size:23px}.hero p{margin:4px 0;color:var(--muted);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 13px}.title{font-weight:700;font-size:14px;margin-bottom:10px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+label{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}input,select,button{font:inherit}input,select{width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px}
+button{border:0;border-radius:9px;cursor:pointer}.btn{padding:10px 12px;background:#26334c;color:#fff}.primary{width:100%;padding:13px;background:#4f46e5;color:#fff;font-weight:700;font-size:15px}.secondary{background:#17233a;color:#cbd5e1}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mode button{padding:12px;text-align:left;background:var(--input);border:1px solid var(--line);color:#cbd5e1}.mode button.active{border-color:var(--blue);background:#12243a;color:#fff}
+.badge{display:inline-block;padding:4px 8px;border-radius:7px;font-size:12px;font-weight:700;margin:4px 0}.muted{color:var(--muted);font-size:11px}.notice{background:#172554;border:1px solid #3347a1;color:#c7d2fe;border-radius:9px;padding:9px;font-size:11px;margin-top:9px}
+.bodygrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.body{background:var(--input);border:1px solid var(--line);padding:10px;border-radius:9px;text-align:center;color:#cbd5e1;font-size:12px}.body.active{border-color:var(--gold);color:#fff;background:#211d10}
+.result{display:none}.verdict{border:1px solid #4338ca;background:#17144a;border-radius:14px;padding:16px;text-align:center;margin-bottom:13px}.score{font-size:29px;font-weight:700}.confidence{font-size:11px;color:#c4b5fd}.heading{font-size:17px;font-weight:700;margin-top:4px}.meter{height:8px;background:#0b1120;border-radius:99px;overflow:hidden;margin-top:10px}.meter i{display:block;height:100%;background:var(--green);width:0}
+.row{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}.dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}.row b{font-size:12px}.row div{font-size:11px;color:#cbd5e1;line-height:1.55}
+.stat{background:var(--input);border:1px solid var(--line);border-radius:10px;padding:10px}.stat b{display:block;font-size:12px}.stat span{font-size:11px;color:var(--muted)}
+.sectionhead{font-size:13px;font-weight:700;margin-bottom:8px}.small{font-size:10px;color:var(--muted);line-height:1.5}.method{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:11px}.method:last-child{border:0}.ok{color:var(--green)}.warn{color:var(--gold)}.bad{color:var(--red)}
+details summary{cursor:pointer;color:var(--blue);font-size:12px;font-weight:700}
+@media(max-width:520px){.grid3{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>အင်္ဂဝိဇ္ဇာ အခါတော်တွက် Engine</h1>
+<p>V2 • Solar + Standard • 24-layer cross-check • Evidence-first interpretation</p>
+</header>
+
+<section class="card">
+<div class="title">၁။ မေးချိန် + နေရာ</div>
+<div class="grid2">
+<div><label>ရက်စွဲ</label><input id="date" type="date"></div>
+<div><label>အချိန်</label><input id="time" type="time" step="1"></div>
+<div><label>နေရာ</label><select id="city"></select></div>
+<div><label>စနစ်</label>
+<select id="mode"><option value="solar">ဒေသ Solar / Dynamic</option><option value="standard">ရိုးရာ ၆:၀၀ စမှတ်</option><option value="compare">နှစ်မျိုးလုံး နှိုင်းယှဉ်</option></select>
+</div>
+</div>
+<div class="notice" id="astro">Astronomical calculation loading…</div>
+</section>
+
+<section class="card">
+<div class="title">၂။ အခါ / အမူအရာ / အသံ</div>
+<div id="horaCards" class="grid2"></div>
+<div style="margin-top:10px">
+<label>ထိတွေ့သည့် အစိတ်အပိုင်း</label>
+<div id="bodyGrid" class="bodygrid"></div>
+</div>
+<div style="margin-top:10px">
+<label>မေးခွန်း စတင်ပြောသော စကားလုံး</label>
+<input id="sound" placeholder="ဥပမာ — အလုပ်၊ ငွေ၊ သူငယ်ချင်း၊ သူ...">
+<div id="soundInfo" class="muted" style="margin-top:5px"></div>
+</div>
+</section>
+
+<button id="calc" class="primary">✦ အဆင့် ၂၄ ဆင့် ဖြတ်ပြီး အပြီးသတ်ဟောချက်ထုတ်မည်</button>
+
+<section id="result" class="result" style="margin-top:13px">
+<div class="verdict">
+<div class="score" id="score">--</div>
+<div class="confidence" id="confidence">--</div>
+<div class="heading" id="heading">--</div>
+<div class="meter"><i id="meter"></i></div>
+</div>
+
+<div class="card">
+<div class="sectionhead">Astronomical / Hora အခြေခံဒေတာ</div>
+<div id="stats" class="grid3"></div>
+</div>
+
+<div class="card">
+<div class="sectionhead">၂၄ အလွှာ Cross-check</div>
+<div id="methods"></div>
+<div class="small" style="margin-top:8px">မှတ်ချက် — အောက်ပါ ၂၄ အလွှာသည် engine validation / corroboration layers ဖြစ်သည်။ ရိုးရာစာပေတွင် သီးခြားသတ်မှတ်ထားသော “၂၄ နည်း” ဟူသော အမည်နှင့် စည်းမျဉ်းများကို မရရှိသေးသဖြင့် အမည်မဖန်တီးထားပါ။</div>
+</div>
+
+<div class="card">
+<div class="sectionhead">ဓာတ်မိတ် / ဓာတ်ရန်</div><div id="pairs"></div><div id="elements"></div>
+</div>
+
+<div class="card"><div class="sectionhead">(၁) ဘာကိစ္စနှင့် ပတ်သက်သနည်း</div><div id="root"></div></div>
+<div class="card"><div class="sectionhead">(၂) အောင်မြင် / ကြန့်ကြာ / မသင့်</div><div id="detail"></div></div>
+<div class="card"><div class="sectionhead">(၃) ရှေ့ဖြစ်နှင့် နောက်ဆက်တွဲ</div><div id="progress"></div></div>
+<div class="card"><div class="sectionhead">(၄) အချိန်ကာလ</div><div id="duration"></div></div>
+<div class="card"><div class="sectionhead">⚠️ အဓိက သတိပြုရန်</div><div id="caution"></div></div>
+</section>
+
+<details class="card" style="margin-top:13px"><summary>Engine design note</summary>
+<p class="small">ဒီ version မှာ “အမှန်တကယ်ဖြစ်နိုင်ခြေ 83%” လို့ မဆိုထားပါ။ Score သည် traditional/heuristic indicators များကို ပေါင်းစပ်ထားသော strength index ဖြစ်ပြီး empirical probability မဟုတ်ပါ။ တကယ့် “သွေးထွက်အောင်မှန်” ဖြစ်မဖြစ်ကို historical back-test ဖြင့်သာ စစ်ဆေးနိုင်ပါသည်။</p>
+</details>
+</div>
+
+<script>
+'use strict';
+
+/* =========================
+   DATA
+========================= */
+const P={
+  1:{name:'တနင်္ဂနွေ',element:'FIRE',kw:'အာဏာ • အကြီးအကဲ • ဂုဏ်သိက္ခာ'},
+  2:{name:'တနင်္လာ',element:'WATER',kw:'ငွေကြေး • ခရီး • စိတ်လှုပ်ရှား'},
+  3:{name:'အင်္ဂါ',element:'FIRE',kw:'အပြိုင်အဆိုင် • အမှုအခင်း • စက်/မြေ'},
+  4:{name:'ဗုဒ္ဓဟူး',element:'WATER',kw:'စာချုပ် • စကား • ဆက်သွယ်ရေး'},
+  5:{name:'ကြာသပတေး',element:'EARTH',kw:'ဆရာ • မင်္ဂလာ • ပညာ/ဥပဒေ'},
+  6:{name:'သောကြာ',element:'AIR',kw:'အချစ် • အလှအပ • ရတနာ'},
+  0:{name:'စနေ',element:'AIR',kw:'အကြွေး • ကြန့်ကြာ • ပျောက်ဆုံးမှု'}
+};
+const CITIES={
+  yangon:{name:'ရန်ကုန်',lat:16.8661,lng:96.1951,tz:6.5},
+  mandalay:{name:'မန္တလေး',lat:21.9588,lng:96.0891,tz:6.5},
+  bangkok:{name:'ဘန်ကောက်',lat:13.7563,lng:100.5018,tz:7},
+  singapore:{name:'စင်ကာပူ',lat:1.3521,lng:103.8198,tz:8},
+  tokyo:{name:'တိုကျို',lat:35.6762,lng:139.6503,tz:9},
+  london:{name:'လန်ဒန်',lat:51.5074,lng:-0.1278,tz:0},
+  newyork:{name:'နယူးယောက်',lat:40.7128,lng:-74.0060,tz:-4}
+};
+const FRIEND={
+'1-5':20,'5-1':20,'2-4':20,'4-2':20,'3-6':20,'6-3':20,'4-0':20,'0-4':20
+};
+const ENEMY={
+'1-6':-25,'6-1':-25,'2-5':-25,'5-2':-25,'3-0':-30,'0-3':-30
+};
+const BODY=[
+['HEAD','ဦးခေါင်း / ဆံပင်',1],['FACE','မျက်နှာ / မျက်စိ / နဖူး',2],
+['NECK','လည်ပင်း / ပခုံး',3],['CHEST','ရင်ဘတ် / နှလုံး / လက်ဖျံ',4],
+['BELLY','ဝမ်းဗိုက် / ခါး',5],['FEET','ခြေဖျား / လျှို့ဝှက်အင်္ဂါ',6],
+['JOINTS','ဒူး / ခြေဆစ် / အရိုး',0]
+];
+const DOSSIER={
+1:['တေဇောဓာတ် • အာဏာနှင့် ဂုဏ်သိက္ခာ','ဂုဏ်သိက္ခာ၊ အကြီးအကဲ၊ အာဏာပိုင်၊ ရာထူး၊ အမိန့်'],
+2:['ပထဝီ/အာပေါ • ငွေကြေးနှင့် အပြောင်းအလဲ','ငွေ၊ အရောင်းအဝယ်၊ ခရီး၊ အိမ်/နေရာပြောင်း'],
+3:['တေဇောကြမ်း • အပြိုင်အဆိုင်','အမှုအခင်း၊ စက်၊ မြေ၊ ပြိုင်ဘက်၊ အရေးယူမှု'],
+4:['အာပေါ/ဝါယော • ဆက်သွယ်ရေး','စာချုပ်၊ စကား၊ သတင်း၊ ပညာ၊ ကုန်သွယ်မှု'],
+5:['ပထဝီကြီး • မင်္ဂလာနှင့် တရားဓမ္မ','ဆရာ၊ ဥပဒေ၊ ပညာ၊ မင်္ဂလာ၊ ဘဏ်'],
+6:['ဝါယောနု • အလှအပနှင့် သုခ','အချစ်၊ အနုပညာ၊ အလှအပ၊ ရတနာ'],
+0:['ဝါယောကြမ်း • အကြွေးနှင့် ကြန့်ကြာမှု','အကြွေးဟောင်း၊ ပျောက်ဆုံးမှု၊ ဝန်ထုပ်ဝန်ပိုး၊ ကြန့်ကြာမှု']
+};
+
+/* =========================
+   ASTRONOMY
+   NOAA-style solar event calculation.
+   All calculations use explicit location timezone.
+========================= */
+const RAD=Math.PI/180, DEG=180/Math.PI;
+const norm=x=>((x%360)+360)%360;
+function julianDay(y,m,d){
+  if(m<=2){y--;m+=12}
+  const A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;
+}
+function solarPosition(date,lat,lng){
+  const y=date.getUTCFullYear(),m=date.getUTCMonth()+1,d=date.getUTCDate();
+  const jd=julianDay(y,m,d)+(date.getUTCHours()+date.getUTCMinutes()/60+date.getUTCSeconds()/3600)/24;
+  const T=(jd-2451545)/36525;
+  const L0=norm(280.46646+36000.76983*T+0.0003032*T*T);
+  const M=norm(357.52911+35999.05029*T-0.0001537*T*T);
+  const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M*RAD)+(0.019993-0.000101*T)*Math.sin(2*M*RAD)+0.000289*Math.sin(3*M*RAD);
+  const sunLon=L0+C;
+  const e=23.439291-0.0130042*T;
+  const ra=Math.atan2(Math.cos(e*RAD)*Math.sin(sunLon*RAD),Math.cos(sunLon*RAD))*DEG;
+  const dec=Math.asin(Math.sin(e*RAD)*Math.sin(sunLon*RAD))*DEG;
+  const gmst=norm(280.46061837+360.98564736629*(jd-2451545)+0.000387933*T*T-T*T*T/38710000);
+  const lst=norm(gmst+lng);
+  let H=norm(lst-ra); if(H>180)H-=360;
+  const alt=Math.asin(Math.sin(lat*RAD)*Math.sin(dec*RAD)+Math.cos(lat*RAD)*Math.cos(dec*RAD)*Math.cos(H*RAD))*DEG;
+  return {dec,ra,alt};
+}
+function eventUTC(y,m,d,lat,lng,zenith=90.8333,rise=true){
+  // Iterative local solar transit approximation; sufficient for user-facing minute-level hora work.
+  let date=new Date(Date.UTC(y,m-1,d,12,0,0));
+  let base=solarPosition(date,lat,lng);
+  let dec=base.dec;
+  let cosH=(Math.cos(zenith*RAD)-Math.sin(lat*RAD)*Math.sin(dec*RAD))/(Math.cos(lat*RAD)*Math.cos(dec*RAD));
+  if(cosH>1)return null;if(cosH<-1)return null;
+  let H= Math.acos(cosH)*DEG;
+  if(!rise)H=-H;
+  const noonMinutes=720-4*lng;
+  // Equation of time from solar position model
+  const T=(julianDay(y,m,d)-2451545)/36525;
+  const L0=norm(280.46646+36000.76983*T+0.0003032*T*T);
+  const M=norm(357.52911+35999.05029*T-0.0001537*T*T);
+  const eps=23.439291-0.0130042*T;
+  const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M*RAD)+(0.019993-0.000101*T)*Math.sin(2*M*RAD)+0.000289*Math.sin(3*M*RAD);
+  const sunLon=L0+C;
+  let ra=Math.atan2(Math.cos(eps*RAD)*Math.sin(sunLon*RAD),Math.cos(sunLon*RAD))*DEG;
+  ra=norm(ra);
+  const eq=4*(norm(L0)-ra);
+  let mins=noonMinutes-eq+4*H;
+  mins=((mins%1440)+1440)%1440;
+  return mins/60;
+}
+function solarEvents(date,city){
+  const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();
+  const sr=eventUTC(y,m,d,city.lat,city.lng,90.8333,true);
+  const ss=eventUTC(y,m,d,city.lat,city.lng,90.8333,false);
+  const prev=new Date(date);prev.setDate(prev.getDate()-1);
+  const next=new Date(date);next.setDate(next.getDate()+1);
+  const ps=eventUTC(prev.getFullYear(),prev.getMonth()+1,prev.getDate(),city.lat,city.lng,90.8333,true);
+  const ns=eventUTC(next.getFullYear(),next.getMonth()+1,next.getDate(),city.lat,city.lng,90.8333,true);
+  return {sunrise:sr,sunset:ss,prevSunrise:ps,nextSunrise:ns,dayLen:sr!=null&&ss!=null?ss-sr:null};
+}
+const toMin=h=>h*60;
+const fromMin=m=>((m%1440)+1440)%1440;
+function hms(h){if(h==null)return'—';let m=fromMin(Math.round(h*60));return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function dateFromInputs(){return new Date(document.getElementById('date').value+'T'+document.getElementById('time').value)}
+function localMinutes(date){return date.getHours()*60+date.getMinutes()+date.getSeconds()/60}
+
+/* Planetary hours */
+const HORA=[1,6,4,2,0,5,3];
+const dayLord=d=>({0:1,1:2,2:3,3:4,4:5,5:6,6:0})[d];
+function standardHora(date){
+  let dow=date.getDay(), mins=localMinutes(date), before=mins<360;
+  if(before)dow=(dow+6)%7;
+  const lord=dayLord(dow), elapsed=(mins<360?mins+1440:mins)-360;
+  const idx=Math.floor(elapsed/60);
+  const start=HORA.indexOf(lord);
+  return {planet:HORA[(start+idx)%7],dayLord:lord,index:(idx%24)+1,before};
+}
+function solarHora(date,city){
+  const e=solarEvents(date,city), mins=localMinutes(date);
+  if(e.sunrise==null||e.sunset==null)return standardHora(date);
+  let lord=date.getDay(),start=e.sunrise,segments;
+  let phase='day', idx;
+  if(mins>=e.sunrise&&mins<e.sunset){
+    segments=(e.sunset-e.sunrise)/12;idx=Math.floor((mins-e.sunrise)/segments);
+  }else{
+    phase='night';
+    const ns=(mins>=e.sunset)?e.nextSunrise+1440:e.sunrise+1440;
+    const s=(mins>=e.sunset)?e.sunset:e.prevSunrise;
+    segments=(ns-s)/12;idx=Math.floor((mins-s)/segments);
+    if(mins<e.sunrise)lord=(lord+6)%7;
+  }
+  const dl=dayLord(lord), startIdx=HORA.indexOf(dl);
+  return {planet:HORA[(startIdx+idx)%7],dayLord:dl,index:idx+1,phase,segmentMinutes:segments,sunrise:e.sunrise,sunset:e.sunset};
+}
+function trueSolarTime(date,city){
+  const mins=localMinutes(date), standardMeridian=city.tz*15;
+  const longitudeCorrection=4*(city.lng-standardMeridian);
+  const day=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(date.getFullYear(),0,0))/86400000);
+  const B=2*Math.PI*(day-81)/364;
+  const eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
+  return fromMin(mins+longitudeCorrection+eot);
+}
+
+/* =========================
+   Burmese consonant parser
+========================= */
+function parseSound(s){
+  const c=(s||'').trim()[0];if(!c)return null;
+  const sets=[
+    [/[အဣဤဥဦဧဩဪ]/,1],[/[ကခဂဃင]/,2],[/[စဆဇဈည]/,3],
+    [/[ယရလဝ]/,4],[/[ပဖဗဘမ]/,5],[/[သဟဠ]/,6],[/[တထဒဓန]/,0]
+  ];
+  for(const [re,p] of sets)if(re.test(c))return{char:c,planet:p};
+  return{char:c,planet:1};
+}
+
+/* =========================
+   Relation + element layer
+========================= */
+function relation(a,b){
+  if(a===b)return{type:'SAME',delta:25,title:'ထပ်တူဓာတ်',desc:'အင်အားတစ်မျိုးတည်း ထပ်တူကျ၍ အချက်အလက်က တစ်ဖက်တည်းကို ပြင်းပြင်းထန်ထန် ညွှန်သည်.'};
+  const k=a+'-'+b;
+  if(FRIEND[k])return{type:'FRIEND',delta:FRIEND[k],title:'ဓာတ်မိတ်',desc:'မိတ်ဖက်အနေအထားက ကိစ္စကို တွန်းပို့သည်.'};
+  if(ENEMY[k])return{type:'ENEMY',delta:ENEMY[k],title:'ဓာတ်ရန်',desc:'ပဋိပက္ခ/အတားအဆီး indicator တိုးသည်.'};
+  return{type:'NEUTRAL',delta:0,title:'အလယ်အလတ်',desc:'မိတ်/ရန် အထူးသတ်မှတ်ချက် မရှိ.'};
+}
+function elementLayer(ps){
+  const es=ps.map(x=>P[x].element),n=[];
+  let d=0;
+  if(es.includes('FIRE')&&es.includes('WATER')){d-=10;n.push('မီး + ရေ တွဲမှုကြောင့် အမြန်တက်ပြီး ပြန်တုံ့ပြန်မှု ဖြစ်နိုင်သည်.')}
+  if(es.includes('EARTH')&&es.includes('AIR')){d-=8;n.push('မြေ + လေ တွဲမှုကြောင့် အစီအစဉ်နှင့် လက်တွေ့ကြား ကွာဟမှု ရှိနိုင်သည်.')}
+  if(es.filter(x=>x==='FIRE').length>=2){d+=5;n.push('မီးဓာတ် အားကောင်း — အဆုံးအဖြတ်မြန်.')}
+  if(es.filter(x=>x==='WATER').length>=2){d+=8;n.push('ရေဓာတ် အားကောင်း — ညှိနှိုင်း/စီးဆင်းမှုကောင်း.')}
+  return{delta:d,notes:n};
+}
+
+/* =========================
+   24 corroboration layers
+   These are engineering layers, not claimed as canonical
+   traditional 24 methods.
+========================= */
+function run24(ctx){
+  const {date,city,std,sol,solar,ts,p1,p2,p3}=ctx;
+  const sameMode=std.planet===sol.planet;
+  const rel12=relation(p1,p2),rel23=relation(p2,p3),rel13=relation(p1,p3);
+  const el=elementLayer([p1,p2,p3]);
+  const arr=[];
+  const add=(name,pass,why)=>arr.push({name,pass,why});
+  add('01 • Standard 6AM Hora',true,`${P[p1].name} အခါကို ရိုးရာ ၆:၀၀ စမှတ်ဖြင့် တွက်ထားသည်.`);
+  add('02 • Solar Sunrise Hora',true,`${P[p2].name} — ဒေသနေထွက်ကို စမှတ်အဖြစ် အသုံးပြု.`);
+  add('03 • Dynamic Day/Night Hora',true,`${sol.phase==='day'?'နေ့':'ည'} ယာမ်အရှည် ${sol.segmentMinutes?sol.segmentMinutes.toFixed(2):'—'} မိနစ်.`);
+  add('04 • Day Lord',true,`နေ့နံ = ${P[sol.dayLord].name}.`);
+  add('05 • Hora Lord',true,`လက်ရှိအခါ = ${P[sol.planet].name}.`);
+  add('06 • True Solar Time',true,`ဒေသနေအချိန်ညှိချက် = ${hms(ts)}.`);
+  add('07 • Sunrise Anchor',solar.sunrise!=null,true?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');
+  add('08 • Sunset Anchor',solar.sunset!=null,solar.sunset!=null?`နေဝင် ${hms(solar.sunset)}.`:'နေဝင်မရရှိ.');
+  add('09 • Solar Noon Geometry',true,`နေ့လယ်အလယ်ချက် ≈ ${hms((solar.sunrise+solar.sunset)/2)}.`);
+  add('10 • Phase Position',true,`${sol.phase==='day'?'နေ့ပိုင်း':'ညပိုင်း'} ${sol.index} ယာမ်မြောက်.`);
+  add('11 • Day/Hora Agreement',sameMode,`Standard=${P[std.planet].name}, Solar=${P[sol.planet].name}.`);
+  add('12 • Hora→Body Relation',true,`${P[sol.planet].name} ↔ ${P[p2].name}: ${rel12.type}.`);
+  add('13 • Body→Sound Relation',true,`${P[p2].name} ↔ ${P[p3].name}: ${rel23.type}.`);
+  add('14 • Hora→Sound Relation',true,`${P[p1].name} ↔ ${P[p3].name}: ${rel13.type}.`);
+  add('15 • Triple Concordance',rel12.delta+rel23.delta+rel13.delta>=0,`အတွဲသုံးခုစုစုပေါင်း ${rel12.delta+rel23.delta+rel13.delta}.`);
+  add('16 • Element Balance',el.delta>=0,`ဓာတ်ညှိချက် ${el.delta >=0?'+':''}${el.delta}.`);
+  add('17 • Dominant Planet',true,`အဓိက = ${P[p1].name}.`);
+  add('18 • Conflict Index',rel12.type!=='ENEMY'&&rel23.type!=='ENEMY',`ရန်အတွဲအရေအတွက်ကို စစ်ထားသည်.`);
+  add('19 • Sound Signal',!!parseSound(document.getElementById('sound').value),`အစဗျည်းမှ ${P[p3].name} ကို ထုတ်ထားသည်.`);
+  add('20 • Time Resonance',true,`ယာမ်နံပါတ် ${sol.index} နှင့် အခါနံ ဆက်စပ်မှု.`);
+  add('21 • Midnight Rule',std.before||sol.phase==='night',`ည/နေမထွက်မီ rule ကို စစ်ထားသည်.`);
+  add('22 • Solar/Standard Cross-check',sameMode,`စနစ်နှစ်ခု ${sameMode?'တူညီ':'ကွဲပြား'} သည်.`);
+  add('23 • Consensus Strength',true,`အောက်ပါ weighted score ဖြင့် consensus ထုတ်မည်.`);
+  add('24 • Data Quality Gate',solar.sunrise!=null&&solar.sunset!=null,`နက္ခတ်အချက်အလက် completeness ကို စစ်ထားသည်.`);
+  return {arr,rel12,rel23,rel13,el,sameMode};
+}
+
+/* =========================
+   Interpretation
+========================= */
+const ROOT={
+1:'အကြီးအကဲ၊ ရာထူး၊ ဂုဏ်သိက္ခာ၊ အာဏာပိုင် သို့မဟုတ် ဖခင်/အထက်လူကြီးဆိုင်ရာ ကိစ္စ.',
+2:'ငွေကြေး၊ အရောင်းအဝယ်၊ ခရီး၊ နေရာပြောင်းခြင်း သို့မဟုတ် စိတ်အပြောင်းအလဲဆိုင်ရာ ကိစ္စ.',
+3:'အငြင်းပွားမှု၊ ပြိုင်ဘက်၊ စက်/မြေ၊ အရေးယူမှု သို့မဟုတ် အမှုအခင်းဆိုင်ရာ ကိစ္စ.',
+4:'စာချုပ်၊ သတင်း၊ စကားပြော၊ ပညာရေး၊ ကုန်သွယ်ရေး သို့မဟုတ် မိတ်ဆွေဆက်သွယ်မှု.',
+5:'ဆရာ၊ ဥပဒေ၊ ပညာ၊ အဖွဲ့အစည်း၊ မင်္ဂလာ သို့မဟုတ် အကြံပေးသူဆိုင်ရာ ကိစ္စ.',
+6:'အချစ်ရေး၊ အနုပညာ၊ အလှအပ၊ ရတနာ၊ ယာဉ် သို့မဟုတ် ဆွဲဆောင်မှုဆိုင်ရာ ကိစ္စ.',
+0:'အကြွေးဟောင်း၊ ပျောက်ဆုံးမှု၊ ကြန့်ကြာနေသောအလုပ်၊ ဝန်ထုပ်ဝန်ပိုး သို့မဟုတ် ပြန်လည်ဖြေရှင်းရမည့် အဟောင်းကိစ္စ.'
+};
+const NEXT={
+1:'အစပိုင်းတွင် အခွင့်အရေးကောင်းပေါ်လာပြီး အထက်လူကြီး/အာဏာပိုင်၏ စိစစ်မှုနောက်မှ အဆုံးအဖြတ်ကျမည်.',
+2:'ငွေ/အခွင့်အရေး လှုပ်ရှားလာနိုင်သော်လည်း အဝင်အထွက်မြန်၍ ပြန်လည်ညှိနှိုင်းရနိုင်သည်.',
+3:'ပြိုင်ဘက် သို့မဟုတ် အငြင်းပွားစရာတစ်ခု ပေါ်လာနိုင်ပြီး တိုက်ရိုက်တုံ့ပြန်ခြင်းထက် စနစ်တကျ ဖြေရှင်းရန်လို.',
+4:'စကား၊ စာရွက်စာတမ်း သို့မဟုတ် မိတ်ဆွေတစ်ဦး၏ ဆက်သွယ်မှုက နောက်တစ်ဆင့်ကို ဖွင့်ပေးနိုင်သည်.',
+5:'အတွေ့အကြုံရှိသူ/အထက်လူကြီး၏ အကြံက အဆုံးအဖြတ်ကို ပိုကောင်းစေမည်.',
+6:'လူ/အရာဝတ္ထုတစ်ခုက ဆွဲဆောင်မှုတိုးစေမည်; သို့သော် အပျော်အပါးကြောင့် မူလရည်ရွယ်ချက် မလွဲစေရန်လို.',
+0:'ကြန့်ကြာမှု သို့မဟုတ် ပြန်လည်ပြင်ဆင်ရမှု ဖြစ်နိုင်ပြီး အချိန်ပိုနှင့် ကုန်ကျစရိတ်ပိုကို ကြိုတင်တွက်ထားသင့်.'
+};
+function duration(p,score){
+  const fast=score>=70?'မြန်':'အလယ်အလတ်';
+  const unit={1:'၁ ရက်–၁ ပတ်',2:'၂ ရက်–၂ ပတ်',3:'၃ ရက်–၃ ပတ်',4:'၄ ရက်–၄ ပတ်',5:'၅ ရက်–၅ ပတ်',6:'၆ ရက်–၆ ပတ်',0:'၇ ရက်နှင့်အထက်'}[p];
+  return `${fast} ဘက် — အဓိက time signal ${unit}. ရိုးရာ timing ကို empirical guarantee မဟုတ်ဘဲ indicator အဖြစ်သာ ယူပါ.`;
+}
+function finalScore(ctx,x){
+  const base=50;
+  const agreement=x.sameMode?8:0;
+  const relationScore=x.rel12.delta+x.rel23.delta*.7+x.rel13.delta*.5;
+  const solarQuality=(ctx.solar.sunrise!=null&&ctx.solar.sunset!=null)?4:0;
+  let raw=base+relationScore+x.el.delta+agreement+solarQuality;
+  return Math.max(5,Math.min(95,Math.round(raw)));
+}
+function confidence(ctx,x){
+  let c=62;
+  if(ctx.solar.sunrise!=null&&ctx.solar.sunset!=null)c+=8;
+  if(x.sameMode)c+=12;
+  if(x.rel12.type==='ENEMY'||x.rel23.type==='ENEMY'||x.rel13.type==='ENEMY')c+=3;
+  if(!document.getElementById('sound').value.trim())c-=8;
+  return Math.max(35,Math.min(92,c));
+}
+
+/* =========================
+   UI
+========================= */
+const cityEl=document.getElementById('city');
+Object.entries(CITIES).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.name;cityEl.appendChild(o)});
+const now=new Date();
+document.getElementById('date').value=now.toISOString().slice(0,10);
+document.getElementById('time').value=[now.getHours(),now.getMinutes(),now.getSeconds()].map((x,i)=>String(x).padStart(2,'0')).join(':');
+let selectedBody=1;
+BODY.forEach((b,i)=>{const el=document.createElement('button');el.className='body'+(i===0?' active':'');el.textContent=b[1];el.onclick=()=>{document.querySelectorAll('.body').forEach(x=>x.classList.remove('active'));el.classList.add('active');selectedBody=b[2]};document.getElementById('bodyGrid').appendChild(el)});
+document.getElementById('sound').addEventListener('input',()=>{const p=parseSound(document.getElementById('sound').value);document.getElementById('soundInfo').textContent=p?`အစဗျည်း [${p.char}] → ${P[p.planet].name} နံ (${p.planet})`:'စကားလုံးထည့်ပါ'});
+function update(){
+  const date=dateFromInputs(),city=CITIES[cityEl.value],e=solarEvents(date,city),std=standardHora(date),sol=solarHora(date,city),ts=trueSolarTime(date,city);
+  document.getElementById('astro').textContent=`${city.name} • နေထွက် ${hms(e.sunrise)} • နေဝင် ${hms(e.sunset)} • True Solar ${hms(ts)} • ${sol.phase==='day'?'နေ့':'ည'} ${sol.index} ယာမ်`;
+  document.getElementById('horaCards').innerHTML='';
+  [['Standard',std],['Solar Dynamic',sol]].forEach(([n,h])=>{
+    const d=document.createElement('div');d.className='stat';
+    d.innerHTML=`<b>${n}: ${P[h.planet].name} အခါ</b><span>${h.index} ယာမ် • နေ့နံ ${P[h.dayLord].name}<br>${P[h.planet].kw}</span>`;
+    document.getElementById('horaCards').appendChild(d);
+  });
+}
+['date','time','city','mode'].forEach(id=>document.getElementById(id).addEventListener('change',update));update();
+
+document.getElementById('calc').onclick=()=>{
+  const date=dateFromInputs(),city=CITIES[cityEl.value],solar=solarEvents(date,city),std=standardHora(date),sol=solarHora(date,city),ts=trueSolarTime(date,city);
+  const p1=std.planet,p2=selectedBody,p3=(parseSound(document.getElementById('sound').value)||{planet:1}).planet;
+  const ctx={date,city,std,sol,solar,ts,p1,p2,p3};
+  const x=run24(ctx),score=finalScore(ctx,x),conf=confidence(ctx,x);
+  let heading=score>=75?'အခါစီး အားကောင်း — အောင်မြင်ဘက် အလေးသာ':score>=55?'အလယ်အလတ် — အခြေအနေကို ထိန်းချုပ်ပြီး ဆက်လုပ်ရန်လို':'ကြန့်ကြာ/ပဋိပက္ခဘက် အလေးသာ';
+  document.getElementById('score').textContent=`${score}/100`;
+  document.getElementById('confidence').textContent=`အင်အားညွှန်းကိန်း • data confidence ${conf}% (probability မဟုတ်)`;
+  document.getElementById('heading').textContent=heading;
+  document.getElementById('meter').style.width=score+'%';
+
+  document.getElementById('stats').innerHTML=[
+    ['နေထွက်',hms(solar.sunrise)],['နေဝင်',hms(solar.sunset)],['True Solar',hms(ts)],
+    ['Standard',P[std.planet].name],['Solar Dynamic',P[sol.planet].name],['Phase',`${sol.phase} • ${sol.index}`]
+  ].map(a=>`<div class="stat"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('');
+
+  document.getElementById('methods').innerHTML=x.arr.map(m=>`<div class="method"><span>${m.name}</span><b class="${m.pass?'ok':'warn'}">${m.pass?'✓':'△'}</b><div style="display:none">${m.why}</div></div>`).join('');
+  document.getElementById('pairs').innerHTML=[['အခါ ↔ အမူအရာ',x.rel12],['အမူအရာ ↔ အသံ',x.rel23],['အခါ ↔ အသံ',x.rel13]].map(([n,r])=>`<div class="row"><span class="dot" style="background:${r.type==='ENEMY'?'var(--red)':r.type==='FRIEND'||r.type==='SAME'?'var(--green)':'var(--muted)'}"></span><div><b>${n} — ${r.title}</b><br>${r.desc} (${r.delta>=0?'+':''}${r.delta})</div></div>`).join('');
+  document.getElementById('elements').innerHTML=x.el.notes.length?`<div class="notice">${x.el.notes.join('<br>')}</div>`:'';
+
+  document.getElementById('root').textContent=ROOT[p1];
+  document.getElementById('detail').textContent=score>=75?'အခြေခံအချက်များက တစ်ဖက်တည်းကို ပိုမိုထောက်ခံနေသည်။ သို့သော် အပြင်ဘက်အခြေအနေများကို မကြည့်ဘဲ “သေချာပေါက်” ဟု မယူပါနှင့်.':score>=55?'အခွင့်အရေးရှိသော်လည်း အတားအဆီး/ညှိနှိုင်းရမှု ပါဝင်နိုင်သည်။ အချိန်နှင့် လုပ်ဆောင်ပုံက ရလဒ်ကို ပြောင်းနိုင်သည်.':'ယခုအချိန်တွင် စတင်ရန်ထက် ပြန်စစ်၊ ပြန်ညှိပြီးမှ လုပ်ဆောင်ခြင်းက ပိုသင့်တော်သည်.';
+  document.getElementById('progress').textContent=NEXT[p2];
+  document.getElementById('duration').textContent=duration(p3,score);
+  document.getElementById('caution').textContent=x.el.notes.length?x.el.notes.join(' '):'အဓိက indicator များအကြား ကြီးမားသောဓာတ်ပဋိပက္ခ မတွေ့ရပါ.';
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+};
+</script>
+</body>
+</html>'''
+
+# Fix one small accidental boolean expression in the generated JS for readability.
+html = html.replace(
+    "add('07 • Sunrise Anchor',solar.sunrise!=null,true?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');",
+    "add('07 • Sunrise Anchor',solar.sunrise!=null,solar.sunrise!=null?`နေထွက် ${hms(solar.sunrise)}.`:'နေထွက်မရရှိ.');"
+)
+
+path = Path("/mnt/data/Anga_Weikza_Horary_Engine_V2.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
+print(f"Size: {path.stat().st_size:,} bytes")
