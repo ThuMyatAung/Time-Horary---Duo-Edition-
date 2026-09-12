@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (Tri-Mode Comparison)</title>
+  <title>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine (Master Comprehensive Edition)</title>
   
+  <!-- FontAwesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: Padauk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
@@ -41,19 +43,19 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto;
-      padding-bottom: 60px;
+      padding-bottom: 70px;
     }
 
     .header {
       text-align: center;
-      margin: 12px 0 16px 0;
+      margin: 10px 0 16px 0;
     }
     .header h1 {
       font-size: 19px;
@@ -98,7 +100,7 @@
       gap: 8px;
     }
     .time-info {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--accent-blue);
     }
@@ -117,7 +119,7 @@
       border: none;
       border-radius: 6px;
       color: #f1f5f9;
-      padding: 5px 10px;
+      padding: 4px 10px;
       font-size: 11px;
       cursor: pointer;
       display: flex;
@@ -125,10 +127,10 @@
       gap: 4px;
     }
 
-    /* 3 Comparative Cards Grid */
-    .tri-grid {
+    /* 3-Column Comparative Horizontal Grid */
+    .tri-grid-horizontal {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin-bottom: 12px;
     }
@@ -143,6 +145,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      min-height: 145px;
     }
     .hora-select-card:hover {
       border-color: #475569;
@@ -150,19 +153,19 @@
     .hora-select-card.active {
       border-color: var(--accent-blue);
       background-color: #162038;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
     }
     .active-tag {
       display: none;
       position: absolute;
-      top: -9px;
-      right: 8px;
+      top: -8px;
+      right: 6px;
       background-color: var(--accent-blue);
       color: #090d16;
       font-size: 9px;
       font-weight: 700;
       padding: 1px 6px;
-      border-radius: 8px;
+      border-radius: 6px;
     }
     .hora-select-card.active .active-tag {
       display: block;
@@ -174,11 +177,10 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      margin-bottom: 4px;
     }
     .hora-badge-mini {
-      display: inline-block;
-      padding: 4px 6px;
+      display: block;
+      padding: 4px;
       border-radius: 6px;
       color: #ffffff;
       font-size: 12px;
@@ -189,16 +191,17 @@
     .card-kw-box {
       font-size: 10px;
       color: #cbd5e1;
-      line-height: 1.4;
-      background-color: rgba(0, 0, 0, 0.25);
+      line-height: 1.35;
+      background-color: rgba(0, 0, 0, 0.3);
       padding: 5px;
       border-radius: 5px;
-      margin-top: 4px;
+      flex-grow: 1;
     }
     .card-meta-text {
-      font-size: 10px;
+      font-size: 9px;
       color: #94a3b8;
       margin-top: 4px;
+      text-align: center;
     }
 
     /* Active Summary Banner */
@@ -338,7 +341,7 @@
       font-weight: 700;
     }
 
-    /* Step 2: Body Grid */
+    /* Body Touch Buttons Grid */
     .instruction {
       font-size: 12px;
       color: var(--text-muted);
@@ -353,7 +356,7 @@
       background-color: var(--bg-input);
       border: 1.5px solid var(--border-color);
       border-radius: 8px;
-      padding: 10px 6px;
+      padding: 9px 6px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -382,7 +385,7 @@
       font-weight: 700;
     }
 
-    /* Step 3: Sound Input */
+    /* Sound Input */
     .text-input {
       width: 100%;
       background-color: var(--bg-input);
@@ -495,6 +498,79 @@
       color: #64748b;
       margin-top: 4px;
     }
+
+    /* Kattar-Kan Card */
+    .kattar-card {
+      background-color: #0b1120;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .kattar-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      font-size: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .kattar-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Diagnostic Specialized Tabs */
+    .diag-tab-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 14px 0 10px 0;
+    }
+    .diag-tab-btn {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 4px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .diag-tab-btn.active {
+      border-color: var(--accent-gold);
+      background-color: #1e293b;
+      color: var(--accent-gold);
+    }
+    .diag-content-box {
+      background-color: #0b1120;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* Caution Notice Box */
+    .caution-note {
+      background-color: #3b0710;
+      border-left: 4px solid var(--accent-red);
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      color: #fecaca;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .caution-title {
+      font-weight: 700;
+      color: #f87171;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
   </style>
 </head>
 <body>
@@ -503,14 +579,14 @@
     
     <div class="header">
       <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
-      <p>ကျမ်းရင်း ၈ အခါ • ရိုးရာ ၆ နာရီ • နက္ခတ် ၁ နာရီ နှိုင်းယှဉ်ချက်</p>
+      <p>ခင်ကြီးဖျော် မူရင်းကျမ်းလာ • ကတ္တား/ကံ • နဂို/ယာယီလဂ် • အသံနိမိတ်နှင့် ဓာတ်ဆင်ကုထုံး</p>
     </div>
 
-    <!-- Step 1: Location & 3 Comparative Cards -->
+    <!-- Step 1: Location & 3 Comparative Horizontal Cards -->
     <div class="card">
       <div class="card-header">
         <i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i>
-        <span>အဆင့် (၁) - အခါရွေးချယ်မှု (နှိုင်းယှဉ်ချက် ၃ ကွက်)</span>
+        <span>အဆင့် (၁) - အခါရွေးချယ်မှု (ဘေးတိုက် ၃ ကွက်ယှဉ်)</span>
       </div>
 
       <!-- Location Bar -->
@@ -537,14 +613,14 @@
         </div>
       </div>
 
-      <!-- ၃ ကွက်တွဲ နှိုင်းယှဉ်ချက် (Tri-Grid Cards) -->
-      <div class="tri-grid">
+      <!-- 3-Column Comparative Horizontal Grid (ဘေးတိုက်ယှဉ်ပြသော ၃ ကွက်) -->
+      <div class="tri-grid-horizontal">
         <!-- ကတ် ၁: ကျမ်းရင်း ၈ အခါ (ဆရာတော် ခင်ကြီးဖျော် ပေမူ) -->
         <div class="hora-select-card active" id="cardKhingyi" onclick="selectCardMode('khingyi')">
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
             <i class="fa-solid fa-scroll" style="color: var(--accent-gold);"></i>
-            <span>၁။ ကျမ်းရင်း ၈ အခါ</span>
+            <span>ကျမ်းရင်း ၈ ခါ</span>
           </div>
           <div class="hora-badge-mini" id="badgeKhingyi">...</div>
           <div class="card-kw-box" id="kwKhingyi">...</div>
@@ -556,11 +632,11 @@
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
             <i class="fa-solid fa-book" style="color: var(--accent-blue);"></i>
-            <span>၂။ ရိုးရာ ၆ နာရီစံ</span>
+            <span>ရိုးရာ ၆ နာရီ</span>
           </div>
           <div class="hora-badge-mini" id="badgeFixed">...</div>
           <div class="card-kw-box" id="kwFixed">...</div>
-          <div class="card-meta-text" id="metaFixed">မနက် ၆:၀၀ ပုံသေ</div>
+          <div class="card-meta-text" id="metaFixed">မနက် ၆:၀၀ စံ</div>
         </div>
 
         <!-- ကတ် ၃: နက္ခတ် Solar ၁ နာရီစနစ် (Solar 1-Hour Step) -->
@@ -568,11 +644,11 @@
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
             <i class="fa-solid fa-sun" style="color: var(--accent-orange);"></i>
-            <span>၃။ နက္ခတ် ၁ နာရီ</span>
+            <span>နက္ခတ် ၁ နာရီ</span>
           </div>
           <div class="hora-badge-mini" id="badgeSolar1h">...</div>
           <div class="card-kw-box" id="kwSolar1h">...</div>
-          <div class="card-meta-text" id="metaSolar1h">နေထွက်မှ ၁ နာရီခြား</div>
+          <div class="card-meta-text" id="metaSolar1h">နေထွက်မှ ၁ နာရီ</div>
         </div>
       </div>
 
@@ -682,6 +758,7 @@
         <div class="status-pills" id="resStatusPills"></div>
       </div>
 
+      <!-- Core 4 Deliverables -->
       <div class="result-card">
         <div class="result-label">(၁) ဘာကိစ္စနှင့် ပတ်သက်၍ ရောက်လာခြင်း (အခါအရင်းခံ)</div>
         <div class="result-body" id="resRootCause">...</div>
@@ -703,10 +780,75 @@
         <div class="number-subtext" id="resDominantNums">အကျိုးပေးဂြိုဟ်အစီအစဉ်: [...]</div>
       </div>
 
-      <div class="result-card" style="border-left-color: var(--accent-gold);">
-        <div class="result-label" style="color: var(--accent-gold);">(၅) ကျမ်းလာ ယတြာနှင့် အစာဓာတ်ဆင် လမ်းညွှန်</div>
-        <div class="result-body" id="resRemedyText">...</div>
+      <!-- Kattar-Kan Deep Analysis Section -->
+      <div class="kattar-card">
+        <div class="card-header" style="margin-bottom: 6px; color: var(--accent-gold);">
+          <i class="fa-solid fa-arrows-split-up-and-left"></i>
+          <span>ရုပ် • နာမ် • ကံ • ကတ္တား အဆင့်ဆင့် ခွဲခြမ်းချက်</span>
+        </div>
+        <div class="kattar-row">
+          <span style="color: #38bdf8;">• အထက် နာမ် (အနိုင်ဓာတ်):</span>
+          <strong id="kattarNamText">...</strong>
+        </div>
+        <div class="kattar-row">
+          <span style="color: #f59e0b;">• အလယ် ကံ/ရုပ် (ဗဟိုဝတ္ထု):</span>
+          <strong id="kattarKanText">...</strong>
+        </div>
+        <div class="kattar-row">
+          <span style="color: #ef4444;">• အောက် ကတ္တား (ဖန်တီး/ရန်):</span>
+          <strong id="kattarKattarText">...</strong>
+        </div>
+        <div style="font-size: 12px; color: #cbd5e1; margin-top: 8px; line-height: 1.5;" id="kattarDiagnosis">
+          ...
+        </div>
       </div>
+
+      <!-- 3 Specialized Diagnostic Tabs -->
+      <div class="diag-tab-bar">
+        <div class="diag-tab-btn active" onclick="switchDiagTab('travel')">
+          <i class="fa-solid fa-route"></i> ခရီး / ပျောက်ရှ
+        </div>
+        <div class="diag-tab-btn" onclick="switchDiagTab('court')">
+          <i class="fa-solid fa-scale-balanced"></i> တရား / ပြိုင်ဆိုင်
+        </div>
+        <div class="diag-tab-btn" onclick="switchDiagTab('remedy')">
+          <i class="fa-solid fa-shield-halved"></i> ကုထုံး / ယတြာ
+        </div>
+      </div>
+
+      <!-- Tab Content 1: Travel & Lost Property -->
+      <div class="diag-content-box" id="tabContentTravel">
+        <div style="font-weight: 700; color: var(--accent-blue); margin-bottom: 6px;" id="travelLagnaTitle">
+          ဒွါရ / ဗဟိ / အဗ္ဘန္တရ လဂ်သုံးပါး စစ်ဆေးချက်
+        </div>
+        <div id="travelDiagnosisText">...</div>
+      </div>
+
+      <!-- Tab Content 2: Court & Competition -->
+      <div class="diag-content-box" id="tabContentCourt" style="display: none;">
+        <div style="font-weight: 700; color: var(--accent-yellow); margin-bottom: 6px;" id="courtLagnaTitle">
+          နဂိုလဂ် နှင့် ယာယီလဂ် အနိုင်အရှုံး ဆန်းစစ်ချက်
+        </div>
+        <div id="courtDiagnosisText">...</div>
+      </div>
+
+      <!-- Tab Content 3: Remedies & Therapeutics -->
+      <div class="diag-content-box" id="tabContentRemedy" style="display: none;">
+        <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 6px;">
+          ★ ကျမ်းလာ ဓာတ်ဆင်၊ ယတြာနှင့် အသံကုထုံး လမ်းညွှန်
+        </div>
+        <div id="remedyDetailText">...</div>
+
+        <!-- Caution Box -->
+        <div class="caution-note">
+          <div class="caution-title">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>* မှတ်ချက်/သတိပြုရန် (မဖြစ်မနေ ရှောင်ကြဉ်ရမည့် အခိုက်များ):</span>
+          </div>
+          <div id="cautionText">...</div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -807,6 +949,17 @@
       puti: { name: 'ပူတိ (အပုပ်)', score: -35, color: '#EF4444', desc: 'အပုပ်နိမိတ်၊ ရောဂါဝေဒနာ၊ ရန်သူအတိုက်အခိုက် အလွန်ပြင်းထန်ခြင်း' },
     };
 
+    // ကျမ်းလာ ရုပ်၊ နာမ်၊ ကံ၊ ကတ္တား ခွဲတမ်း (ပုဒ်ရေ ၃၆)
+    const KATTAR_KAN_MATRIX = {
+      1: { nam: [6, 2, 5], kan: 1, kattar: [3, 0, 4] },
+      2: { nam: [5, 1, 3], kan: 2, kattar: [0, 4, 6] },
+      3: { nam: [2, 5, 4], kan: 3, kattar: [6, 1, 0] },
+      4: { nam: [1, 3, 0], kan: 4, kattar: [5, 6, 2] },
+      5: { nam: [4, 6, 1], kan: 5, kattar: [2, 0, 3] },
+      6: { nam: [0, 2, 3], kan: 6, kattar: [1, 5, 4] },
+      0: { nam: [3, 4, 6], kan: 0, kattar: [2, 1, 5] },
+    };
+
     const CITIES = {
       yangon: { name: 'ရန်ကုန်', lat: 16.8661, lng: 96.1951, tz: 'Asia/Yangon' },
       mandalay: { name: 'မန္တလေး', lat: 21.9588, lng: 96.0891, tz: 'Asia/Yangon' },
@@ -839,7 +992,6 @@
     let selectedBodyPlanet = 1;
     let activeCalculatedHora = 1;
 
-    // Cache for 3 modes
     let modeResults = {
       khingyi: { hora: 1, index: 1, label: '', kw: '', dayLord: 1 },
       fixed: { hora: 1, index: 1, label: '', kw: '', dayLord: 1 },
@@ -911,7 +1063,6 @@
       }
     }
 
-    // ၃ မျိုးလုံးကို တစ်ပြိုင်နက် တွက်ချက်ခြင်း
     function calculateAllThreeModes() {
       const localDate = getCityCurrentDate(currentTz);
       const hours = localDate.getHours();
@@ -931,9 +1082,7 @@
       const dayLordMap = [1, 2, 3, 4, 5, 6, 0];
       const horaCycle = [1, 6, 4, 2, 0, 5, 3];
 
-      // ----------------------------------------------------
-      // ၁။ ကတ် (၁): ကျမ်းရင်း ၈ အခါ (ဆရာတော် ခင်ကြီးဖျော် ပေမူ)
-      // ----------------------------------------------------
+      // ၁။ ကျမ်းရင်း ၈ အခါ
       let kDayOfWeek = localDate.getDay();
       let kHora = 1, kIdx = 1, kLabel = '';
 
@@ -975,9 +1124,7 @@
         dayLord: dayLordMap[kDayOfWeek],
       };
 
-      // ----------------------------------------------------
-      // ၂။ ကတ် (၂): ရိုးရာ ၆:၀၀ နာရီစနစ် (Fixed 6:00 AM Standard)
-      // ----------------------------------------------------
+      // ၂။ ရိုးရာ ၆:၀၀ နာရီစနစ်
       let fDayOfWeek = localDate.getDay();
       if (currentDec < 6.0) {
         fDayOfWeek = (fDayOfWeek - 1 + 7) % 7;
@@ -995,9 +1142,7 @@
         dayLord: dayLordMap[fDayOfWeek],
       };
 
-      // ----------------------------------------------------
-      // ၃။ ကတ် (၃): နက္ခတ် Solar ၁ နာရီစနစ် (Solar 1-Hour Step)
-      // ----------------------------------------------------
+      // ၃။ နက္ခတ် Solar ၁ နာရီစနစ်
       let sDayOfWeek = localDate.getDay();
       let sElapsed = 0;
       if (currentDec < sunrise) {
@@ -1048,7 +1193,10 @@
       return { planet: 1, char: firstChar, name: 'အခြား (တနင်္ဂနွေ)' };
     }
 
-    function evaluateAngaWeikza(p1, p2, p3) {
+    // ==========================================
+    // ၄။ Master Comprehensive Evaluator
+    // ==========================================
+    function evaluateAngaWeikzaMaster(p1, p2, p3) {
       const stMap = SEVEN_STATUSES[p1];
       const pillars = THREE_PILLARS[p1];
 
@@ -1073,15 +1221,16 @@
       let verdictDetail = '';
       if (score >= 75) {
         verdictTitle = 'ဧကန်မုချ အောင်မြင်ပြီးမြောက်မည် (အဓိပတိ/အထွန်း ဓာတ်စီး)';
-        verdictDetail = `မေးသူ၏ အင်္ဂါလက္ခဏာသည် [${infoP2.name}] ဌာနသို့ ကျရောက်ပြီး စကားအသံသည် [${infoP3.name}] ဌာနနှင့် ညီညွတ်နေသဖြင့် အတားအဆီးမရှိ လျင်မြန်စွာ အောင်မြင်ပါမည်။`;
+        verdictDetail = `အခါတော်သခင် (${PLANET_INFO[p1].name}) ပေါ်တွင် မေးသူ၏ အင်္ဂါလှုပ်ရှားမှု (${PLANET_INFO[p2].name}) သည် [${infoP2.name}] ဌာနသို့ ဆုံစည်းပြီး၊ မေးသည့်အကြောင်းအရာ (${PLANET_INFO[p3].name}) သည် [${infoP3.name}] အကျိုးပေးဌာနနှင့် ဓာတ်မိတ်ညီညွတ်နေသဖြင့် အတားအဆီးမရှိ လျင်မြန်ချောမွေ့စွာ အောင်မြင်ပါမည်။`;
       } else if (score >= 48) {
         verdictTitle = 'အခက်အခဲကြားမှ တစ်ဝက်တစ်ပျက် အောင်မြင်မည်';
-        verdictDetail = `အကျိုးပေးဌာနနှင့် အညံ့ဌာနတို့ အားပြိုင်နေသဖြင့် အလွယ်တကူမပြီးဘဲ မိမိဘက်မှ အားထုတ်မှု နှစ်ဆစိုက်ထုတ်ပြီး သည်းခံညှိနှိုင်းမှသာ ပြီးမြောက်ပါမည်။`;
+        verdictDetail = `အခါသခင်ပေါ်တွင် [${infoP2.name}] နှင့် [${infoP3.name}] တို့ မိတ်ဓာတ်နှင့် အညံ့ဓာတ် အားပြိုင်နေသဖြင့် အလွယ်တကူ မပြီးမြောက်နိုင်ဘဲ၊ မေးသူဘက်မှ ဇွဲဖြင့် နှစ်ခါပြန်လည် ကြိုးပမ်းမှသာ ပြီးမြောက်ပါမည်။`;
       } else {
         verdictTitle = 'ပျက်စီး/ကြန့်ကြာမည် (ဘင်္ဂ/ပူတိ ဓာတ်ခိုက်)';
-        verdictDetail = `အမူအရာနှင့် စကားသံတို့သည် [${infoP2.name}] နှင့် [${infoP3.name}] အပုပ်နိမိတ်သို့ ကျရောက်နေသဖြင့် လောလောဆယ် ကိစ္စမမြောက်ဘဲ အရှုပ်အထွေး ကြုံရတတ်ပါသည်။`;
+        verdictDetail = `အခါသခင်ပေါ်တွင် အင်္ဂါလက္ခဏာနှင့် မေးသည့်အရာတို့သည် [${infoP2.name}] နှင့် [${infoP3.name}] အပုပ်နိမိတ်သို့ ကျရောက်နေသဖြင့် လောလောဆယ် ကိစ္စမမြောက်ဘဲ အရှုပ်အထွေး ကြုံရတတ်ပါသည်။`;
       }
 
+      // Root Causes
       const rootCauses = {
         1: 'ဂုဏ်သိက္ခာ၊ ရာထူး၊ အကြီးအကဲ၊ အစိုးရ သို့မဟုတ် ဖခင်/အထက်လူကြီးနှင့် ပတ်သက်သောအရေး ဖြစ်သည်။',
         2: 'ငွေကြေးအရင်းအနှီး၊ ခရီးသွားလာရေး၊ ကူးသန်းရောင်းဝယ်ရေး သို့မဟုတ် စိတ်လှုပ်ရှားဖွယ် ကိစ္စများကြောင့် ဖြစ်သည်။',
@@ -1112,15 +1261,122 @@
         0: '၇ ရက်၊ ၇ လ သို့မဟုတ် ကြန့်ကြာချိန် အနည်းငယ်ကြာနိုင်သည်',
       };
 
-      const remedies = {
-        1: 'ပဉ္စပွတ် (ကြာသပတေးနံ-တမာ) နှင့် ဆပွတ် (သောကြာနံ) ကို ရှောင်၍ တြိရန်း (အင်္ဂါနံ-ဇီး၊ ဆီးသီး) ဖြင့် ဓာတ်ဆင် ယတြာပြုပါ။',
-        2: 'ပဉ္စပွတ် (သောကြာနံ) နှင့် ဆပွတ် (စနေနံ) ကို ရှောင်၍ စတုရန်း (ကြာသပတေးနံ-ပဲ၊ နွားနို့) ဖြင့် အစာဓာတ်ပေးပါ။',
-        3: 'စနေနှင့် တနင်္ဂနွေ အခါတို့တွင် ခရီးယတြာရှောင်ပါ။ ကြာသပတေးနံ (ပေါက်ပန်း၊ ဖီးကြမ်း) ဖြင့် ဓာတ်ကို ထောက်ပံ့ပါ။',
-        4: 'တနင်္ဂနွေနှင့် တနင်္လာနံ အစာရှောင်ပါ။ သောကြာနံ (မေတ္တာစကား၊ သီးသီး) နှင့် စနေနံ (သည်းခံခြင်း) ဖြင့် အောင်မြင်အောင် ပြုလုပ်ပါ။',
-        5: 'စနေနံနှင့် တနင်္ဂနွေနံ အစာရှောင်ပါ။ ကြာသပတေးနံ ဆရာသမားနှင့် သံဃာတော်များအား ဆွမ်း၊ သစ်သီး လှူဒါန်း ယတြာပြုပါ။',
-        6: 'အင်္ဂါနံနှင့် ဗုဒ္ဓဟူးနံတို့ကို ရှောင်ပါ။ သောကြာနံ အဝတ်အစားသစ် သို့မဟုတ် အမွှေးနံ့သာဖြင့် မိမိဓာတ်ကို မြှင့်တင်ပါ။',
-        0: 'ဗုဒ္ဓဟူးနံနှင့် ကြာသပတေးနံတို့ကို ရှောင်ပါ။ အကြွေးဟောင်းပြေစေရန် စနေနံ ဘုရားတွင် မီးသက်စေ့ ထွန်းညှိပူဇော်ပါ။',
+      // ၅။ ရုပ်၊ နာမ်၊ ကံ၊ ကတ္တား ဆန်းစစ်ချက် (ကျမ်းမျက်နှာ ၂၇)
+      const knm = KATTAR_KAN_MATRIX[p1];
+      function getRole(planet) {
+        if (knm.nam.includes(planet)) return { role: 'နာမ်', name: 'အထွတ်အထိပ် (အနိုင်ဓာတ်)' };
+        if (planet === knm.kan) return { role: 'ကံ/ရုပ်', name: 'ဗဟိုဝတ္ထု (ခံရသူ)' };
+        return { role: 'ကတ္တား', name: 'ဖန်တီး/တိုက်ခိုက်သူ (ရန်သူ)' };
+      }
+      const roleP2 = getRole(p2);
+      const roleP3 = getRole(p3);
+
+      let kattarDiagnosis = '';
+      if (roleP2.role === 'ကတ္တား' && roleP3.role === 'ကံ/ရုပ်') {
+        kattarDiagnosis = 'ကျမ်းလာ "ကတ္တားရှိရာ ကံမလာနှင့်" ဥပဒေသအရ မေးသူကိုယ်တိုင် (ကတ္တား) ဖြစ်ပြီး မေးသည့်ကိစ္စက (ကံ) ဖြစ်နေ၍ အလျင်စလို ပြုမူပါက ပစ္စည်း သို့မဟုတ် ငွေကြေး ထိခိုက်ဆုံးရှုံးရတတ်သည်။ အချိန်ဆိုင်းငံ့ပါ။';
+      } else if (roleP3.role === 'နာမ်') {
+        kattarDiagnosis = 'မေးသည့်အကြောင်းအရာသည် အထက် "နာမ်" ဇုန်တွင် စံပယ်နေသဖြင့် အခက်အခဲ မည်မျှပင်ရှိစေကာမူ ဉာဏ်ပညာနှင့် မိတ်ဆွေကောင်းများ၏ အကူအညီဖြင့် ဧကန်မုချ အောင်မြင်ပါမည်။';
+      } else if (roleP2.role === 'ကတ္တား' && roleP3.role === 'ကတ္တား') {
+        kattarDiagnosis = 'ကတ္တားချင်း အောက်ခြေတွင် ထိပ်တိုက်ရင်ဆိုင်နေသဖြင့် နှစ်ဦးနှစ်ဖက် မာနပြိုင်ခြင်း၊ ဒေါသထွက်ခြင်းနှင့် စကားအချေအတင် ဖြစ်ပွားရတတ်သည်။ စိတ်အေးအေးထားပါ။';
+      } else {
+        kattarDiagnosis = 'နာမ်နှင့် ကံ အချိုးညီမျှစွာ စီးဝင်နေသဖြင့် အနှောင့်အယှက်ကြီးမားစွာ မရှိဘဲ ပုံမှန်အတိုင်း အေးချမ်းစွာ ပြီးမြောက်ပါမည်။';
+      }
+
+      // ၆။ အထူးပြု ကဏ္ဍခွဲများ (Tab Diagnostics)
+      // (က) ခရီး / ပျောက်ရှ (ဒွါရ၊ ဗဟိ၊ အဗ္ဘန္တရ)
+      let travelTitle = '';
+      let travelText = '';
+      if ([1, 0, 2].includes(p1)) {
+        travelTitle = `ဒွါရလဂ် (တံခါးဝလဂ်) ကျရောက်သည်`;
+        travelText = `• <strong>ခရီးသည်:</strong> ခရီးသည်သည် အိမ်တံခါးဝသို့ ရောက်နေပြီ သို့မဟုတ် ယနေ့ပင် ရောက်ရှိလာပါမည်။<br>• <strong>ပစ္စည်းပျောက်:</strong> ပျောက်သောပစ္စည်းသည် အိမ်တံခါးဝ၊ ခြံဝင်း သို့မဟုတ် မြေကြမ်းပြင်ပေါ်တွင် ကျကျန်ရစ်သည်၊ အမြန်ဆုံး ရှာဖွေပါက ပြန်ရပါမည်။`;
+      } else if ([3, 4].includes(p1)) {
+        travelTitle = `ဗဟိလဂ် (အပြင်လဂ်) ကျရောက်သည်`;
+        travelText = `• <strong>ခရီးသည်:</strong> ခရီးသည်သည် လမ်းခရီးတစ်ဝက်သို့ ရောက်ရှိနေပြီ ဖြစ်သည်။<br>• <strong>ပစ္စည်းပျောက်:</strong> ပျောက်သောပစ္စည်းသည် အိမ်နှင့် မနီးမဝေး ပတ်ဝန်းကျင် သို့မဟုတ် ကပ်လျက်ရပ်ကွက်တွင် ရှိနေပြီး အစပျိုးစုံစမ်းပါက ပြန်လည်ရရှိနိုင်ပါသည်။`;
+      } else {
+        travelTitle = `အဗ္ဘန္တရလဂ် (အတွင်းလဂ်) ကျရောက်သည်`;
+        travelText = `• <strong>ခရီးသည်:</strong> ခရီးသည်သည် မလာသေးဘဲ ထိုရပ်ရွာ၌ ဆက်လက် ကြန့်ကြာနေဆဲ ဖြစ်သည်။<br>• <strong>ပစ္စည်းပျောက်:</strong> ပျောက်သောပစ္စည်းသည် အဝေးသို့ ရောက်သွားပြီ သို့မဟုတ် သေတ္တာအတွင်း၊ သစ်ပင်ခြုံနွယ်ရင်း ဝှက်ထားခံရသဖြင့် လွယ်လွယ်နှင့် ပြန်မတွေ့နိုင်ပါ။`;
+      }
+
+      // (ခ) တရား / ပြိုင်ဆိုင်မှု (နဂိုလဂ် vs ယာယီလဂ်)
+      // အခါသခင်၏ နဂို/ယာယီ ခွဲခြားမှု
+      let courtTitle = '';
+      let courtText = '';
+      if ([3, 4, 5, 0].includes(p1)) {
+        courtTitle = `နဂိုလဂ် (အငြိမ်သဘော) အားကောင်းသည်`;
+        courtText = `• <strong>တရားအမှုအခင်း:</strong> တရားရင်ဆိုင်ခြင်း၊ အငြင်းပွားမှုများတွင် မိမိဘက်မှ အခိုင်အမာ ရပ်တည်နိုင်ပြီး <strong>ဧကန်မုချ အနိုင်ရမည်</strong> ဖြစ်သည်။<br>• <strong>အပြိုင်အဆိုင်:</strong> ပြိုင်ဆိုင်မှုများတွင် တည်ငြိမ်စွာ ကစားပါက အထွတ်အထိပ် ရောက်ပါမည်။ ခရီးသွားခြင်းကား အနည်းငယ် နှောင့်နှေးတတ်သည်။`;
+      } else {
+        courtTitle = `ယာယီလဂ် (အရွေ့သဘော) အားကောင်းသည်`;
+        courtText = `• <strong>တရားအမှုအခင်း:</strong> ဤအခါတွင် တရားစကား ရင်ဆိုင်ပါက အခွင့်အရေး မသာဘဲ <strong>အနိုင်မရဘဲ အရှုံးနှင့် ရင်ဆိုင်ရတတ်သည်</strong>။ ဖျန်ဖြေညှိနှိုင်းခြင်းသာ ပြုပါ။<br>• <strong>ခရီးအသွားအလာ:</strong> ခရီးသွားရန်မှာ အလွန်လျင်မြန်စွာ ရောက်တတ်သည်။`;
+      }
+
+      // (ဂ) ကျမ်းလာ ယတြာ၊ ဓာတ်ဆင်နှင့် အသံကုထုံး
+      const remedyDatabase = {
+        1: {
+          direction: 'အရှေ့အရပ် သို့မဟုတ် မြောက်အရပ်သို့ မျက်နှာမူ၍ ပြုလုပ်ပါ',
+          bestDayTime: 'တနင်္ဂနွေနေ့ နံနက် နေထွက်စ နေမင်းရောင်ခြည် ဦးတိုက်ချိန်',
+          awaePlant: 'မြေဇာပင် (အဝေးခြင်္သေ့ဟောက် - အင်္ဂါနံ)',
+          aneePlant: 'ကလိန်ပင် (အနီးခြင်္သေ့ဟောက် / ဆင်ဝှေ့ပြန် - ဗုဒ္ဓဟူးနံ)',
+          soundHeal: 'ကြာသပတေးနံ ချိုသာသော တရားစကား၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ စောင်းသံ ငြိမ့်ငြိမ့် ဖွင့်ပြပါ (အထက် ဌီအသံများ)',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: လမ်းကြုံ၍ဖြစ်စေ ဆူးလေပင်၊ သံသတ်ပင်၊ ဩဇာပင်များ မဝယ်မိ/မစိုက်မိစေရန် သတိပြုပါ။<br>• ကြားမသွားစေရမည့်အသံ: အင်္ဂါ၊ စနေတို့၏ သံတိုသံစ စကားများရန်ဖြစ်သံ၊ ခလောက်သံ၊ သံစုံကျကွဲသံ ကြားပါက အနာရောဂါ ပိုဆိုးသွားတတ်သဖြင့် တားမြစ်ပါ။',
+        },
+        2: {
+          direction: 'အရှေ့တောင်အရပ် သို့မဟုတ် အနောက်အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'တနင်္လာနေ့ နံနက်ပိုင်း သို့မဟုတ် ဗုဒ္ဓဟူးအခါ',
+          awaePlant: 'ဂန့်ဂလာပင် (ဗုဒ္ဓဟူးနံ)',
+          aneePlant: 'ပေါက်ပန်းဖြူပင် (ကြာသပတေးနံ)',
+          soundHeal: 'သောကြာနံ သီချင်းသံ၊ တနင်္ဂနွေနံ ခရုသင်းသံ၊ သာယာသော တူရိယာသံများ ဖွင့်ပြပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: ထနောင်းပင်၊ ရှားပင်၊ တည်ပင်များ အိမ်အနီး မစိုက်ရ၊ အိမ်တွင်း မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: အချင်းချင်း ကတိဖျက်ငြင်းခုန်သံ၊ ဆဲဆိုသံများ မကြားစေရ။',
+        },
+        3: {
+          direction: 'တောင်အရပ် သို့မဟုတ် အရှေ့မြောက်အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'အင်္ဂါနေ့ နံနက် သို့မဟုတ် သောကြာအခါ',
+          awaePlant: 'သဖန်းပင် (ကြာသပတေးနံ)',
+          aneePlant: 'ဖက်သန်းပင် (သောကြာနံ)',
+          soundHeal: 'တနင်္လာနံ ကြေးသံ၊ ဗုဒ္ဓဟူးနံ ပုလွေသံ၊ ကြာသပတေးနံ မေတ္တာစကားသံ နားထောင်ပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: အုန်းပင်၊ ကံ့ကော်ပင်၊ သပြေပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: သံတူရွင်းသံ၊ စက်သံ ဆူညံစွာ ကြားပါက ဒေါသကြွပြီး ပြဿနာကြီးသွားတတ်သည်။',
+        },
+        4: {
+          direction: 'တောင်အရပ် သို့မဟုတ် အနောက်တောင်အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'ဗုဒ္ဓဟူးနေ့ နေ့လယ်ပိုင်း သို့မဟုတ် တနင်္လာအခါ',
+          awaePlant: 'သံသတ်ပင် (သောကြာနံ)',
+          aneePlant: 'နှောပင် (စနေနံ)',
+          soundHeal: 'ကြာသပတေးနံ တရားသံ၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ တေးသံ နားထောင်ပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: သစ်သော့ပင်၊ ထနောင်းပင်များ အိမ်သို့ မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: လူမသမာတို့၏ စကားအလိမ်အကောက် မကြားပါစေနှင့်။',
+        },
+        5: {
+          direction: 'အနောက်အရပ် သို့မဟုတ် အရှေ့အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'ကြာသပတေးနေ့ နံနက် သို့မဟုတ် တနင်္ဂနွေအခါ',
+          awaePlant: 'တည်ပင် (စနေနံ)',
+          aneePlant: 'အင်ပင် (တနင်္ဂနွေနံ)',
+          soundHeal: 'ဆရာသမား၏ ဆုံးမစကားသံ၊ ပရိတ်တရားတော်သံ၊ ဘုရားဆုတောင်းသံ နားထောင်ပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: မန်ကျည်းပင်၊ ဆီးပင်၊ သပွတ်ပင်များ မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: သစ္စာဖောက်စကားသံ၊ အောက်တန်းကျသော အတင်းအဖျင်းစကားများ ရှောင်ပါ။',
+        },
+        6: {
+          direction: 'မြောက်အရပ် သို့မဟုတ် အရှေ့တောင်အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'သောကြာနေ့ နံနက်စောစော သို့မဟုတ် အင်္ဂါအခါ',
+          awaePlant: 'အုန်းပင် (တနင်္ဂနွေနံ)',
+          aneePlant: 'မန်ကျည်းပင် (တနင်္လာနံ)',
+          soundHeal: 'စောင်းသံ၊ တယောသံ၊ မင်္ဂလာတေးသီချင်းသံ ချိုသာစွာ ဖွင့်ပြပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: ဇီးပင်၊ ခံပင်၊ သီးပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: ညည်းတွားငိုကြွေးသံ၊ သောကစကားသံများ လုံးဝ မကြားစေရ။',
+        },
+        0: {
+          direction: 'အနောက်တောင်အရပ် သို့မဟုတ် တောင်အရပ်သို့ မျက်နှာမူပါ',
+          bestDayTime: 'စနေနေ့ ညနေစောင်း သို့မဟုတ် ဗုဒ္ဓဟူးအခါ',
+          awaePlant: 'ကြခတ်ပင် (တနင်္လာနံ)',
+          aneePlant: 'ဆီးပင် (အင်္ဂါနံ)',
+          soundHeal: 'ဗုဒ္ဓဟူးနံ စကားချိုချို၊ တနင်္လာနံ မေတ္တာပို့သံ၊ ကြာသပတေးနံ တရားသံ နားထောင်ပါ',
+          cautionAvoid: '• သတိပြုရန်/အခိုက်: ကုက္ကိုပင်၊ ညောင်ပင်၊ အင်ကြင်းပင်များ အိမ်အနီး မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: ခွေးဟောင်သံ၊ မြည်တမ်းသံ၊ အရိုးဆစ်ချိုးသံများ မကြားစေရ။',
+        },
       };
+
+      const rem = remedyDatabase[p1];
+      const remedyDetailHtml = `
+        <div style="margin-bottom: 6px;"><strong>• မျက်နှာမူရာ အရပ်မျက်နှာ:</strong> <span style="color: #38bdf8;">${rem.direction}</span></div>
+        <div style="margin-bottom: 6px;"><strong>• အကောင်းဆုံး ဆောင်ရွက်ရမည့် အချိန်:</strong> ${rem.bestDayTime}</div>
+        <div style="margin-bottom: 6px;"><strong>• အဝေးခြင်္သေ့ဟောက် (တြိရန်း) စိုက်ရမည့်အပင်:</strong> <span style="color: #34d399;">${rem.awaePlant}</span></div>
+        <div style="margin-bottom: 6px;"><strong>• အနီးခြင်္သေ့ဟောက် (စတုရန်း ဆင်ဝှေ့ပြန်) စိုက်ရမည့်အပင်:</strong> <span style="color: #fbbf24;">${rem.aneePlant}</span></div>
+        <div style="margin-bottom: 6px;"><strong>• အသံကုထုံး (Sound Therapeutics):</strong> ${rem.soundHeal}</div>
+      `;
 
       return {
         score,
@@ -1129,22 +1385,32 @@
         rootCause: rootCauses[p1],
         progression: subsequentProgression[p2],
         duration: timeUnits[p3] || 'မကြာမီ ကာလအတွင်း',
-        remedy: remedies[p1],
         stP2: { key: stP2, ...infoP2 },
         stP3: { key: stP3, ...infoP3 },
         dominantNumbers: `${PLANET_INFO[p1].symbol}, ${PLANET_INFO[p2].symbol}, ${PLANET_INFO[p3].symbol}`,
+        // Kattar-Kan
+        knmNam: knm.nam.map((p) => `${PLANET_INFO[p].name} (${p})`).join(', '),
+        knmKan: `${PLANET_INFO[knm.kan].name} (${knm.kan})`,
+        knmKattar: knm.kattar.map((p) => `${PLANET_INFO[p].name} (${p})`).join(', '),
+        kattarDiagnosis,
+        // Specialized Tabs
+        travelTitle,
+        travelText,
+        courtTitle,
+        courtText,
+        remedyDetailHtml,
+        cautionAvoid: rem.cautionAvoid,
       };
     }
 
     // ==========================================
-    // ၄။ UI Controller & Event Binding
+    // ၅။ UI Controller & Event Binding
     // ==========================================
     const timeDisplay = document.getElementById('timeDisplay');
     const cityLabel = document.getElementById('cityLabel');
     const citySelect = document.getElementById('citySelect');
     const btnGps = document.getElementById('btnGps');
 
-    // 3 Cards elements
     const cardKhingyi = document.getElementById('cardKhingyi');
     const cardFixed = document.getElementById('cardFixed');
     const cardSolar1h = document.getElementById('cardSolar1h');
@@ -1156,7 +1422,6 @@
     const badgeSolar1h = document.getElementById('badgeSolar1h');
     const kwSolar1h = document.getElementById('kwSolar1h');
 
-    // Active Banner elements
     const activeHoraTitle = document.getElementById('activeHoraTitle');
     const activeHoraTag = document.getElementById('activeHoraTag');
     const activeMetaLine = document.getElementById('activeMetaLine');
@@ -1164,7 +1429,6 @@
     const pillarNimitta = document.getElementById('pillarNimitta');
     const pillarLakkhana = document.getElementById('pillarLakkhana');
 
-    // Accordions
     const dossierBtnText = document.getElementById('dossierBtnText');
     const dossierBox = document.getElementById('dossierBox');
     const dossierToggleBtn = document.getElementById('dossierToggleBtn');
@@ -1188,25 +1452,25 @@
       const times = calculateAllThreeModes();
       timeDisplay.textContent = times.localDate.toLocaleTimeString('en-US');
 
-      // Update Card 1: Khingyi
+      // Card 1
       const k = modeResults.khingyi;
       badgeKhingyi.textContent = `${PLANET_INFO[k.hora].name} (${k.label})`;
       badgeKhingyi.style.backgroundColor = PLANET_INFO[k.hora].color;
       kwKhingyi.textContent = k.kw;
 
-      // Update Card 2: Fixed
+      // Card 2
       const f = modeResults.fixed;
       badgeFixed.textContent = `${PLANET_INFO[f.hora].name} (${f.label})`;
       badgeFixed.style.backgroundColor = PLANET_INFO[f.hora].color;
       kwFixed.textContent = f.kw;
 
-      // Update Card 3: Solar 1h
+      // Card 3
       const s = modeResults.solar1h;
       badgeSolar1h.textContent = `${PLANET_INFO[s.hora].name} (${s.label})`;
       badgeSolar1h.style.backgroundColor = PLANET_INFO[s.hora].color;
       kwSolar1h.textContent = s.kw;
 
-      // Update Active Selected Mode
+      // Active Selection
       const activeRes = modeResults[selectedMode];
       activeCalculatedHora = activeRes.hora;
 
@@ -1223,7 +1487,7 @@
       pillarNimitta.textContent = `${pillars.n} (${PLANET_INFO[pillars.n].name.substring(0,3)})`;
       pillarLakkhana.textContent = `${pillars.l} (${PLANET_INFO[pillars.l].name.substring(0,3)})`;
 
-      // Update Dossier
+      // Dossier
       const dossier = HORA_DOSSIER[activeRes.hora];
       dossierBtnText.textContent = `${pInfo.name}အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ`;
       document.getElementById('dossierTitle').textContent = dossier.title;
@@ -1232,7 +1496,7 @@
       document.getElementById('dossierMatters').textContent = dossier.matters;
       document.getElementById('dossierGuidance').textContent = dossier.guidance;
 
-      // Update Matrix Table
+      // 7-Status Table
       renderMatrixTable(activeRes.hora);
     }
 
@@ -1252,17 +1516,37 @@
       }
     }
 
-    // Toggle Dossier Box
+    // Toggle Accordions
     dossierToggleBtn.addEventListener('click', () => {
       const isCollapsed = dossierBox.classList.toggle('collapsed');
       dossierChevron.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
     });
 
-    // Toggle Matrix Table Panel
     matrixToggleBtn.addEventListener('click', () => {
       const isCollapsed = matrixPanel.classList.toggle('collapsed');
       matrixChevron.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
     });
+
+    // Specialized Tabs Controller
+    function switchDiagTab(tabKey) {
+      document.querySelectorAll('.diag-tab-btn').forEach((btn, idx) => {
+        btn.classList.remove('active');
+      });
+      document.getElementById('tabContentTravel').style.display = 'none';
+      document.getElementById('tabContentCourt').style.display = 'none';
+      document.getElementById('tabContentRemedy').style.display = 'none';
+
+      if (tabKey === 'travel') {
+        document.querySelectorAll('.diag-tab-btn')[0].classList.add('active');
+        document.getElementById('tabContentTravel').style.display = 'block';
+      } else if (tabKey === 'court') {
+        document.querySelectorAll('.diag-tab-btn')[1].classList.add('active');
+        document.getElementById('tabContentCourt').style.display = 'block';
+      } else {
+        document.querySelectorAll('.diag-tab-btn')[2].classList.add('active');
+        document.getElementById('tabContentRemedy').style.display = 'block';
+      }
+    }
 
     // City Selection
     citySelect.addEventListener('change', (e) => {
@@ -1349,7 +1633,7 @@
     btnCalculate.addEventListener('click', () => {
       const parsed = parseInitialConsonant(soundInput.value);
       const p3 = parsed ? parsed.planet : 1;
-      const res = evaluateAngaWeikza(activeCalculatedHora, selectedBodyPlanet, p3);
+      const res = evaluateAngaWeikzaMaster(activeCalculatedHora, selectedBodyPlanet, p3);
 
       document.getElementById('resScore').textContent = `${res.score}% ဓာတ်စီး အလားအလာ`;
       document.getElementById('resHeading').textContent = res.verdictTitle;
@@ -1357,10 +1641,10 @@
       const pillsBox = document.getElementById('resStatusPills');
       pillsBox.innerHTML = `
         <span class="status-pill" style="background-color: ${res.stP2.color}; color: #000;">
-          အမူအရာ: ${res.stP2.name}
+          အမူအရာ: ${res.stP2.name} ဌာန
         </span>
         <span class="status-pill" style="background-color: ${res.stP3.color}; color: #000;">
-          စကားသံ: ${res.stP3.name}
+          မေးသည့်အရာ: ${res.stP3.name} ဌာန
         </span>
       `;
 
@@ -1369,7 +1653,22 @@
       document.getElementById('resProgression').textContent = res.progression;
       document.getElementById('resDuration').textContent = res.duration;
       document.getElementById('resDominantNums').textContent = `အကျိုးပေးဂြိုဟ်အစီအစဉ်: [${res.dominantNumbers}]`;
-      document.getElementById('resRemedyText').textContent = res.remedy;
+
+      // Kattar-Kan
+      document.getElementById('kattarNamText').textContent = res.knmNam;
+      document.getElementById('kattarKanText').textContent = res.knmKan;
+      document.getElementById('kattarKattarText').textContent = res.knmKattar;
+      document.getElementById('kattarDiagnosis').textContent = res.kattarDiagnosis;
+
+      // Specialized Diagnostics
+      document.getElementById('travelLagnaTitle').textContent = res.travelTitle;
+      document.getElementById('travelDiagnosisText').innerHTML = res.travelText;
+
+      document.getElementById('courtLagnaTitle').textContent = res.courtTitle;
+      document.getElementById('courtDiagnosisText').innerHTML = res.courtText;
+
+      document.getElementById('remedyDetailText').innerHTML = res.remedyDetailHtml;
+      document.getElementById('cautionText').innerHTML = res.cautionAvoid;
 
       resultContainer.style.display = 'block';
       resultContainer.scrollIntoView({ behavior: 'smooth' });
