@@ -28,6 +28,7 @@
       --accent-gold: #fbbf24;
       --accent-red: #ef4444;
       --accent-orange: #fb923c;
+      --accent-teal: #14b8a6;
     }
 
     * {
@@ -552,6 +553,26 @@
       margin-bottom: 14px;
     }
 
+    /* Remedy Section Cards */
+    .remedy-sub-card {
+      background-color: #131d33;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+    .remedy-sub-card:last-child {
+      margin-bottom: 0;
+    }
+    .remedy-sub-title {
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* Caution Notice Box */
     .caution-note {
       background-color: #3b0710;
@@ -566,7 +587,7 @@
     .caution-title {
       font-weight: 700;
       color: #f87171;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -579,7 +600,7 @@
     
     <div class="header">
       <h1>အင်္ဂဝိဇ္ဇာဋီကာကြီး အခါတော်တွက် Engine</h1>
-      <p>ခင်ကြီးဖျော် မူရင်းကျမ်းလာ • ကတ္တား/ကံ • နဂို/ယာယီလဂ် • အသံနိမိတ်နှင့် ဓာတ်ဆင်ကုထုံး</p>
+      <p>ခင်ကြီးဖျော် မူရင်းကျမ်းလာ • ဓာတ်စာ/ပန်းခက် • ဆောင်ရန်/နင်းကြမ်း • အသံကုထုံးနှင့် အခိုက်သတိပြုချက်</p>
     </div>
 
     <!-- Step 1: Location & 3 Comparative Horizontal Cards -->
@@ -613,9 +634,9 @@
         </div>
       </div>
 
-      <!-- 3-Column Comparative Horizontal Grid (ဘေးတိုက်ယှဉ်ပြသော ၃ ကွက်) -->
+      <!-- 3-Column Comparative Horizontal Grid -->
       <div class="tri-grid-horizontal">
-        <!-- ကတ် ၁: ကျမ်းရင်း ၈ အခါ (ဆရာတော် ခင်ကြီးဖျော် ပေမူ) -->
+        <!-- Card 1: Khingyi Phyaw 8-Division Solar -->
         <div class="hora-select-card active" id="cardKhingyi" onclick="selectCardMode('khingyi')">
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
@@ -627,7 +648,7 @@
           <div class="card-meta-text" id="metaKhingyi">နေထွက်/ဝင် ÷ ၈</div>
         </div>
 
-        <!-- ကတ် ၂: ရိုးရာ ၆:၀၀ နာရီစနစ် (Fixed 6:00 AM Standard) -->
+        <!-- Card 2: Fixed 6:00 AM Standard -->
         <div class="hora-select-card" id="cardFixed" onclick="selectCardMode('fixed')">
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
@@ -639,7 +660,7 @@
           <div class="card-meta-text" id="metaFixed">မနက် ၆:၀၀ စံ</div>
         </div>
 
-        <!-- ကတ် ၃: နက္ခတ် Solar ၁ နာရီစနစ် (Solar 1-Hour Step) -->
+        <!-- Card 3: Solar 1-Hour Step -->
         <div class="hora-select-card" id="cardSolar1h" onclick="selectCardMode('solar1h')">
           <div class="active-tag">ရွေးထားသည်</div>
           <div class="card-mode-title">
@@ -652,7 +673,7 @@
         </div>
       </div>
 
-      <!-- Active Selection Summary Banner -->
+      <!-- Active Summary Banner -->
       <div class="active-banner">
         <div class="banner-top">
           <div class="banner-title" id="activeHoraTitle">တနင်္ဂနွေ အခါ</div>
@@ -677,7 +698,7 @@
         </div>
       </div>
 
-      <!-- Accordion 1: Dossier Box (သဘောသဘာဝ အကွက်) -->
+      <!-- Accordion 1: Dossier Box -->
       <button class="accordion-btn" id="dossierToggleBtn">
         <span><i class="fa-solid fa-book-open"></i> <span id="dossierBtnText">အခါ၏ ကိုယ်စားပြု သဘောသဘာဝများ</span></span>
         <i class="fa-solid fa-chevron-up" id="dossierChevron"></i>
@@ -702,7 +723,7 @@
         </div>
       </div>
 
-      <!-- Accordion 2: 7-Status Matrix Table (ဆပွတ်ရိုက် ၇ ဌာန ဇယား) -->
+      <!-- Accordion 2: 7-Status Matrix Table -->
       <button class="accordion-btn" id="matrixToggleBtn" style="margin-top: 8px;">
         <span><i class="fa-solid fa-table-cells"></i> <span id="matrixBtnText">ဆပွတ်ရိုက် ၇ ဌာန ဇယား ကြည့်ရန်</span></span>
         <i class="fa-solid fa-chevron-down" id="matrixChevron"></i>
@@ -812,7 +833,7 @@
           <i class="fa-solid fa-scale-balanced"></i> တရား / ပြိုင်ဆိုင်
         </div>
         <div class="diag-tab-btn" onclick="switchDiagTab('remedy')">
-          <i class="fa-solid fa-shield-halved"></i> ကုထုံး / ယတြာ
+          <i class="fa-solid fa-shield-halved"></i> ကုထုံး / ယတြာစုံ
         </div>
       </div>
 
@@ -832,14 +853,15 @@
         <div id="courtDiagnosisText">...</div>
       </div>
 
-      <!-- Tab Content 3: Remedies & Therapeutics -->
+      <!-- Tab Content 3: Remedies & Multi-Therapeutics -->
       <div class="diag-content-box" id="tabContentRemedy" style="display: none;">
-        <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 6px;">
-          ★ ကျမ်းလာ ဓာတ်ဆင်၊ ယတြာနှင့် အသံကုထုံး လမ်းညွှန်
+        <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px;">
+          ★ ကျမ်းလာ ဓာတ်ဆင်၊ ပန်းခက်၊ ဓာတ်စာ၊ နင်းကြမ်းနှင့် အသံကုထုံး လမ်းညွှန်
         </div>
-        <div id="remedyDetailText">...</div>
+        
+        <div id="remedyDetailBlocks"></div>
 
-        <!-- Caution Box -->
+        <!-- Caution Box (Taboos) -->
         <div class="caution-note">
           <div class="caution-title">
             <i class="fa-solid fa-triangle-exclamation"></i>
@@ -949,7 +971,6 @@
       puti: { name: 'ပူတိ (အပုပ်)', score: -35, color: '#EF4444', desc: 'အပုပ်နိမိတ်၊ ရောဂါဝေဒနာ၊ ရန်သူအတိုက်အခိုက် အလွန်ပြင်းထန်ခြင်း' },
     };
 
-    // ကျမ်းလာ ရုပ်၊ နာမ်၊ ကံ၊ ကတ္တား ခွဲတမ်း (ပုဒ်ရေ ၃၆)
     const KATTAR_KAN_MATRIX = {
       1: { nam: [6, 2, 5], kan: 1, kattar: [3, 0, 4] },
       2: { nam: [5, 1, 3], kan: 2, kattar: [0, 4, 6] },
@@ -988,7 +1009,7 @@
     let currentLat = CITIES.yangon.lat;
     let currentLng = CITIES.yangon.lng;
     let currentTz = CITIES.yangon.tz;
-    let selectedMode = 'khingyi'; // 'khingyi', 'fixed', 'solar1h'
+    let selectedMode = 'khingyi';
     let selectedBodyPlanet = 1;
     let activeCalculatedHora = 1;
 
@@ -1230,7 +1251,6 @@
         verdictDetail = `အခါသခင်ပေါ်တွင် အင်္ဂါလက္ခဏာနှင့် မေးသည့်အရာတို့သည် [${infoP2.name}] နှင့် [${infoP3.name}] အပုပ်နိမိတ်သို့ ကျရောက်နေသဖြင့် လောလောဆယ် ကိစ္စမမြောက်ဘဲ အရှုပ်အထွေး ကြုံရတတ်ပါသည်။`;
       }
 
-      // Root Causes
       const rootCauses = {
         1: 'ဂုဏ်သိက္ခာ၊ ရာထူး၊ အကြီးအကဲ၊ အစိုးရ သို့မဟုတ် ဖခင်/အထက်လူကြီးနှင့် ပတ်သက်သောအရေး ဖြစ်သည်။',
         2: 'ငွေကြေးအရင်းအနှီး၊ ခရီးသွားလာရေး၊ ကူးသန်းရောင်းဝယ်ရေး သို့မဟုတ် စိတ်လှုပ်ရှားဖွယ် ကိစ္စများကြောင့် ဖြစ်သည်။',
@@ -1261,7 +1281,7 @@
         0: '၇ ရက်၊ ၇ လ သို့မဟုတ် ကြန့်ကြာချိန် အနည်းငယ်ကြာနိုင်သည်',
       };
 
-      // ၅။ ရုပ်၊ နာမ်၊ ကံ၊ ကတ္တား ဆန်းစစ်ချက် (ကျမ်းမျက်နှာ ၂၇)
+      // ရုပ်၊ နာမ်၊ ကံ၊ ကတ္တား ဆန်းစစ်ချက်
       const knm = KATTAR_KAN_MATRIX[p1];
       function getRole(planet) {
         if (knm.nam.includes(planet)) return { role: 'နာမ်', name: 'အထွတ်အထိပ် (အနိုင်ဓာတ်)' };
@@ -1282,8 +1302,7 @@
         kattarDiagnosis = 'နာမ်နှင့် ကံ အချိုးညီမျှစွာ စီးဝင်နေသဖြင့် အနှောင့်အယှက်ကြီးမားစွာ မရှိဘဲ ပုံမှန်အတိုင်း အေးချမ်းစွာ ပြီးမြောက်ပါမည်။';
       }
 
-      // ၆။ အထူးပြု ကဏ္ဍခွဲများ (Tab Diagnostics)
-      // (က) ခရီး / ပျောက်ရှ (ဒွါရ၊ ဗဟိ၊ အဗ္ဘန္တရ)
+      // Specialized Diagnostics
       let travelTitle = '';
       let travelText = '';
       if ([1, 0, 2].includes(p1)) {
@@ -1297,8 +1316,6 @@
         travelText = `• <strong>ခရီးသည်:</strong> ခရီးသည်သည် မလာသေးဘဲ ထိုရပ်ရွာ၌ ဆက်လက် ကြန့်ကြာနေဆဲ ဖြစ်သည်။<br>• <strong>ပစ္စည်းပျောက်:</strong> ပျောက်သောပစ္စည်းသည် အဝေးသို့ ရောက်သွားပြီ သို့မဟုတ် သေတ္တာအတွင်း၊ သစ်ပင်ခြုံနွယ်ရင်း ဝှက်ထားခံရသဖြင့် လွယ်လွယ်နှင့် ပြန်မတွေ့နိုင်ပါ။`;
       }
 
-      // (ခ) တရား / ပြိုင်ဆိုင်မှု (နဂိုလဂ် vs ယာယီလဂ်)
-      // အခါသခင်၏ နဂို/ယာယီ ခွဲခြားမှု
       let courtTitle = '';
       let courtText = '';
       if ([3, 4, 5, 0].includes(p1)) {
@@ -1309,74 +1326,95 @@
         courtText = `• <strong>တရားအမှုအခင်း:</strong> ဤအခါတွင် တရားစကား ရင်ဆိုင်ပါက အခွင့်အရေး မသာဘဲ <strong>အနိုင်မရဘဲ အရှုံးနှင့် ရင်ဆိုင်ရတတ်သည်</strong>။ ဖျန်ဖြေညှိနှိုင်းခြင်းသာ ပြုပါ။<br>• <strong>ခရီးအသွားအလာ:</strong> ခရီးသွားရန်မှာ အလွန်လျင်မြန်စွာ ရောက်တတ်သည်။`;
       }
 
-      // (ဂ) ကျမ်းလာ ယတြာ၊ ဓာတ်ဆင်နှင့် အသံကုထုံး
-      const remedyDatabase = {
+      // ကျမ်းလာ ဓာတ်ဆင် ယတြာနှင့် စုံလင်သော ကုထုံးများ ဒေတာဘေ့စ် (ပုဒ်ရေ ၄၃, ၄၄, ၄၆, ၅၀, ၅၁)
+      const comprehensiveRemedies = {
         1: {
-          direction: 'အရှေ့အရပ် သို့မဟုတ် မြောက်အရပ်သို့ မျက်နှာမူ၍ ပြုလုပ်ပါ',
-          bestDayTime: 'တနင်္ဂနွေနေ့ နံနက် နေထွက်စ နေမင်းရောင်ခြည် ဦးတိုက်ချိန်',
-          awaePlant: 'မြေဇာပင် (အဝေးခြင်္သေ့ဟောက် - အင်္ဂါနံ)',
-          aneePlant: 'ကလိန်ပင် (အနီးခြင်္သေ့ဟောက် / ဆင်ဝှေ့ပြန် - ဗုဒ္ဓဟူးနံ)',
-          soundHeal: 'ကြာသပတေးနံ ချိုသာသော တရားစကား၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ စောင်းသံ ငြိမ့်ငြိမ့် ဖွင့်ပြပါ (အထက် ဌီအသံများ)',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: လမ်းကြုံ၍ဖြစ်စေ ဆူးလေပင်၊ သံသတ်ပင်၊ ဩဇာပင်များ မဝယ်မိ/မစိုက်မိစေရန် သတိပြုပါ။<br>• ကြားမသွားစေရမည့်အသံ: အင်္ဂါ၊ စနေတို့၏ သံတိုသံစ စကားများရန်ဖြစ်သံ၊ ခလောက်သံ၊ သံစုံကျကွဲသံ ကြားပါက အနာရောဂါ ပိုဆိုးသွားတတ်သဖြင့် တားမြစ်ပါ။',
+          direction: 'အရှေ့အရပ် သို့မဟုတ် မြောက်အရပ်သို့ မျက်နှာမူပါ',
+          bestTime: 'တနင်္ဂနွေနေ့ နံနက် နေထွက်စ (သို့မဟုတ်) ဗုဒ္ဓဟူးအခါ',
+          branchRemedy: 'သပြေခက် (သို့မဟုတ်) အုန်းခက် ၃ ညွန့်ကို ဗုဒ္ဓဟူးအခါတွင် အိမ်/ဆိုင် စားပွဲပေါ် ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'သီးသီး၊ သရက်သီး၊ မာလကာသီး စားသုံးပေးပါ (အာဟာရဓာတ်ပေးသွင်းခြင်း)',
+          dietAvoid: 'ရှောက်သီး၊ သံပုရာသီး၊ ခတက်ချဉ် (ဗုဒ္ဓဟူးနံ အစာရှောင်ပါ)',
+          carryItem: 'ရွှေထည်၊ နီညိုရောင်အဆင်၊ ပိတောက်သား/သပြေသား နင်းကြမ်းပြု၍ ညာခြေဖြင့် စတင်နင်းကာ ခရီးထွက်ပါ',
+          soundHealing: 'ကြာသပတေးနံ ချိုသာသော တရားစကား၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ စောင်းသံ ငြိမ့်ငြိမ့် နားဆင်ပါ (အထက် ဌီအသံများ)',
+          lightSpiritual: 'တနင်္ဂနွေထောင့် ဘုရားတွင် မိမိအသက်စေ့ (သို့မဟုတ် ၆ တိုင်) မီးသက်စေ့ ထွန်းညှိပူဇော်ပါ',
+          plants: 'မြေဇာပင် (အဝေးခြင်္သေ့ဟောက် - အင်္ဂါနံ) / ကလိန်ပင် (အနီးဆင်ဝှေ့ပြန် - ဗုဒ္ဓဟူးနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: လမ်းကြုံ၍ဖြစ်စေ ဆူးလေပင်၊ သံသတ်ပင်၊ ဩဇာပင်များ မဝယ်မိ/မစိုက်မိစေရန် သတိပြုပါ။<br>• ကြားမသွားစေရမည့်အသံ: အင်္ဂါ၊ စနေတို့၏ သံတိုသံစ စကားများရန်ဖြစ်သံ၊ ခလောက်သံ၊ သံစုံကျကွဲသံ ကြားပါက အနာရောဂါ ပိုဆိုးသွားတတ်သဖြင့် တားမြစ်ပါ။',
         },
         2: {
           direction: 'အရှေ့တောင်အရပ် သို့မဟုတ် အနောက်အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'တနင်္လာနေ့ နံနက်ပိုင်း သို့မဟုတ် ဗုဒ္ဓဟူးအခါ',
-          awaePlant: 'ဂန့်ဂလာပင် (ဗုဒ္ဓဟူးနံ)',
-          aneePlant: 'ပေါက်ပန်းဖြူပင် (ကြာသပတေးနံ)',
-          soundHeal: 'သောကြာနံ သီချင်းသံ၊ တနင်္ဂနွေနံ ခရုသင်းသံ၊ သာယာသော တူရိယာသံများ ဖွင့်ပြပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: ထနောင်းပင်၊ ရှားပင်၊ တည်ပင်များ အိမ်အနီး မစိုက်ရ၊ အိမ်တွင်း မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: အချင်းချင်း ကတိဖျက်ငြင်းခုန်သံ၊ ဆဲဆိုသံများ မကြားစေရ။',
+          bestTime: 'တနင်္လာနေ့ နံနက်ပိုင်း (သို့မဟုတ်) ကြာသပတေးအခါ',
+          branchRemedy: 'ကလိန်ခက် (သို့မဟုတ်) ပေါက်ပန်းဖြူခက် ၄ ညွန့်ကို ကြာသပတေးအခါတွင် ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'ထန်းလျက်၊ နို့ထွက်ပစ္စည်း၊ ရေချိုငါး စားသုံးပေးပါ',
+          dietAvoid: 'ဗူးသီး၊ ပဲအမျိုးမျိုး၊ ပေရည် (ကြာသပတေးနံ အစာရှောင်ပါ)',
+          carryItem: 'ပုလဲ၊ ငွေထည်၊ အဖြူရောင်ပုဝါ၊ ပေါက်ပန်းသား/လက်ပံသား နင်းကြမ်းပြု၍ တက်လှမ်းပါ',
+          soundHealing: 'သောကြာနံ သီချင်းသံ၊ တနင်္ဂနွေနံ ခရုသင်းသံ၊ သာယာငြိမ့်ညောင်းသော တူရိယာသံများ ဖွင့်ပြပါ',
+          lightSpiritual: 'တနင်္လာထောင့် ဘုရားတွင် ရေချမ်းသပ္ပါယ်ပြီး မီးသက်စေ့ ၁၅ တိုင် ပူဇော်ပါ',
+          plants: 'ဂန့်ဂလာပင် (ဗုဒ္ဓဟူးနံ) / ပေါက်ပန်းဖြူပင် (ကြာသပတေးနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: ထနောင်းပင်၊ ရှားပင်၊ တည်ပင်များ အိမ်အနီး မစိုက်ရ၊ အိမ်တွင်း မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: ကတိဖျက်ငြင်းခုန်သံ၊ ဆဲဆိုသံများ လုံးဝ မကြားစေရ။',
         },
         3: {
           direction: 'တောင်အရပ် သို့မဟုတ် အရှေ့မြောက်အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'အင်္ဂါနေ့ နံနက် သို့မဟုတ် သောကြာအခါ',
-          awaePlant: 'သဖန်းပင် (ကြာသပတေးနံ)',
-          aneePlant: 'ဖက်သန်းပင် (သောကြာနံ)',
-          soundHeal: 'တနင်္လာနံ ကြေးသံ၊ ဗုဒ္ဓဟူးနံ ပုလွေသံ၊ ကြာသပတေးနံ မေတ္တာစကားသံ နားထောင်ပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: အုန်းပင်၊ ကံ့ကော်ပင်၊ သပြေပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: သံတူရွင်းသံ၊ စက်သံ ဆူညံစွာ ကြားပါက ဒေါသကြွပြီး ပြဿနာကြီးသွားတတ်သည်။',
+          bestTime: 'အင်္ဂါနေ့ နံနက် (သို့မဟုတ်) သောကြာအခါ',
+          branchRemedy: 'သီးခက် (သို့မဟုတ်) ဇီးခက် ၃ ညွန့်ကို သောကြာအခါတွင် စိုက်ထူ/ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'အုန်းသီး၊ အုန်းနို့ခေါက်ဆွဲ၊ စိမ်းစားဥ စားသုံးပေးပါ',
+          dietAvoid: 'သီးသီး၊ အချိုအေး၊ သကြားခဲ (သောကြာနံ အစာရှောင်ပါ)',
+          carryItem: 'သန္တာကျောက်၊ ကြေးထည်ပစ္စည်း၊ ပန်းရောင်အဆင်၊ သက်ရင်းသား/သီးသား နင်းကြမ်းပြုပါ',
+          soundHealing: 'တနင်္လာနံ ကြေးစည်သံ၊ ဗုဒ္ဓဟူးနံ ပုလွေသံ၊ ကြာသပတေးနံ မေတ္တာပို့သံ နားထောင်ပါ',
+          lightSpiritual: 'အင်္ဂါထောင့် ဘုရားတွင် မီးသက်စေ့ ၈ တိုင် ထွန်းညှိပူဇော်ပါ',
+          plants: 'သဖန်းပင် (ကြာသပတေးနံ) / ဖက်သန်းပင် (သောကြာနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: အုန်းပင်၊ ကံ့ကော်ပင်၊ သပြေပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: သံတူရွင်းသံ၊ စက်သံ ဆူညံစွာ ကြားပါက ဒေါသကြွပြီး အမှုအခင်း ကြီးသွားတတ်သည်။',
         },
         4: {
           direction: 'တောင်အရပ် သို့မဟုတ် အနောက်တောင်အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'ဗုဒ္ဓဟူးနေ့ နေ့လယ်ပိုင်း သို့မဟုတ် တနင်္လာအခါ',
-          awaePlant: 'သံသတ်ပင် (သောကြာနံ)',
-          aneePlant: 'နှောပင် (စနေနံ)',
-          soundHeal: 'ကြာသပတေးနံ တရားသံ၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ တေးသံ နားထောင်ပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: သစ်သော့ပင်၊ ထနောင်းပင်များ အိမ်သို့ မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: လူမသမာတို့၏ စကားအလိမ်အကောက် မကြားပါစေနှင့်။',
+          bestTime: 'ဗုဒ္ဓဟူးနေ့ နေ့လယ်ပိုင်း (သို့မဟုတ်) စနေအခါ',
+          branchRemedy: 'မန်ကျည်းကိုင်း (သို့မဟုတ်) ကသစ်ခက်ကို စနေအခါတွင် အိမ်အနီး စိုက်ထူ/ပန်းအိုးထိုးပါ',
+          dietRemedy: 'ကြံရည်၊ သကြား၊ ဟင်းနုနွယ် စားသုံးပေးပါ',
+          dietAvoid: 'ထန်းသီး၊ နှမ်းဆီ၊ အမဲသား (စနေနံ အစာရှောင်ပါ)',
+          carryItem: 'မြကျောက်၊ အစိမ်းရောင်ပစ္စည်း၊ ကသစ်သား/မန်ကျည်းသား နင်းကြမ်းပြုပါ',
+          soundHealing: 'ကြာသပတေးနံ တရားသံ၊ တနင်္လာနံ ကြေးစည်သံ၊ သောကြာနံ တေးသံ နားထောင်ပါ',
+          lightSpiritual: 'ဗုဒ္ဓဟူးထောင့် ဘုရားတွင် အမွှေးနံ့သာနှင့် မီးသက်စေ့ ၁၇ တိုင် ပူဇော်ပါ',
+          plants: 'သံသတ်ပင် (သောကြာနံ) / နှောပင် (စနေနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: သစ်သော့ပင်၊ ထနောင်းပင်များ အိမ်သို့ မယူဆောင်ရ။<br>• ကြားမသွားစေရမည့်အသံ: အတင်းအဖျင်းနှင့် လှည့်ဖြားသော စကားသံများ မကြားပါစေနှင့်။',
         },
         5: {
           direction: 'အနောက်အရပ် သို့မဟုတ် အရှေ့အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'ကြာသပတေးနေ့ နံနက် သို့မဟုတ် တနင်္ဂနွေအခါ',
-          awaePlant: 'တည်ပင် (စနေနံ)',
-          aneePlant: 'အင်ပင် (တနင်္ဂနွေနံ)',
-          soundHeal: 'ဆရာသမား၏ ဆုံးမစကားသံ၊ ပရိတ်တရားတော်သံ၊ ဘုရားဆုတောင်းသံ နားထောင်ပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: မန်ကျည်းပင်၊ ဆီးပင်၊ သပွတ်ပင်များ မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: သစ္စာဖောက်စကားသံ၊ အောက်တန်းကျသော အတင်းအဖျင်းစကားများ ရှောင်ပါ။',
+          bestTime: 'ကြာသပတေးနေ့ နံနက် (သို့မဟုတ်) တနင်္ဂနွေအခါ',
+          branchRemedy: 'အင်ကြင်းခက် (သို့မဟုတ်) အုန်းခက် ၅ ညွန့်ကို တနင်္ဂနွေအခါတွင် ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'ဆီးသီး၊ ဆီးယို၊ မာလကာသီး စားသုံးပေးပါ',
+          dietAvoid: 'အုန်းသီး၊ ဥအမျိုးမျိုး (တနင်္ဂနွေနံ အစာရှောင်ပါ)',
+          carryItem: 'ဥဿဖယား၊ ရွှေဝါရောင်အဝတ်၊ သစ်သားပုတီး၊ အင်ကြင်းသား နင်းကြမ်းပြုပါ',
+          soundHealing: 'ဆရာသမား၏ ဆုံးမစကားသံ၊ ပရိတ်တရားတော်သံ၊ ဘုရားဆုတောင်းသံ နားထောင်ပါ',
+          lightSpiritual: 'ကြာသပတေးထောင့် ဘုရားတွင် ဆွမ်း၊ သစ်သီးနှင့် မီးသက်စေ့ ၁၉ တိုင် ပူဇော်ပါ',
+          plants: 'တည်ပင် (စနေနံ) / အင်ပင် (တနင်္ဂနွေနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: မန်ကျည်းပင်၊ ဆီးပင်၊ သပွတ်ပင်များ မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: သစ္စာဖောက်စကားသံ၊ ရိုင်းစိုင်းသော စကားသံများ ရှောင်ပါ။',
         },
         6: {
           direction: 'မြောက်အရပ် သို့မဟုတ် အရှေ့တောင်အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'သောကြာနေ့ နံနက်စောစော သို့မဟုတ် အင်္ဂါအခါ',
-          awaePlant: 'အုန်းပင် (တနင်္ဂနွေနံ)',
-          aneePlant: 'မန်ကျည်းပင် (တနင်္လာနံ)',
-          soundHeal: 'စောင်းသံ၊ တယောသံ၊ မင်္ဂလာတေးသီချင်းသံ ချိုသာစွာ ဖွင့်ပြပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: ဇီးပင်၊ ခံပင်၊ သီးပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: ညည်းတွားငိုကြွေးသံ၊ သောကစကားသံများ လုံးဝ မကြားစေရ။',
+          bestTime: 'သောကြာနေ့ နံနက်စောစော (သို့မဟုတ်) တနင်္လာအခါ',
+          branchRemedy: 'ဆီးကိုင်း (သို့မဟုတ်) စံပယ်ခက် ၆ ညွန့်ကို တနင်္လာအခါတွင် ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'ရှောက်သီးသုပ်၊ ဝက်သား၊ သံပုရာရည် သောက်ပေးပါ',
+          dietAvoid: 'ကြံရည်၊ မုန့်ဟင်းခါး (တနင်္လာနံ အစာရှောင်ပါ)',
+          carryItem: 'စိန်၊ အမွှေးနံ့သာရေမွှေးဆွတ်ခြင်း၊ ပိုးထည်၊ ဆူးလေသား/ဆီးသား နင်းကြမ်းပြုပါ',
+          soundHealing: 'စောင်းသံ၊ တယောသံ၊ မင်္ဂလာတေးသီချင်းသံ ချိုသာစွာ ဖွင့်ပြပါ',
+          lightSpiritual: 'သောကြာထောင့် ဘုရားတွင် အမွှေးနံ့သာရေနှင့် မီးသက်စေ့ ၂၁ တိုင် ပူဇော်ပါ',
+          plants: 'အုန်းပင် (တနင်္ဂနွေနံ) / မန်ကျည်းပင် (တနင်္လာနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: ဇီးပင်၊ ခံပင်၊ သီးပင်များ မစိုက်မိပါစေနှင့်။<br>• ကြားမသွားစေရမည့်အသံ: ညည်းတွားငိုကြွေးသံ၊ ပူဆွေးသောကစကားသံများ လုံးဝ မကြားစေရ။',
         },
         0: {
           direction: 'အနောက်တောင်အရပ် သို့မဟုတ် တောင်အရပ်သို့ မျက်နှာမူပါ',
-          bestDayTime: 'စနေနေ့ ညနေစောင်း သို့မဟုတ် ဗုဒ္ဓဟူးအခါ',
-          awaePlant: 'ကြခတ်ပင် (တနင်္လာနံ)',
-          aneePlant: 'ဆီးပင် (အင်္ဂါနံ)',
-          soundHeal: 'ဗုဒ္ဓဟူးနံ စကားချိုချို၊ တနင်္လာနံ မေတ္တာပို့သံ၊ ကြာသပတေးနံ တရားသံ နားထောင်ပါ',
-          cautionAvoid: '• သတိပြုရန်/အခိုက်: ကုက္ကိုပင်၊ ညောင်ပင်၊ အင်ကြင်းပင်များ အိမ်အနီး မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: ခွေးဟောင်သံ၊ မြည်တမ်းသံ၊ အရိုးဆစ်ချိုးသံများ မကြားစေရ။',
+          bestTime: 'စနေနေ့ ညနေစောင်း (သို့မဟုတ်) အင်္ဂါအခါ',
+          branchRemedy: 'ရှောက်ကိုင်း (သို့မဟုတ်) သပိတ်ဥကို အင်္ဂါအခါတွင် စိုက်ထူ/ပန်းအိုးထိုး တင်လှူပါ',
+          dietRemedy: 'ပေရည်၊ မန်ကျည်းဖျော်ရည်၊ ပဲဟင်း စားသုံးပေးပါ',
+          dietAvoid: 'ဆီကြော်မုန့်၊ အုန်းသီး၊ အစပ်အစာ (အင်္ဂါနံ အစာရှောင်ပါ)',
+          carryItem: 'နီလာ၊ သံထည်ပစ္စည်း၊ မဲနက်ရောင်အဆင်၊ ဝက်အူသား/ထနောင်းသား နင်းကြမ်းပြုပါ',
+          soundHealing: 'ဗုဒ္ဓဟူးနံ စကားချိုချို၊ တနင်္လာနံ မေတ္တာပို့သံ၊ ကြာသပတေးနံ တရားသံ နားထောင်ပါ',
+          lightSpiritual: 'စနေထောင့် ဘုရားတွင် သက်စေ့မီးပူဇော်ပြီး ရေလှူဒါန်းပါ',
+          plants: 'ကြခတ်ပင် (တနင်္လာနံ) / ဆီးပင် (အင်္ဂါနံ)',
+          cautionAvoid: '• အခိုက်သစ်ပင်: ကုက္ကိုပင်၊ ညောင်ပင်၊ အင်ကြင်းပင်များ အိမ်အနီး မစိုက်ရ။<br>• ကြားမသွားစေရမည့်အသံ: ခွေးဟောင်သံ၊ မြည်တမ်းသံ၊ အရိုးဆစ်ချိုးသံများ မကြားစေရ။',
         },
       };
 
-      const rem = remedyDatabase[p1];
-      const remedyDetailHtml = `
-        <div style="margin-bottom: 6px;"><strong>• မျက်နှာမူရာ အရပ်မျက်နှာ:</strong> <span style="color: #38bdf8;">${rem.direction}</span></div>
-        <div style="margin-bottom: 6px;"><strong>• အကောင်းဆုံး ဆောင်ရွက်ရမည့် အချိန်:</strong> ${rem.bestDayTime}</div>
-        <div style="margin-bottom: 6px;"><strong>• အဝေးခြင်္သေ့ဟောက် (တြိရန်း) စိုက်ရမည့်အပင်:</strong> <span style="color: #34d399;">${rem.awaePlant}</span></div>
-        <div style="margin-bottom: 6px;"><strong>• အနီးခြင်္သေ့ဟောက် (စတုရန်း ဆင်ဝှေ့ပြန်) စိုက်ရမည့်အပင်:</strong> <span style="color: #fbbf24;">${rem.aneePlant}</span></div>
-        <div style="margin-bottom: 6px;"><strong>• အသံကုထုံး (Sound Therapeutics):</strong> ${rem.soundHeal}</div>
-      `;
+      const rem = comprehensiveRemedies[p1];
 
       return {
         score,
@@ -1398,8 +1436,8 @@
         travelText,
         courtTitle,
         courtText,
-        remedyDetailHtml,
-        cautionAvoid: rem.cautionAvoid,
+        // Remedy Multi-Blocks
+        remedy: rem,
       };
     }
 
@@ -1529,9 +1567,7 @@
 
     // Specialized Tabs Controller
     function switchDiagTab(tabKey) {
-      document.querySelectorAll('.diag-tab-btn').forEach((btn, idx) => {
-        btn.classList.remove('active');
-      });
+      document.querySelectorAll('.diag-tab-btn').forEach((btn) => btn.classList.remove('active'));
       document.getElementById('tabContentTravel').style.display = 'none';
       document.getElementById('tabContentCourt').style.display = 'none';
       document.getElementById('tabContentRemedy').style.display = 'none';
@@ -1667,8 +1703,49 @@
       document.getElementById('courtLagnaTitle').textContent = res.courtTitle;
       document.getElementById('courtDiagnosisText').innerHTML = res.courtText;
 
-      document.getElementById('remedyDetailText').innerHTML = res.remedyDetailHtml;
-      document.getElementById('cautionText').innerHTML = res.cautionAvoid;
+      // Remedy Multi-Blocks Rendering
+      const r = res.remedy;
+      const remedyContainer = document.getElementById('remedyDetailBlocks');
+      remedyContainer.innerHTML = `
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-compass"></i> အရပ်မျက်နှာနှင့် အချိန်အခါ</div>
+          <div>• <strong>မျက်နှာမူရာ အရပ်:</strong> <span style="color: #38bdf8;">${r.direction}</span></div>
+          <div>• <strong>အကောင်းဆုံး အချိန်:</strong> ${r.bestTime}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-spa"></i> ၁။ ပန်းခက် / သစ်ကိုင်း ပန်းအိုးထိုး ကုထုံး (အပင်မစိုက်နိုင်သူများအတွက်)</div>
+          <div>${r.branchRemedy}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-utensils"></i> ၂။ ဓာတ်စာ စားသုံးခြင်း နှင့် အစာရှောင်ခြင်း</div>
+          <div style="color: #34d399;">• <strong>စားသုံးပေးရမည့် ဓာတ်စာ:</strong> ${r.dietRemedy}</div>
+          <div style="color: #f87171; margin-top: 2px;">• <strong>လုံးဝ ရှောင်ကြဉ်ရမည့် အစာ:</strong> ${r.dietAvoid}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-gem"></i> ၃။ ဆောင်ရန် နံသင့်ပစ္စည်း နှင့် နင်းကြမ်းပြုခြင်း</div>
+          <div>${r.carryItem}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-headphones"></i> ၄။ အသံကုထုံး (Acoustic Sound Therapeutics)</div>
+          <div>${r.soundHealing}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-fire"></i> ၅။ ဘုရား မီးပူဇော်ခြင်း ယတြာ</div>
+          <div>${r.lightSpiritual}</div>
+        </div>
+
+        <div class="remedy-sub-card">
+          <div class="remedy-sub-title"><i class="fa-solid fa-seedling"></i> ၆။ အပင်စိုက်ထူ ကုထုံး (မြေနေရာရှိသူများအတွက်)</div>
+          <div>${r.plants}</div>
+        </div>
+      `;
+
+      document.getElementById('cautionText').innerHTML = r.cautionAvoid;
 
       resultContainer.style.display = 'block';
       resultContainer.scrollIntoView({ behavior: 'smooth' });
